@@ -1,0 +1,14 @@
+
+{
+	"name": "engram",
+
+	"scripts": {
+		"prestart": "bash build_es6.sh",
+		"start":    "node node_modules/engram/engram.js"
+	},
+
+	"dependencies": {
+		"express": ">=4.10.2",
+		"sqlite3": ">=3.0.5"
+	}
+}

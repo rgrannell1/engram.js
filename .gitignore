@@ -1,0 +1,5 @@
+npm-debug.log
+cert/
+node_modules/*
+!node_modules/harness
+
