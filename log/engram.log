@@ -170,3 +170,61 @@
 {"name":"engram","hostname":"ryan-S400CA","pid":16098,"level":40,"err":{},"url":"http://www.google.com","msg":"phantom-based title extraction failed.","time":"2015-05-02T20:59:34.074Z","v":0}
 {"name":"engram","hostname":"ryan-S400CA","pid":16227,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:00:12.786Z","v":0}
 {"name":"engram","hostname":"ryan-S400CA","pid":16227,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T21:00:41.642Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16608,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:05:50.633Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16970,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:11:08.183Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16970,"level":50,"url":"/http://www.google.com","msg":"failed to save url","time":"2015-05-02T21:11:11.095Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17117,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:11:52.454Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17117,"level":50,"url":"/http://www.google.com","msg":"failed to save url","time":"2015-05-02T21:11:52.911Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17295,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:12:29.196Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17295,"level":30,"url":"/http://www.google.com","msg":"GET http://www.google.com","time":"2015-05-02T21:12:29.228Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17390,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:13:01.111Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17390,"level":30,"url":"/www.google.com","msg":"GET www.google.com","time":"2015-05-02T21:13:01.303Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17390,"level":30,"url":"/%2Fgoogle.com","msg":"GET %2Fgoogle.com","time":"2015-05-02T21:13:11.114Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17582,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:14:09.265Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17582,"level":30,"url":"/%2Fgoogle.com","msg":"GET %2Fgoogle.com","time":"2015-05-02T21:14:11.629Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17717,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:14:39.099Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17717,"level":30,"url":"/%2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","msg":"GET %2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","time":"2015-05-02T21:14:41.673Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17853,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:15:40.509Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17853,"level":30,"url":"/%2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","msg":"GET %2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","time":"2015-05-02T21:15:43.190Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17959,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:16:02.673Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":17959,"level":30,"url":"/%2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","msg":"GET %2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","time":"2015-05-02T21:16:03.383Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18078,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:16:24.118Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18078,"level":30,"url":"/%2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","msg":"GET %2Fhttps%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuoAe6LanFkg","time":"2015-05-02T21:16:24.653Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18078,"level":30,"url":"/https://www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET https://www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:17:00.055Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18216,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:17:28.112Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18216,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:17:28.305Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18345,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:18:29.478Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18345,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:18:29.688Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18626,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:20:11.238Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18626,"level":50,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"failed to save url","time":"2015-05-02T21:20:11.874Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18761,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:20:33.148Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18761,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:20:33.439Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18761,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:20:34.572Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18761,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:20:36.141Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18761,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:20:37.660Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18902,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:20:54.125Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":18902,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:20:54.303Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19032,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:21:31.261Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19032,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:21:31.444Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19163,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:21:54.413Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19163,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET http:www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:21:54.557Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19310,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:22:28.220Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19405,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:22:36.694Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19405,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET http:www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:22:39.021Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19525,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:22:57.558Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19525,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET http:www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:22:57.785Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19622,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:23:12.663Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":19622,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET http:///www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:23:12.772Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20068,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:29:32.417Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20068,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET http:///www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:29:34.299Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20156,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:29:44.484Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20333,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:30:45.950Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20333,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET http:///www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:30:49.063Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20700,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:32:59.489Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20700,"level":30,"url":"/www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","msg":"GET http:///www.google.ie/?gws_rd=cr,ssl&ei=xD5FVYDtBvGu7Ab05oD4Bg","time":"2015-05-02T21:33:01.149Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:33:28.270Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":30,"url":"/","msg":"GET http://","time":"2015-05-02T21:33:31.712Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":50,"url":"http://","err":{},"msg":"url lookup failed.","time":"2015-05-02T21:33:31.715Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":30,"url":"/https://github.com/trentm/node-bunyan","msg":"GET https://github.com/trentm/node-bunyan","time":"2015-05-02T21:33:51.424Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":30,"url":"https://github.com/trentm/node-bunyan","msg":"url lookup succeeded.","time":"2015-05-02T21:33:52.487Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":60,"err":{"code":"MODULE_NOT_FOUND"},"msg":"uncaught exception","time":"2015-05-02T21:33:52.819Z","v":0}
