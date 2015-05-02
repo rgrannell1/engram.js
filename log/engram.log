@@ -141,3 +141,32 @@
 {"name":"engram","hostname":"ryan-S400CA","pid":12532,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:37:28.122Z","v":0}
 {"name":"engram","hostname":"ryan-S400CA","pid":12532,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:37:34.197Z","v":0}
 {"name":"engram","hostname":"ryan-S400CA","pid":12735,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:38:38.404Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13099,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:41:10.506Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13432,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:41:44.137Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13432,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:42:01.177Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13752,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:45:13.691Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13752,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:45:16.163Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13879,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:45:54.545Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13879,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:45:54.587Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13879,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:45:55.109Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":13879,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:45:55.603Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":14090,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:47:07.610Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":14090,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:47:08.109Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":14208,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:47:26.291Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":14208,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:47:27.133Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":14881,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:52:47.810Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15033,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:53:22.253Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15033,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:53:23.160Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15189,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:54:06.934Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15189,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:54:08.128Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15300,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:54:26.265Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15300,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:54:27.317Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15435,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:54:58.112Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15435,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:55:04.827Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15812,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:57:30.821Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":15812,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:57:40.974Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16098,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T20:59:27.194Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16098,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T20:59:33.723Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16098,"level":40,"err":{},"url":"http://www.google.com","msg":"phantom-based title extraction failed.","time":"2015-05-02T20:59:34.074Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16227,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:00:12.786Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":16227,"level":30,"msg":"GET http://www.google.com","time":"2015-05-02T21:00:41.642Z","v":0}
