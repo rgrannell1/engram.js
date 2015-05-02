@@ -9,6 +9,7 @@
 
 	"dependencies": {
 		"express": ">=4.10.2",
-		"sqlite3": ">=3.0.5"
+		"sqlite3": ">=3.0.5",
+		"phantom": "*"
 	}
 }
