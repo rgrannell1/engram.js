@@ -228,3 +228,30 @@
 {"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":30,"url":"/https://github.com/trentm/node-bunyan","msg":"GET https://github.com/trentm/node-bunyan","time":"2015-05-02T21:33:51.424Z","v":0}
 {"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":30,"url":"https://github.com/trentm/node-bunyan","msg":"url lookup succeeded.","time":"2015-05-02T21:33:52.487Z","v":0}
 {"name":"engram","hostname":"ryan-S400CA","pid":20861,"level":60,"err":{"code":"MODULE_NOT_FOUND"},"msg":"uncaught exception","time":"2015-05-02T21:33:52.819Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20988,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:34:30.119Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20988,"level":30,"url":"/https://github.com/trentm/node-bunyan","msg":"GET https://github.com/trentm/node-bunyan","time":"2015-05-02T21:34:34.907Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20988,"level":30,"url":"https://github.com/trentm/node-bunyan","msg":"url lookup succeeded.","time":"2015-05-02T21:34:35.830Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":20988,"level":60,"err":{"code":"MODULE_NOT_FOUND"},"msg":"uncaught exception","time":"2015-05-02T21:34:36.019Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21176,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:35:23.545Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21176,"level":30,"url":"/https://github.com/trentm/node-bunyan","msg":"GET https://github.com/trentm/node-bunyan","time":"2015-05-02T21:35:24.076Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21176,"level":30,"url":"https://github.com/trentm/node-bunyan","msg":"url lookup succeeded.","time":"2015-05-02T21:35:24.971Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21176,"level":60,"err":{"code":"MODULE_NOT_FOUND"},"msg":"uncaught exception","time":"2015-05-02T21:35:25.182Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21319,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:35:51.968Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21516,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:37:42.381Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21516,"level":30,"url":"/https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"GET https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","time":"2015-05-02T21:38:34.314Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21516,"level":30,"url":"https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"url lookup succeeded.","time":"2015-05-02T21:38:35.414Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21516,"level":60,"err":{"code":"MODULE_NOT_FOUND"},"msg":"uncaught exception","time":"2015-05-02T21:38:35.646Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21649,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:39:10.810Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21649,"level":30,"url":"/https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"GET https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","time":"2015-05-02T21:39:13.473Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21649,"level":30,"url":"https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"url lookup succeeded.","time":"2015-05-02T21:39:14.380Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":21649,"level":40,"err":{},"url":"https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"phantom-based title extraction failed.","time":"2015-05-02T21:39:14.391Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22353,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:42:57.120Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22571,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:44:00.248Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22571,"level":30,"url":"/localhost:5000/https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"GET localhost:5000/https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","time":"2015-05-02T21:44:03.112Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22571,"level":50,"url":"localhost:5000/https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","err":{},"msg":"url lookup failed.","time":"2015-05-02T21:44:03.118Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22571,"level":30,"url":"/https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"GET https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","time":"2015-05-02T21:44:14.218Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22571,"level":30,"url":"https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"url lookup succeeded.","time":"2015-05-02T21:44:15.109Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22571,"level":40,"err":{},"url":"https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"phantom-based title extraction failed.","time":"2015-05-02T21:44:15.112Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22734,"level":30,"msg":"engram listening on port 5000","time":"2015-05-02T21:45:08.656Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22734,"level":30,"url":"/https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"GET https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","time":"2015-05-02T21:45:09.171Z","v":0}
+{"name":"engram","hostname":"ryan-S400CA","pid":22734,"level":30,"url":"https://github.com/rgrannell1/engram.py/blob/master/engram/extract_title.js","msg":"url lookup succeeded.","time":"2015-05-02T21:45:10.025Z","v":0}
