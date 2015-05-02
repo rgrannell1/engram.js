@@ -3,8 +3,9 @@
 	"name": "engram",
 
 	"scripts": {
-		"prestart": "bash build_es6.sh",
-		"start":    "node node_modules/engram/engram.js"
+		"prestart": "bash build-es6.sh",
+		"start":    "node node_modules/engram/engram.js",
+		"rebuild": "bash build-docs.sh && bash build-es6.sh"
 	},
 
 	"dependencies": {
