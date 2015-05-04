@@ -9,8 +9,9 @@
 	},
 
 	"dependencies": {
-		"express": ">=4.10.2",
-		"sqlite3": ">=3.0.5",
-		"phantom": "*"
+		"express":      ">=4.10.2",
+		"sqlite3":      ">=3.0.5",
+		"phantom":      "*",
+		"content-type": "*"
 	}
 }
