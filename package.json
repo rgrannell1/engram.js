@@ -9,6 +9,7 @@
 	},
 
 	"dependencies": {
+		"is":           "rgrannell1/is",
 		"express":      ">=4.10.2",
 		"sqlite3":      ">=3.0.5",
 		"phantom":      "*",
