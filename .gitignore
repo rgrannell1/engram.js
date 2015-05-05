@@ -1,5 +1,7 @@
 npm-debug.log
 cert/
+log/
+data/
+build/
 node_modules/*
 !node_modules/engram
-
