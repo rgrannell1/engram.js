@@ -16,4 +16,28 @@ do
 
 done
 
+
+
+
+
+for file in bin/*.es6
+do
+
+	filename="$(
+		echo $file |
+		sed "s/\.es6/\.js/" |
+		sed "s/es6//g"
+
+	)"
+
+	echo $file "->" $filename
+
+	babel $file --out-file $filename
+
+done
+
+
+
+
+
 echo "done."
