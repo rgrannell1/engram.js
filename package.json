@@ -19,6 +19,7 @@
 		"phantom":      "*",
 		"content-type": "*",
 		"mustache":     "*",
-		"docopt":       "*"
+		"docopt":       "*",
+		"requestify":   "*"
 	}
 }
