@@ -3,7 +3,6 @@
 	"name": "engram",
 
 	"scripts": {
-		"prestart": "bash build-es6.sh",
 		"start":    "./bin/docopt-engram.js --port=5000",
 		"rebuild":  "bash build-docs.sh && bash build-es6.sh"
 	},
