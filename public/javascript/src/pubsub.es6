@@ -113,3 +113,11 @@ var EventBus = function ( ) {
 	}
 
 }
+
+
+
+
+
+if (process && process.version && module.exports) {
+	module.exports = EventBus
+}
