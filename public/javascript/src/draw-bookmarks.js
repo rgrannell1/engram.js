@@ -37,7 +37,7 @@ $.get('/public/html/bookmark-template.html', function (template) {
 
 		bookmark.displayTitle   = bookmark.title
 			? bookmark.title
-			? bookmark.url
+			: bookmark.url
 
 		bookmark.hasTitleFlag   = bookmark.title
 			? 'titled'
