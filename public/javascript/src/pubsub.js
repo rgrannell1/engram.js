@@ -118,6 +118,6 @@ var EventBus = function ( ) {
 
 
 
-if (process && process.version && module.exports) {
+if (typeof process !== 'undefined' && process.version) {
 	module.exports = EventBus
 }
