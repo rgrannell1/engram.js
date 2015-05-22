@@ -72,7 +72,13 @@ header ul li {
 	text-align: center;
 }
 
-.bookmark:not(.status-coded)
+
+
+
+
+.bookmark:not(.status-coded) a {
+	color: grey;
+}
 
 
 .archive:not(.archived) {
