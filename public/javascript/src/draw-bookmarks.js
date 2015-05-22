@@ -35,6 +35,10 @@ $.get('/public/html/bookmark-template.html', function (template) {
 
 		bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime))
 
+		bookmark.displayTitle   = bookmark.title
+			? bookmark.title
+			? bookmark.url
+
 		bookmark.hasTitleFlag   = bookmark.title
 			? 'titled'
 			: ''
