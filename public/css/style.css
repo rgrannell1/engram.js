@@ -1,5 +1,7 @@
 
 
+
+
 html {
 	font-family: 'Sans';
 	color:       #3d464d;
@@ -70,15 +72,20 @@ header ul li {
 
 
 
-
-.titled {
+.title {
 
 }
 
-.archived {
+.title .titled {
 
+}
+
+.archive:not(.archived) {
+	color: grey;
 }
 
 .status-coded {
 
 }
+
+

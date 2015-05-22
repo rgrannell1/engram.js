@@ -6,7 +6,6 @@
 // -- this is bad.
 
 ENGRAM.drawFocus = function () {
-
 	setTimeout(function () {
 		return ENGRAM.drawFocus(ENGRAM.inFocus);
 	}, 100);
@@ -24,9 +23,23 @@ $.get("/public/html/bookmark-template.html", function (template) {
 
 	var renderBookmark = function (bookmark) {
 
+		renderBookmark.precond(bookmark);
+
 		bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime));
 
+		bookmark.displayTitle = bookmark.title ? bookmark.title : bookmark.url;
+
+		bookmark.hasTitleFlag = bookmark.title ? "titled" : "";
+
+		bookmark.hasStatusCode = bookmark.status_code ? "status-coded" : "";
+
+		bookmark.hasArchiveFlag = bookmark.archive ? "archived" : "";
+
 		return Mustache.render(template, bookmark);
+	};
+
+	renderBookmark.precond = function (bookmark) {
+		is.always.object(bookmark);
 	};
 
 	ENGRAM.drawFocus = function (focus) {

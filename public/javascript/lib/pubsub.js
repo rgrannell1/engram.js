@@ -36,7 +36,7 @@ function fire(topic, data) {
 
 	if (topic.length > 0 && !is.undefined(this.topics[topic])) {
 
-		var data = data || {};
+		data = data || {};
 
 		var topicListeners = this.topics[topic];
 
@@ -116,3 +116,7 @@ var EventBus = (function (_EventBus) {
 		on: on
 	};
 });
+
+if (process && process.version && module.exports) {
+	module.exports = EventBus;
+}
