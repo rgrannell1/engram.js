@@ -6,8 +6,7 @@
 // -- remove this if I find an objective reason
 // -- this is bad.
 
-ENGRAM.drawFocus = function ( ) {
-
+ENGRAM.drawFocus = ( ) => {
 	setTimeout(( ) => ENGRAM.drawFocus(ENGRAM.inFocus), 100)
 }
 
