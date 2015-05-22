@@ -31,11 +31,33 @@ $.get('/public/html/bookmark-template.html', function (template) {
 
 	var renderBookmark = bookmark => {
 
+		renderBookmark.precond(bookmark)
+
 		bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime))
+
+		bookmark.hasTitleFlag   = bookmark.title
+			? 'titled'
+			: ''
+
+		bookmark.hasStatusCode  = bookmark.status_code
+			? 'status-coded'
+			: ''
+
+		bookmark.hasArchiveFlag = bookmark.archive
+			? 'archived'
+			: ''
 
 		return Mustache.render(template, bookmark)
 
 	}
+
+	renderBookmark.precond = bookmark => {
+		is.always.object(bookmark)
+	}
+
+
+
+
 
 	ENGRAM.drawFocus = focus => {
 
