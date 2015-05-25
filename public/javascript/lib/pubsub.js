@@ -1,5 +1,9 @@
 "use strict";
 
+if (typeof process !== "undefined" && process.version) {
+	var is = require("is");
+}
+
 var on = (function (_on) {
 	var _onWrapper = function on(_x, _x2) {
 		return _on.apply(this, arguments);

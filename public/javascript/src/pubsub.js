@@ -3,6 +3,13 @@
 
 
 
+if (typeof process !== 'undefined' && process.version) {
+	var is = require('is')
+}
+
+
+
+
 
 
 var on = function (topic, listener) {
