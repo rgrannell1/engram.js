@@ -1,6 +1,7 @@
 
 {
-	"name": "engram",
+	"name":    "engram",
+	"version": "0.1.0",
 
 	"scripts": {
 		"start":    "./bin/docopt-engram.js --port=5000",
@@ -18,7 +19,6 @@
 		"phantom":      "*",
 		"content-type": "*",
 		"mustache":     "*",
-		"docopt":       "*",
-		"requestify":   "*"
+		"docopt":       "*"
 	}
 }
