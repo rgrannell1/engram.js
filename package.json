@@ -6,7 +6,7 @@
 	"scripts": {
 		"start":    "./bin/docopt-engram.js --port=5000",
 		"rebuild":  "bash build-docs.sh && bash build-es6.sh",
-		"test":     "mocha node_modules/engram/test"
+		"test":     "mocha node_modules/engram/test --timeout=20000"
 	},
 
 	"bin": {
@@ -21,6 +21,7 @@
 		"content-type": "*",
 		"mustache":     "*",
 		"docopt":       "*",
-		"validUrl":     "*"
+		"validUrl":     "*",
+		"supertest":    "*"
 	}
 }
