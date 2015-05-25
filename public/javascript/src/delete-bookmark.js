@@ -12,7 +12,7 @@ ENGRAM.eventBus
 	$article.hide(ENGRAM.DELETEFADE)
 
 	$.ajax({
-		url: `/bookmarks/${id}`,
+		url: `/api/bookmarks/${id}`,
 		type: 'DELETE',
 		success: data => {
 			ENGRAM.eventBus.fire(':successful-delete', {id, $article})

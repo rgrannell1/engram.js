@@ -9,7 +9,7 @@ ENGRAM.eventBus.on(":delete-bookmark", function (_ref) {
 	$article.hide(ENGRAM.DELETEFADE);
 
 	$.ajax({
-		url: "/bookmarks/" + id,
+		url: "/api/bookmarks/" + id,
 		type: "DELETE",
 		success: function (data) {
 			ENGRAM.eventBus.fire(":successful-delete", { id: id, $article: $article });
