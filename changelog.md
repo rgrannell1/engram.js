@@ -1,16 +1,21 @@
 
 # 0.3.0
+------------------------------------------------------------------------------------------------------------
+2015 May 26
 
 ## ENHANCEMENTS:
 
+* Closed #2: "Refactor to setInterval and pubSub".
 
-
+* Saving a bookmark now instantly triggers title extraction and similar tasks.
 
 
 
 
 
 # 0.2.0
+------------------------------------------------------------------------------------------------------------
+2015 May 25
 
 ## ENHANCEMENTS:
 
