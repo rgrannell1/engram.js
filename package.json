@@ -1,7 +1,7 @@
 
 {
 	"name":    "engram",
-	"version": "0.2.0",
+	"version": "0.3.0",
 
 	"scripts": {
 		"start":    "./bin/docopt-engram.js --port=5000",

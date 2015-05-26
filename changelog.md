@@ -1,5 +1,18 @@
 
+# 0.3.0
+
+## ENHANCEMENTS:
+
+
+
+
+
+
+
+
 # 0.2.0
+
+## ENHANCEMENTS:
 
 * Closed #1: "Support URLs with and without protocol". 
 
