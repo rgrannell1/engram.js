@@ -9,6 +9,9 @@ body {
   margin: 0 auto;
   font-size: 100%; }
 
+#uploader-hidden {
+  display: none; }
+
 h1 {
   font-size: 1em; }
 
@@ -49,5 +52,11 @@ header {
 
 .dead a {
   color: #840725; }
+
+#navbar {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  li-padding: 10px; }
 
 /*# sourceMappingURL=style.css.map */

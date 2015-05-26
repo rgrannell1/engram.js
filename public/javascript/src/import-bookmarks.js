@@ -85,7 +85,7 @@ var sendBookmarks = function (bookmarks) {
 
 	$.ajax({
 		type: "POST",
-		url:  '/api/resave',
+		url:  '/api/import',
 
 		dataType : "json",
 		data: JSON.stringify({data: entityBody}),
@@ -101,5 +101,14 @@ var sendBookmarks = function (bookmarks) {
 
 
 $(( ) => {
-	$('#uploader').on('click', uploadFile.bind({ }, 1000, sendBookmarks))
+
+	$('#uploader').on('click', event => {
+
+		event.preventDefault( )
+		$('#uploader-hidden').trigger('click')
+
+		uploadFile(1000, sendBookmarks)
+
+	})
+
 })
