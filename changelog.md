@@ -5,6 +5,23 @@
 
 ## ENHANCEMENTS:
 
+* Closed #3: "Run JSHint".
+
+* Closed #4: "Add cache-size maintainance".
+
+* Closed #5: "Add delay for cache requests".
+
+
+
+
+
+
+# 0.3.0
+------------------------------------------------------------------------------------------------------------
+2015 May 26
+
+## ENHANCEMENTS:
+
 * Closed #2: "Refactor to setInterval and pubSub".
 
 * Saving a bookmark now instantly triggers title extraction and similar tasks.
