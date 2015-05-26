@@ -30,7 +30,7 @@ var readDataURL = function readDataURL(reader, callback) {
 
 var uploadFile = function (retries, callback) {
 
-	var $uploader = $("#uploader");
+	var $uploader = $("#uploader-hidden");
 	var files = $uploader.prop("files");
 
 	if (is.undefined(files[0])) {

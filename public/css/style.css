@@ -56,7 +56,8 @@ header {
 #navbar {
   position: fixed;
   left: 10px;
-  top: 10px;
-  li-padding: 10px; }
+  top: 10px; }
+  #navbar li {
+    padding: 10px; }
 
 /*# sourceMappingURL=style.css.map */
