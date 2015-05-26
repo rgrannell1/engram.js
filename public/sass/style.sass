@@ -1,4 +1,18 @@
 
+$black:       #3d464d
+
+$link-blue-1: #072584
+$link-blue-2: #0b77e6
+
+$grey-1:      #667581
+$grey-2:      #e9ecee
+
+$dead-red-1:  #840725
+
+
+
+
+
 
 
 
@@ -6,7 +20,7 @@
 
 html
 	font-family: 'Sans'
-	color:       #3d464d
+	color:       $black
 	font-size:   16px
 
 	-webkit-overflow-scrolling: none
@@ -32,10 +46,10 @@ ul
 
 a
 	text-decoration: none
-	color:           #072584
+	color:           $link-blue-1
 
 	&:focus, &:hover
-		color: #0b77e6
+		color: $link-blue-2
 
 
 
@@ -46,11 +60,8 @@ article
 	margin-top:    60px
 	margin-bottom: 60px
 
-.seperator
-	color: #bfbfbf
-
 time
-	font-size: 0.75em
+	font-size:     0.75em
 
 
 
@@ -61,12 +72,14 @@ header
 	*
 		padding: 10px 0px 10px 0px
 
-	border-bottom: 2px solid #e9ecee
+	border-bottom: 2px solid $grey-2
 	font-weight:   bold
-	color:         #667581
+	color:         $grey-1
+
 
 	ul h1
 		display: inline-block
+
 
 	ul li
 		display:    inline-block
@@ -85,4 +98,4 @@ header
 	color: grey
 
 .dead a
-	color: #840725
+	color: $dead-red-1
