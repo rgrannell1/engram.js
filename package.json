@@ -1,7 +1,10 @@
 
 {
-	"name":    "engram",
-	"version": "0.5.0",
+	"name":       "engram",
+	"version":    "0.5.0",
+
+	"licence":    "MIT",
+	"repository": "https://github.com/rgrannell1/engram.js",
 
 	"scripts": {
 		"start":    "./bin/docopt-engram.js --port=5000",
@@ -14,6 +17,7 @@
 	},
 
 	"dependencies": {
+		"mocha":        "*",
 		"is":           "rgrannell1/is",
 		"express":      ">=4.10.2",
 		"sqlite3":      ">=3.0.5",
