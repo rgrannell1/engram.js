@@ -10,7 +10,7 @@
 var doc = `
 
 Usage:
-    engram --port=<port> --database=<database>
+    engram --port=<port> --dbpath=<dbpath>
     engram (-h | --help | --version)
 
 Version:
@@ -34,6 +34,6 @@ var args   = docopt(doc)
 
 
 engram({
-	port:     args['--port'],
-	database: args['--database']
+	port:   args['--port'],
+	dbpath: args['--dbpath']
 })

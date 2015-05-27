@@ -7,7 +7,7 @@
 	"repository": "https://github.com/rgrannell1/engram.js",
 
 	"scripts": {
-		"start":    "./bin/docopt-engram.js --port=5000",
+		"start":    "./bin/docopt-engram.js --port=5000 --dbpath='data/engram'",
 		"rebuild":  "bash build-docs.sh && bash build-es6.sh",
 		"test":     "node_modules/mocha/bin/mocha node_modules/engram/test --timeout=20000"
 	},
