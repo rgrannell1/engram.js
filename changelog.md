@@ -1,5 +1,40 @@
 
-# 0.3.0
+# 0.5.0
+------------------------------------------------------------------------------------------------------------
+2015 May 27
+
+## ENHANCEMENTS:
+
+* Closed #6: "Add import button to bookmark page".
+
+* Closed #8: "Unify URL saving and importing". Pubsub is used to share URL saving code
+between the import and save routes.
+
+* Added travis.
+
+*  Added sass for styles.
+
+* `requestURL` can now limit the number of concurrent requests made.
+
+* `requestURL` now prevents refreshed links from being cleared from the cache prematurely.
+
+
+* Factored some magic numbers into constants file.
+
+* Bookmark import now validated on server-side.
+
+
+## BUG-FIXES:
+
+* Supertest now runs as expected; failure caused by lack of default callback for .end( ) in tests.
+
+* Removed phantom from the title extraction algorithm, as it failed for SSL, caused a memory leak, and was generally a pain to use.
+
+
+
+
+
+# 0.4.0
 ------------------------------------------------------------------------------------------------------------
 2015 May 26
 
