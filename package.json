@@ -25,6 +25,8 @@
 		"docopt":       "*",
 		"valid-url":    "*",
 
+		"bunyan":       "*",
+
 		"mocha":        "*",
 		"supertest":    "*",
 		"should":       "*"
