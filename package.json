@@ -17,7 +17,6 @@
 	},
 
 	"dependencies": {
-		"mocha":        "*",
 		"is":           "rgrannell1/is",
 		"express":      ">=4.10.2",
 		"sqlite3":      ">=3.0.5",
@@ -25,6 +24,9 @@
 		"mustache":     "*",
 		"docopt":       "*",
 		"valid-url":    "*",
-		"supertest":    "*"
+
+		"mocha":        "*",
+		"supertest":    "*",
+		"should":       "*"
 	}
 }
