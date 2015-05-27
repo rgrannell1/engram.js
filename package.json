@@ -13,7 +13,7 @@
 	},
 
 	"bin": {
-		"engram": "node ./bin/docopt-engram.js"
+		"engram": "node_modules/mocha/bin/mocha ./bin/docopt-engram.js"
 	},
 
 	"dependencies": {
