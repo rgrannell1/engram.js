@@ -9,11 +9,11 @@
 	"scripts": {
 		"start":    "./bin/docopt-engram.js --port=5000",
 		"rebuild":  "bash build-docs.sh && bash build-es6.sh",
-		"test":     "./bin/mocha node_modules/engram/test --timeout=20000"
+		"test":     "node_modules/mocha/bin/mocha node_modules/engram/test --timeout=20000"
 	},
 
 	"bin": {
-		"engram": "node_modules/mocha/bin/mocha ./bin/docopt-engram.js"
+		"engram": "node ./bin/docopt-engram.js"
 	},
 
 	"dependencies": {
