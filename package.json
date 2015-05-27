@@ -21,6 +21,8 @@
 
 		"express":      ">=4.10.2",
 		"body-parser":  "*",
+		"request":      "*",
+
 		"sqlite3":      ">=3.0.5",
 		"content-type": "*",
 		"mustache":     "*",
