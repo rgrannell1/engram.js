@@ -47,10 +47,6 @@ $.get('/public/html/bookmark-template.html', function (template) {
 			? 'status-coded'
 			: ''
 
-		bookmark.hasArchiveFlag = bookmark.archive
-			? 'archived'
-			: ''
-
 		bookmark.isDeadLink     = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500
 			? 'dead'
 			: ''
