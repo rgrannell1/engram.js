@@ -1,11 +1,24 @@
 
 # 0.6.0
 ------------------------------------------------------------------------------------------------------------
-2015 May
+2015 June  4
 
 ## ENHANCEMENTS:
 
 * Closed #16: "parametreise database location".
+
+* Closed #10: "Add non-html archiving". Archiving superficially works for pngs, though this is largely untested.
+
+* Closed #9: "Delete associated archive when URL is deleted".
+
+* Removed custom database methods, as they were worse wrappers for existing code.
+
+* Archives now saved as 'blob'
+
+* Added HTTP status codes as a dictionary.
+
+* Moved archive fetching to top-level route, for consistency with bookmarks.
+
 
 
 
