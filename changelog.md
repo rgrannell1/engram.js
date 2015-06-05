@@ -1,4 +1,11 @@
 
+* Lowered the default number of concurrent requests to five, as my laptop was oversaturated with requests.
+
+* Cache hits are now logged at the DEBUG level.
+
+
+
+
 # 0.6.0
 ------------------------------------------------------------------------------------------------------------
 2015 June  4
