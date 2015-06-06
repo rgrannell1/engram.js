@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-"use strict"
-
 
 
 
@@ -11,6 +9,7 @@ Usage:
     rank
 
 `
+
 
 
 
@@ -35,27 +34,53 @@ algorithms.naive = (uri, title) => title
 
 var processTitles = (algorithms, pairs) => {
 
-	return pairs.map( ({url, title}) => {
+	var out = { }
 
-		var out = {}
+	pairs.forEach( ({url, title}) => {
+
+		out[url] = { }
 
 		Object.keys(algorithms).forEach(name => {
-
-			out[name] = {
-				title: algorithms[name](url, title),
-				url:   url
-			}
-
+			out[url][name] = algorithms[name](url, title)
 		})
-
-		return out
 
 	})
 
+	return out
+
 }
+
+
+
+
+
+var clearScreen = ( ) => {
+	process.stdout.write(0o33)
+}
+
+
+var printPrompt = (url, variants) => {
+
+	console.log( clearScreen )
+
+}
+
+
+
 
 var surveyResults = (titles, stored, callback) => {
 
+	var unscreened = Object.keys(titles).filter(url => {
+		return Object.keys(stored).indexOf(url) === -1
+	})
+
+	var toScreen = unscreened[
+		Object.keys(unscreened)[ Math.floor(Math.random( ) * Object.keys(unscreened).length) ]
+	]
+
+	// -- print to the screen.
+	clearScreen( )
+	printPrompt(url, title[toScreen])
 
 }
 
