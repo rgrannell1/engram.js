@@ -7,3 +7,4 @@ node_modules/*
 !node_modules/engram
 scratchpad.sql
 .sass-cache/
+data-bookmarks.json

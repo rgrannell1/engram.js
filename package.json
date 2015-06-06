@@ -13,7 +13,8 @@
 	},
 
 	"bin": {
-		"engram": "node ./bin/docopt-engram.js"
+		"engram":      "node ./bin/docopt-engram.js",
+		"engram-rank": "node ./bin/rank-titles.js"
 	},
 
 	"dependencies": {
