@@ -212,9 +212,9 @@ ENGRAM.eventBus
 	var query = getQuery( )
 
 	is.always.object(bookmark)
-	is.always.number(bookmark.bookmark_id)
+	is.always.number(bookmark.bookmarkId)
 
-	ENGRAM.cache.set(bookmark.bookmark_id, {
+	ENGRAM.cache.set(bookmark.bookmarkId, {
 		bookmark,
 		metadata: {
 			scores: query.length === 0

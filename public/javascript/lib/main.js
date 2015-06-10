@@ -142,9 +142,9 @@ ENGRAM.eventBus.on(":scroll", function detectEdge(_ref) {
 	var query = getQuery();
 
 	is.always.object(bookmark);
-	is.always.number(bookmark.bookmark_id);
+	is.always.number(bookmark.bookmarkId);
 
-	ENGRAM.cache.set(bookmark.bookmark_id, {
+	ENGRAM.cache.set(bookmark.bookmarkId, {
 		bookmark: bookmark,
 		metadata: {
 			scores: query.length === 0 ? {} : _defineProperty({}, query, scoreTextMatch(query, isSplitSubstring(query), bookmark.title))

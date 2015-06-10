@@ -2,7 +2,7 @@
 ENGRAM.cache = ENGRAM.Cache(function (bookmark) {
 	// this callback takes a bookmark and gives you its id.
 
-	const id = bookmark.bookmark_id
+	const id = bookmark.bookmarkId
 
 	if (!is.number(id)) {
 		throw TypeError("id was not a number: " + JSON.stringify(bookmark))
@@ -11,7 +11,7 @@ ENGRAM.cache = ENGRAM.Cache(function (bookmark) {
 		throw RangeError("invalid size for a bookmark id: " + id)
 	}
 
-	return bookmark.bookmark_id
+	return bookmark.bookmarkId
 
 })
 

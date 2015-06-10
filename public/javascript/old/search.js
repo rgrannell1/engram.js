@@ -368,7 +368,7 @@ $.get('/public/html/bookmark-template.html', function (template) {
 			ENGRAM.cache = saveQueryScores(query, ENGRAM.cache)
 
 			searchCache = ENGRAM.Cache(function (bookmark) {
-				return bookmark.bookmark_id
+				return bookmark.bookmarkId
 			})
 			.addAll(findMatchingBookmarks(query, ENGRAM.cache))
 
