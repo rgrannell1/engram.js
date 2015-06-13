@@ -12,13 +12,13 @@
 		$.ajax({
 			url:      `/api/bookmarks?max_id=${maxID}&amount=${ENGRAM.PERREQUEST}`,
 			dataType: 'json',
-			success: ({data, next_id}) => {
+			success: ({data, nextID}) => {
 
 				data.forEach(bookmark => {
 					ENGRAM.eventBus.fire(':load-bookmark', bookmark)
 				})
 
-				callback({data, next_id})
+				callback({data, nextID})
 
 			},
 			failure: res => {
@@ -43,19 +43,19 @@
 
 
 
-	var recur = function ({data, next_id}) {
+	var recur = function ({data, nextID}) {
 
-		recur.precond(data, next_id)
+		recur.precond(data, nextID)
 
-		next_id > 0 && data.length > 0
-			? setTimeout(requestBookmarks, ENGRAM.loadInterval, next_id, recur)
+		nextID > 0 && data.length > 0
+			? setTimeout(requestBookmarks, ENGRAM.loadInterval, nextID, recur)
 			: console.log('loaded all bookmarks.')
 
 	}
 
-	recur.precond = (data, next_id) => {
+	recur.precond = (data, nextID) => {
 		is.always.array(data)
-		is.always.number(next_id)
+		is.always.number(nextID)
 	}
 
 

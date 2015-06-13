@@ -16,13 +16,13 @@
 				dataType: "json",
 				success: function (_ref) {
 					var data = _ref.data;
-					var next_id = _ref.next_id;
+					var nextID = _ref.nextID;
 
 					data.forEach(function (bookmark) {
 						ENGRAM.eventBus.fire(":load-bookmark", bookmark);
 					});
 
-					callback({ data: data, next_id: next_id });
+					callback({ data: data, nextID: nextID });
 				},
 				failure: function (res) {
 					console.log("internal failure: bookmark chunk failed to load.");
@@ -52,16 +52,16 @@
 			return _recurWrapper;
 		})(function (_ref) {
 			var data = _ref.data;
-			var next_id = _ref.next_id;
+			var nextID = _ref.nextID;
 
-			recur.precond(data, next_id);
+			recur.precond(data, nextID);
 
-			next_id > 0 && data.length > 0 ? setTimeout(requestBookmarks, ENGRAM.loadInterval, next_id, recur) : console.log("loaded all bookmarks.");
+			nextID > 0 && data.length > 0 ? setTimeout(requestBookmarks, ENGRAM.loadInterval, nextID, recur) : console.log("loaded all bookmarks.");
 		});
 
-		recur.precond = function (data, next_id) {
+		recur.precond = function (data, nextID) {
 			is.always.array(data);
-			is.always.number(next_id);
+			is.always.number(nextID);
 		};
 
 		// -- sync bookmarks recurs when the data is loaded, fetching all bookmarks.
