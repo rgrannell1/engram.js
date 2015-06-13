@@ -13,7 +13,7 @@ setInterval(function () {
 			previous: previous
 		});
 	}
-}, 1e+29);
+}, 100);
 
 ENGRAM.eventBus.on(":url-update", function (_ref) {
 	var current = _ref.current;
