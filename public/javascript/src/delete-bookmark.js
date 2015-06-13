@@ -24,7 +24,7 @@ ENGRAM.eventBus
 
 })
 .on(':successful-delete', ({id, _}) => {
-	cache.remove(id)
+	ENGRAM.cache.remove(id)
 })
 .on(':successful-delete', ({_, $article}) => {
 	$article.remove( )

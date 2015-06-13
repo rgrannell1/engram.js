@@ -22,7 +22,7 @@ ENGRAM.eventBus.on(":delete-bookmark", function (_ref) {
 	var id = _ref.id;
 	var _ = _ref._;
 
-	cache.remove(id);
+	ENGRAM.cache.remove(id);
 }).on(":successful-delete", function (_ref) {
 	var _ = _ref._;
 	var $article = _ref.$article;
