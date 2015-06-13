@@ -113,7 +113,7 @@
 var fillBookmarks = ( ) => {
 
 	var currentAmount = ENGRAM.inFocus.value.length
-	var stillUnloaded = getQuery( ) === '' && currentAmount !== ENGRAM.MAXLOADED
+	var stillUnloaded = getURL( ) === '' && currentAmount !== ENGRAM.MAXLOADED
 
 	if (!stillUnloaded) {
 		return
@@ -153,7 +153,7 @@ var triggerLoad = (downwards) => {
 
 
 
-	if (getQuery( ) === '') {
+	if (getURL( ) === '') {
 		// -- load linearly by id up or down.
 
 		var topic = ':scroll' + (downwards ? 'down' : 'up')  + '-bookmarks'
@@ -209,7 +209,7 @@ ENGRAM.eventBus
 .on(':update-query', scoreBookmarks)
 .on(':load-bookmark', bookmark => {
 
-	var query = getQuery( )
+	var query = getURL( )
 
 	is.always.object(bookmark)
 	is.always.number(bookmark.bookmarkId)

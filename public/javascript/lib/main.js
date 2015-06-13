@@ -79,7 +79,7 @@ var _defineProperty = function (obj, key, value) { return Object.defineProperty(
 var fillBookmarks = function () {
 
 	var currentAmount = ENGRAM.inFocus.value.length;
-	var stillUnloaded = getQuery() === "" && currentAmount !== ENGRAM.MAXLOADED;
+	var stillUnloaded = getURL() === "" && currentAmount !== ENGRAM.MAXLOADED;
 
 	if (!stillUnloaded) {
 		return;
@@ -102,7 +102,7 @@ var triggerLoad = function (downwards) {
 
 	var nextId = parseInt($("#bookmarks article")[downwards ? "last" : "first"]().attr("id")) + (downwards ? -1 : +1);
 
-	if (getQuery() === "") {
+	if (getURL() === "") {
 		// -- load linearly by id up or down.
 
 		var topic = ":scroll" + (downwards ? "down" : "up") + "-bookmarks";
@@ -139,7 +139,7 @@ ENGRAM.eventBus.on(":scroll", function detectEdge(_ref) {
 	ENGRAM.searchState.setQuery(query);
 }).on(":update-query", scoreBookmarks).on(":load-bookmark", function (bookmark) {
 
-	var query = getQuery();
+	var query = getURL();
 
 	is.always.object(bookmark);
 	is.always.number(bookmark.bookmarkId);

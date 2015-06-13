@@ -40,7 +40,9 @@ function fire(topic, data) {
 
 	if (topic.length > 0 && !is.undefined(this.topics[topic])) {
 
-		data = data || {};
+		if (is.undefined(data)) {
+			data = {};
+		}
 
 		var topicListeners = this.topics[topic];
 
