@@ -59,9 +59,11 @@ var processTitles = function processTitles(algorithms, pairs) {
 var surveyResults = function surveyResults(algorithmTitles) {
 	// -- print to the screen.
 
-	Object.keys(algorithmTitles).map(function (url) {
+	var result = Object.keys(algorithmTitles).map(function (url) {
 		return Object.keys(algorithmTitles[url]).map(function (algorithm) {
-			return "" + algorithm;
+			return "" + algorithm + ": " + algorithmTitles[url][algorithm];
 		});
-	});
+	}).join("\n");
+
+	console.log(result);
 };

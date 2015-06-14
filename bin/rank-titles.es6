@@ -90,13 +90,16 @@ var processTitles = (algorithms, pairs) => {
 var surveyResults = algorithmTitles => {
 	// -- print to the screen.
 
-
-	Object.keys(algorithmTitles)
-	.map(url => {
-		return Object.keys(algorithmTitles[url]).map(algorithm => {
-			return `${algorithm}`
+	var result =
+		Object.keys(algorithmTitles)
+		.map(url => {
+			return Object.keys(algorithmTitles[url]).map(algorithm => {
+				return `${algorithm}: ${algorithmTitles[url][algorithm]}`
+			})
 		})
-	})
+		.join('\n')
+
+	console.log(result)
 
 }
 
