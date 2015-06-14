@@ -62,8 +62,8 @@ var surveyResults = function surveyResults(algorithmTitles) {
 	var result = Object.keys(algorithmTitles).map(function (url) {
 		return Object.keys(algorithmTitles[url]).map(function (algorithm) {
 			return "" + algorithm + ": " + algorithmTitles[url][algorithm];
-		});
-	}).join("\n");
+		}).join("\n");
+	}).join("\n\n");
 
 	console.log(result);
 };

@@ -93,11 +93,13 @@ var surveyResults = algorithmTitles => {
 	var result =
 		Object.keys(algorithmTitles)
 		.map(url => {
-			return Object.keys(algorithmTitles[url]).map(algorithm => {
-				return `${algorithm}: ${algorithmTitles[url][algorithm]}`
-			})
+			return Object.keys(algorithmTitles[url])
+				.map(algorithm => {
+					return `${algorithm}: ${algorithmTitles[url][algorithm]}`
+				})
+				.join('\n')
 		})
-		.join('\n')
+		.join('\n\n')
 
 	console.log(result)
 
