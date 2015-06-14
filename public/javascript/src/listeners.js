@@ -121,4 +121,20 @@ var listeners = { }
 
 	}
 
+	let scrollTimer
+
+	listeners.onStop = ( ) => {
+
+		ENGRAM.eventBus.on(':scroll', scrollData => {
+
+			clearTimeout(scrollTimer)
+
+			scrollTimer = setTimeout(( ) => {
+				ENGRAM.eventBus.fire(':stop', scrollData)
+			}, 10)
+
+		})
+
+	}
+
 }

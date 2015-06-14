@@ -35,19 +35,19 @@ $.get('/public/html/bookmark-template.html', function (template) {
 
 		bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime))
 
-		bookmark.displayTitle   = bookmark.title
+		bookmark.displayTitle = bookmark.title
 			? bookmark.title
 			: bookmark.url
 
-		bookmark.hasTitleFlag   = bookmark.title
+		bookmark.hasTitleFlag = bookmark.title
 			? 'titled'
 			: ''
 
-		bookmark.hasStatusCode  = bookmark.status_code
+		bookmark.hasStatusCode= bookmark.status_code
 			? 'status-coded'
 			: ''
 
-		bookmark.isDeadLink     = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500
+		bookmark.isDeadLink   = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500
 			? 'dead'
 			: ''
 

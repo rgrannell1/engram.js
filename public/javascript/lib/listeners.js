@@ -87,5 +87,19 @@ var listeners = {};
 				});
 			});
 		};
+
+		var scrollTimer = undefined;
+
+		listeners.onStop = function () {
+
+			ENGRAM.eventBus.on(":scroll", function (scrollData) {
+
+				clearTimeout(scrollTimer);
+
+				scrollTimer = setTimeout(function () {
+					ENGRAM.eventBus.fire(":stop", scrollData);
+				}, 10);
+			});
+		};
 	})();
 }

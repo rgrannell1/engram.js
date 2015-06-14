@@ -37,3 +37,38 @@ ENGRAM.eventBus.on(':update-url', url => {
 	}
 
 })
+
+ENGRAM.eventBus.on(':hash-id', id => {
+	history.pushState(null, null, '#' + id)
+})
+
+
+
+
+
+{
+	let $bookmarks = $('#bookmarks')
+
+	let compare = ($elem, actual) => {
+		return $elem.position( ).top - expected
+	}
+
+	ENGRAM.eventBus.on(':stop', ({windowTop, scrollHeight, scrollPosition}) => {
+
+		// -- binary search?
+		for (var ith = 0; ith < ENGRAM.inFocus.value.length; ++ith) {
+
+			var id          = ENGRAM.inFocus.value[ith].bookmark.bookmarkId
+			var topPosition = $bookmarks.find(`#${id}`).position( ).top - windowTop
+
+			if (topPosition >= 0) {
+				ENGRAM.eventBus.fire(':hash-id', id)
+				break
+			}
+		}
+
+
+	})
+
+}
+

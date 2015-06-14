@@ -167,6 +167,7 @@ setImmediateInterval(fillBookmarks, 250);
 listeners.rebroadcastKeyEvents();
 listeners.deleteBookmark();
 listeners.onScroll();
+listeners.onStop();
 
 ENGRAM.syncBookmarks();
 
