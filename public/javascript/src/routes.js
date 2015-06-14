@@ -30,8 +30,8 @@ ENGRAM.eventBus.on(':update-url', url => {
 
 	if (is.string(url)) {
 		url.length === 0
-			? history.pushState(null, '', '/bookmarks')
-			: history.pushState(null, '', `/bookmarks?q=${encodeURIComponent(url)}`)
+			? history.pushState(null, '', `/bookmarks${window.location.hash}`)
+			: history.pushState(null, '', `/bookmarks?q=${encodeURIComponent(url)}${window.location.hash}`)
 	} else {
 		throw TypeError(`${url} was not a valid URL.`)
 	}
