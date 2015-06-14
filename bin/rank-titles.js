@@ -6,7 +6,7 @@ var doc = "\nUsage:\n    rank\n    rank summarise\n    rank clear\n";
 var $ = require("jquery");
 var fs = require("fs");
 var docopt = require("docopt").docopt;
-var prompt = require("prompt");
+var colors = require("colors");
 
 var args = docopt(doc);
 
@@ -60,9 +60,36 @@ var surveyResults = function surveyResults(algorithmTitles) {
 	// -- print to the screen.
 
 	var result = Object.keys(algorithmTitles).map(function (url) {
-		return Object.keys(algorithmTitles[url]).map(function (algorithm) {
-			return "" + algorithm + ": " + algorithmTitles[url][algorithm];
-		}).join("\n");
+
+		var results = Object.keys(algorithmTitles[url]).map(function (algorithm) {
+			return {
+				algorithm: algorithm,
+				title: algorithmTitles[url][algorithm]
+			};
+		});
+
+		var duplicates = true;
+
+		// -- obviously a bad algorithm; doesn't matter here.
+		for (var ith = 0; ith < results.length; ++ith) {
+			for (var jth = 0; jth < results.length; ++jth) {
+
+				var isSame = results[ith].title === results[jth].title;
+				duplicates = duplicates && isSame;
+			}
+		}
+
+		if (!duplicates) {
+
+			return results.map(function (result) {
+				return colors.green("" + result.algorithm + ": " + result.title);
+			}).join("\n");
+		} else {
+
+			return results.map(function (result) {
+				return "" + result.algorithm + ": " + result.title;
+			}).join("\n");
+		}
 	}).join("\n\n");
 
 	console.log(result);
