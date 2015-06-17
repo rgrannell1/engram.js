@@ -1,7 +1,32 @@
 
+# 0.7.0
+------------------------------------------------------------------------------------------------------------
+2015 June  17
+
 * Lowered the default number of concurrent requests to five, as my laptop was oversaturated with requests.
 
+* Implemented a very crude form of title-trimming, which will be expanded in future.
+
+* Refactored some event messaging to use factored-out messages.
+
+* RequestURL now protects against undefined requests.
+
+* Added request rate calculation.
+
+* Added subsystem logging.
+
 * Cache hits are now logged at the DEBUG level.
+
+* Closed #20: "Add title testing regex page".
+
+* Closed #19: "Switch to encoding: null for all request bodies".
+
+* Closed 17#: "Host-name extraction not done for target url".
+
+* Closed #11: "Switch to camelCase identifiers in API".
+
+
+
 
 
 
