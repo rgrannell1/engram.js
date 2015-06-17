@@ -25,6 +25,17 @@ algorithms["trim-end"] = function (uri, title) {
 	return title.replace(regex, "$1");
 };
 
+algorithms["trim-delimiter"] = function (uri, title) {
+
+	var delimiter = /[ \t]+[|\-—»][ \t]+[^|\-—»]+$/g;
+
+	return title.replace(delimiter, "");
+};
+
+algorithms["trim-pipe"] = function (uri, title) {
+	return title.split(/[ \t]*[|][^|]+/g).join("");
+};
+
 fs.readFile("data/data-bookmarks.json", "utf8", function (err, data) {
 
 	if (err) {

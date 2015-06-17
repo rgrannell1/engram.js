@@ -45,6 +45,17 @@ algorithms['trim-end'] = (uri, title) => {
 
 }
 
+algorithms['trim-delimiter'] = (uri, title) => {
+
+	var delimiter = /[ \t]+[|\-—»][ \t]+[^|\-—»]+$/g
+
+	return title.replace(delimiter, '')
+
+}
+
+algorithms['trim-pipe'] = (uri, title) => {
+	return title.split(/[ \t]*[|][^|]+/g).join('')
+}
 
 
 
