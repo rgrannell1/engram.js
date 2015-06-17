@@ -21,7 +21,7 @@
 		"is":           "rgrannell1/is",
 		"content-type": "rgrannell1/content-type",
 
-		"colors",       "*",
+		"colors":       "*",
 
 		"express":      ">=4.10.2",
 		"body-parser":  "*",
