@@ -93,7 +93,7 @@
 
 
 
-		ENGRAM.eventBus.fire(':loaded-bookmarks', {originalOffset, id})
+		ENGRAM.eventBus.fire(message.LOADED_BOOKMARKS, {originalOffset, id})
 
 	}
 

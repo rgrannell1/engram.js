@@ -29,14 +29,14 @@ var listeners = {};
 				var keyCode = event.keyCode;
 
 				if (event.keyCode === eventCode.escape) {
-					ENGRAM.eventBus.fire(":press-escape");
+					ENGRAM.eventBus.fire(message.PRESS_ESCAPE);
 				} else if (event.keyCode === eventCode.backspace) {
-					ENGRAM.eventBus.fire(":press-backspace");
+					ENGRAM.eventBus.fire(message.PRESS_BACKSPACE);
 				} else {
 
 					if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
 
-						ENGRAM.eventBus.fire(":press-typeable", {
+						ENGRAM.eventBus.fire(message.PRESS_TYPEABLE, {
 							key: event.key
 						});
 					}
@@ -60,7 +60,7 @@ var listeners = {};
 				var $article = $button.closest("article");
 				var id = parseInt($article.attr("id"), 10);
 
-				ENGRAM.eventBus.fire(":delete-bookmark", { id: id, $button: $button });
+				ENGRAM.eventBus.fire(message.DELETE, { id: id, $button: $button });
 			});
 		};
 	})();
@@ -78,7 +78,7 @@ var listeners = {};
 
 				var windowTop = $window.scrollTop();
 
-				ENGRAM.eventBus.fire(":scroll", {
+				ENGRAM.eventBus.fire(message.SCROLL, {
 
 					windowTop: windowTop,
 					scrollHeight: $document.height(),
@@ -92,12 +92,12 @@ var listeners = {};
 
 		listeners.onStop = function () {
 
-			ENGRAM.eventBus.on(":scroll", function (scrollData) {
+			ENGRAM.eventBus.on(message.SCROLL, function (scrollData) {
 
 				clearTimeout(scrollTimer);
 
 				scrollTimer = setTimeout(function () {
-					ENGRAM.eventBus.fire(":stop", scrollData);
+					ENGRAM.eventBus.fire(message.STOP, scrollData);
 				}, 10);
 			});
 		};

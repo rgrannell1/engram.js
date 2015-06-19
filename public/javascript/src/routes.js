@@ -5,7 +5,7 @@
 
 
 
-var previous;
+var previous
 
 setInterval(( ) => {
 
@@ -13,7 +13,7 @@ setInterval(( ) => {
 
 		previous = window.location.href
 
-		ENGRAM.eventBus.fire(':url-update', {
+		ENGRAM.eventBus.fire(message.URL_UPDATE, {
 			current:  window.location.href,
 			previous: previous
 		})
@@ -26,7 +26,7 @@ setInterval(( ) => {
 
 
 
-ENGRAM.eventBus.on(':update-url', url => {
+ENGRAM.eventBus.on(message.UPDATE_URL, url => {
 
 	if (is.string(url)) {
 		url.length === 0
@@ -38,7 +38,7 @@ ENGRAM.eventBus.on(':update-url', url => {
 
 })
 
-ENGRAM.eventBus.on(':hash-id', id => {
+ENGRAM.eventBus.on(message.HASH_ID, id => {
 	history.pushState(null, null, '#' + id)
 })
 
@@ -53,7 +53,7 @@ ENGRAM.eventBus.on(':hash-id', id => {
 		return $elem.position( ).top - expected
 	}
 
-	ENGRAM.eventBus.on(':stop', ({windowTop, scrollHeight, scrollPosition}) => {
+	ENGRAM.eventBus.on(message.STOP, ({windowTop, scrollHeight, scrollPosition}) => {
 
 		// -- binary search?
 		for (var ith = 0; ith < ENGRAM.inFocus.value.length; ++ith) {
@@ -62,7 +62,7 @@ ENGRAM.eventBus.on(':hash-id', id => {
 			var topPosition = $bookmarks.find(`#${id}`).position( ).top - windowTop
 
 			if (topPosition >= 0) {
-				ENGRAM.eventBus.fire(':hash-id', id)
+				ENGRAM.eventBus.fire(message.HASH_ID, id)
 				break
 			}
 		}

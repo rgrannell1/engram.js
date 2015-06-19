@@ -65,7 +65,7 @@ ENGRAM.eventBus = EventBus( )
 		this.value        = value
 		this.currentQuery = currentQuery
 
-		ENGRAM.eventBus.fire(':update-focus', this)
+		ENGRAM.eventBus.fire(message.UPDATE_FOCUS, this)
 
 	}
 
@@ -101,4 +101,3 @@ var setImmediateInterval = function (fn, timeout, ...args) {
 	setInterval(fn, timeout, ...args)
 
 }
-

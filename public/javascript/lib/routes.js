@@ -8,14 +8,14 @@ setInterval(function () {
 
 		previous = window.location.href;
 
-		ENGRAM.eventBus.fire(":url-update", {
+		ENGRAM.eventBus.fire(message.URL_UPDATE, {
 			current: window.location.href,
 			previous: previous
 		});
 	}
 }, 100);
 
-ENGRAM.eventBus.on(":update-url", function (url) {
+ENGRAM.eventBus.on(message.UPDATE_URL, function (url) {
 
 	if (is.string(url)) {
 		url.length === 0 ? history.pushState(null, "", "/bookmarks" + window.location.hash) : history.pushState(null, "", "/bookmarks?q=" + encodeURIComponent(url) + "" + window.location.hash);
@@ -24,7 +24,7 @@ ENGRAM.eventBus.on(":update-url", function (url) {
 	}
 });
 
-ENGRAM.eventBus.on(":hash-id", function (id) {
+ENGRAM.eventBus.on(message.HASH_ID, function (id) {
 	history.pushState(null, null, "#" + id);
 });
 
@@ -36,7 +36,7 @@ ENGRAM.eventBus.on(":hash-id", function (id) {
 			return $elem.position().top - expected;
 		};
 
-		ENGRAM.eventBus.on(":stop", function (_ref) {
+		ENGRAM.eventBus.on(message.STOP, function (_ref) {
 			var windowTop = _ref.windowTop;
 			var scrollHeight = _ref.scrollHeight;
 			var scrollPosition = _ref.scrollPosition;
@@ -48,7 +48,7 @@ ENGRAM.eventBus.on(":hash-id", function (id) {
 				var topPosition = $bookmarks.find("#" + id).position().top - windowTop;
 
 				if (topPosition >= 0) {
-					ENGRAM.eventBus.fire(":hash-id", id);
+					ENGRAM.eventBus.fire(message.HASH_ID, id);
 					break;
 				}
 			}

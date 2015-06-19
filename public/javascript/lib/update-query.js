@@ -8,20 +8,20 @@ var getURL = function () {
 	return is["null"](result) ? "" : result;
 };
 
-ENGRAM.eventBus.on(":press-typeable", function (_ref) {
+ENGRAM.eventBus.on(message.PRESS_TYPEABLE, function (_ref) {
 	var key = _ref.key;
 
-	ENGRAM.eventBus.fire(":update-url", getURL() + key);
-}).on(":press-backspace", function (_ref) {
+	ENGRAM.eventBus.fire(message.URL_UPDATE, getURL() + key);
+}).on(message.PRESS_BACKSPACE, function (_ref) {
 	var key = _ref.key;
 
-	ENGRAM.eventBus.fire(":update-url", getURL().slice(0, -1));
-}).on(":press-escape", function (_ref) {
+	ENGRAM.eventBus.fire(message.URL_UPDATE, getURL().slice(0, -1));
+}).on(message.PRESS_ESCAPE, function (_ref) {
 	var key = _ref.key;
 
-	ENGRAM.eventBus.fire(":update-url", "");
+	ENGRAM.eventBus.fire(message.URL_UPDATE, "");
 });
 
 $(function () {
-	return ENGRAM.eventBus.fire(":update-url", getURL());
+	return ENGRAM.eventBus.fire(message.URL_UPDATE, getURL());
 });

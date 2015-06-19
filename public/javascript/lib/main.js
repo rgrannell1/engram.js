@@ -69,7 +69,7 @@ var _defineProperty = function (obj, key, value) { return Object.defineProperty(
 		var originalOffset = bookmark.getBoundingClientRect().top;
 		var id = $(bookmark).attr("id");
 
-		ENGRAM.eventBus.fire(":loaded-bookmarks", { originalOffset: originalOffset, id: id });
+		ENGRAM.eventBus.fire(message.LOADED_BOOKMARKS, { originalOffset: originalOffset, id: id });
 	};
 
 	var loadListDown = loadList.bind({}, true);

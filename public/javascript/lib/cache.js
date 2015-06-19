@@ -8,7 +8,7 @@ Object.defineProperty(ENGRAM.cache, "remove", {
 
 		if (ENGRAM.cache.hasOwnProperty(key)) {
 
-			ENGRAM.eventBus.fire(":update-cache");
+			ENGRAM.eventBus.fire(message.UPDATE_CACHE);
 			delete this[key];
 		}
 
@@ -34,7 +34,7 @@ Object.defineProperty(ENGRAM.cache, "set", {
 			throw Error("attempted to override " + key);
 		}
 
-		ENGRAM.eventBus.fire(":update-cache");
+		ENGRAM.eventBus.fire(message.UPDATE_CACHE);
 		this[key] = value;
 
 		return this;

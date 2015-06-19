@@ -19,18 +19,18 @@ var getURL = ( ) => {
 
 
 ENGRAM.eventBus
-.on(':press-typeable', ({key}) => {
-	ENGRAM.eventBus.fire( ':update-url', getURL( ) + key)
+.on(message.PRESS_TYPEABLE, ({key}) => {
+	ENGRAM.eventBus.fire(message.URL_UPDATE, getURL( ) + key)
 })
-.on(':press-backspace', ({key}) => {
-	ENGRAM.eventBus.fire(':update-url', getURL( ).slice(0, -1))
+.on(message.PRESS_BACKSPACE, ({key}) => {
+	ENGRAM.eventBus.fire(message.URL_UPDATE, getURL( ).slice(0, -1))
 })
-.on(':press-escape', ({key}) => {
-	ENGRAM.eventBus.fire(':update-url', '')
+.on(message.PRESS_ESCAPE, ({key}) => {
+	ENGRAM.eventBus.fire(message.URL_UPDATE, '')
 })
 
 
 
 
 
-$( ( ) => ENGRAM.eventBus.fire( ':update-url', getURL( )) )
+$( ( ) => ENGRAM.eventBus.fire( message.URL_UPDATE, getURL( )) )
