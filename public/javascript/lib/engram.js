@@ -55,7 +55,7 @@ ENGRAM.eventBus = EventBus();
 			this.value = value;
 			this.currentQuery = currentQuery;
 
-			ENGRAM.eventBus.fire(message.UPDATE_FOCUS, this);
+			ENGRAM.eventBus.fire(EventBus.message.UPDATE_FOCUS, this);
 		};
 
 		setFocus.precond = function (_ref) {

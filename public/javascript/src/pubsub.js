@@ -27,8 +27,6 @@ var on = function (topic, listener) {
 }
 
 on.precond = (topic, listener) => {
-
-	is.always.string  (topic,    'topic must be a string.')
 	is.always.function(listener, 'listener must be a function.')
 
 }
@@ -60,8 +58,6 @@ function fire (topic, data) {
 }
 
 fire.precond = (topic, data) => {
-
-	is.always.string(topic, 'topic must be a string.')
 
 }
 

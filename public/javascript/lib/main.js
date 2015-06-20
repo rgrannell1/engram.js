@@ -69,7 +69,7 @@ var _defineProperty = function (obj, key, value) { return Object.defineProperty(
 		var originalOffset = bookmark.getBoundingClientRect().top;
 		var id = $(bookmark).attr("id");
 
-		ENGRAM.eventBus.fire(message.LOADED_BOOKMARKS, { originalOffset: originalOffset, id: id });
+		ENGRAM.eventBus.fire(EventBus.message.LOADED_BOOKMARKS, { originalOffset: originalOffset, id: id });
 	};
 
 	var loadListDown = loadList.bind({}, true);
@@ -100,15 +100,17 @@ var fillBookmarks = function () {
 
 var triggerLoad = function (downwards) {
 
-	var nextId = parseInt($("#bookmarks article")[downwards ? "last" : "first"]().attr("id")) + (downwards ? -1 : +1);
-
 	if (getURL() === "") {
 		// -- load linearly by id up or down.
 
 		var topic = ":scroll" + (downwards ? "down" : "up") + "-bookmarks";
 
-		ENGRAM.eventBus.fire(topic, nextId);
-	} else {}
+		ENGRAM.eventBus.fire(topic, getNextId());
+	} else {
+		// -- load upwards or downwards by search score.
+
+		throw new Error("loading search results not implemented.");
+	}
 };
 
 ENGRAM.eventBus.on(":scroll", function detectEdge(_ref) {
@@ -170,5 +172,3 @@ listeners.onScroll();
 listeners.onStop();
 
 ENGRAM.syncBookmarks();
-
-// -- load upwards or downwards by search score.

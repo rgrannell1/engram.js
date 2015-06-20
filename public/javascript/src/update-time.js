@@ -64,7 +64,7 @@
 
 	ENGRAM.updateTimes = ( ) => {
 
-		$('.bookmark time').each(function () {
+		$('.bookmark time').each(function ( ) {
 			renderTime($(this))
 		})
 

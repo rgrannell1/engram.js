@@ -28,8 +28,6 @@ var on = (function (_on) {
 });
 
 on.precond = function (topic, listener) {
-
-	is.always.string(topic, "topic must be a string.");
 	is.always["function"](listener, "listener must be a function.");
 };
 
@@ -54,10 +52,7 @@ function fire(topic, data) {
 	return this;
 }
 
-fire.precond = function (topic, data) {
-
-	is.always.string(topic, "topic must be a string.");
-};
+fire.precond = function (topic, data) {};
 
 var await = (function (_await) {
 	var _awaitWrapper = function await(_x, _x2) {

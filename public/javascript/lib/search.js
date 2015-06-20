@@ -119,7 +119,7 @@ var scoreBookmarks = function (_ref) {
 		scoresRef[query] = is.number(scoresRef[query]) ? scoresRef[query] : scoreTextMatch(query, isSplitSubstring(query), cacheRef[key].bookmark.title);
 	});
 
-	ENGRAM.eventBus.fire(":rescore", {});
+	ENGRAM.eventBus.fire(EventBus.message.RESCORE, {});
 };
 
 scoreBookmarks.precond = function (pattern) {

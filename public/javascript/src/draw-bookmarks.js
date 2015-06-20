@@ -1,4 +1,4 @@
-":use strict"
+"use strict"
 
 
 
@@ -75,7 +75,7 @@ $.get('/public/html/bookmark-template.html', function (template) {
 				(html0, html1) => html0 + html1, '')
 		)
 
-		ENGRAM.eventBus.fire(message.REDRAW, { })
+		ENGRAM.eventBus.fire(EventBus.message.REDRAW, { })
 
 	}
 
@@ -93,4 +93,4 @@ $.get('/public/html/bookmark-template.html', function (template) {
 
 
 
-ENGRAM.eventBus.on(message.UPDATE_FOCUS, ENGRAM.drawFocus)
+ENGRAM.eventBus.on(EventBus.message.UPDATE_FOCUS, ENGRAM.drawFocus)

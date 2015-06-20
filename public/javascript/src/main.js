@@ -1,6 +1,10 @@
 
 "use strict"
 
+
+
+
+
 {
 
 
@@ -93,7 +97,7 @@
 
 
 
-		ENGRAM.eventBus.fire(message.LOADED_BOOKMARKS, {originalOffset, id})
+		ENGRAM.eventBus.fire(EventBus.message.LOADED_BOOKMARKS, {originalOffset, id})
 
 	}
 
@@ -140,32 +144,21 @@ var fillBookmarks = ( ) => {
 
 
 
-
 var triggerLoad = (downwards) => {
-
-	var nextId =
-		parseInt(
-			$('#bookmarks article')
-			[downwards ? 'last': 'first']( )
-			.attr('id')) + (downwards ? -1 : +1)
-
-
-
-
 
 	if (getURL( ) === '') {
 		// -- load linearly by id up or down.
 
 		var topic = ':scroll' + (downwards ? 'down' : 'up')  + '-bookmarks'
 
-		ENGRAM.eventBus.fire(topic, nextId)
+		ENGRAM.eventBus.fire(topic, getNextId( ))
 
 	} else {
 		// -- load upwards or downwards by search score.
 
+		throw new Error('loading search results not implemented.')
 
 	}
-
 
 }
 

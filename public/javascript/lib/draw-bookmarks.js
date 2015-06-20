@@ -1,7 +1,5 @@
 "use strict";
 
-":use strict";
-
 // -- remove this if I find an objective reason
 // -- this is bad.
 
@@ -54,7 +52,7 @@ $.get("/public/html/bookmark-template.html", function (template) {
 			return html0 + html1;
 		}, ""));
 
-		ENGRAM.eventBus.fire(message.REDRAW, {});
+		ENGRAM.eventBus.fire(EventBus.message.REDRAW, {});
 	};
 
 	ENGRAM.drawFocus.precond = function (focus) {
@@ -65,4 +63,4 @@ $.get("/public/html/bookmark-template.html", function (template) {
 	};
 });
 
-ENGRAM.eventBus.on(message.UPDATE_FOCUS, ENGRAM.drawFocus);
+ENGRAM.eventBus.on(EventBus.message.UPDATE_FOCUS, ENGRAM.drawFocus);

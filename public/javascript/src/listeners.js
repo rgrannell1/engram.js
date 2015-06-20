@@ -43,14 +43,14 @@ var listeners = { }
 			var keyCode = event.keyCode
 
 			if (event.keyCode === eventCode.escape) {
-				ENGRAM.eventBus.fire(message.PRESS_ESCAPE)
+				ENGRAM.eventBus.fire(EventBus.message.PRESS_ESCAPE)
 			} else if (event.keyCode === eventCode.backspace) {
-				ENGRAM.eventBus.fire(message.PRESS_BACKSPACE)
+				ENGRAM.eventBus.fire(EventBus.message.PRESS_BACKSPACE)
 			} else {
 
 				if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
 
-					ENGRAM.eventBus.fire(message.PRESS_TYPEABLE, {
+					ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
 						key: event.key
 					})
 
@@ -81,7 +81,7 @@ var listeners = { }
 			var $article = $button.closest('article')
 			var id       = parseInt($article.attr('id'), 10)
 
-			ENGRAM.eventBus.fire(message.DELETE, {id, $button})
+			ENGRAM.eventBus.fire(EventBus.message.DELETE, {id, $button})
 
 		})
 
@@ -109,7 +109,7 @@ var listeners = { }
 
 			var windowTop = $window.scrollTop( )
 
-			ENGRAM.eventBus.fire(message.SCROLL, {
+			ENGRAM.eventBus.fire(EventBus.message.SCROLL, {
 
 				windowTop,
 				scrollHeight:   $document.height( ),
@@ -125,12 +125,12 @@ var listeners = { }
 
 	listeners.onStop = ( ) => {
 
-		ENGRAM.eventBus.on(message.SCROLL, scrollData => {
+		ENGRAM.eventBus.on(EventBus.message.SCROLL, scrollData => {
 
 			clearTimeout(scrollTimer)
 
 			scrollTimer = setTimeout(( ) => {
-				ENGRAM.eventBus.fire(message.STOP, scrollData)
+				ENGRAM.eventBus.fire(EventBus.message.STOP, scrollData)
 			}, 10)
 
 		})

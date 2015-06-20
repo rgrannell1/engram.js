@@ -137,7 +137,7 @@ var scoreBookmarks = ({query}) => {
 
 	})
 
-	ENGRAM.eventBus.fire(':rescore', {})
+	ENGRAM.eventBus.fire(EventBus.message.RESCORE, {})
 
 }
 
