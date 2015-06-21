@@ -42,7 +42,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 			}
 		};
 
-		var onChange = function (callback) {
+		var onLocationChange = function (callback) {
 
 			var previous;
 
@@ -64,10 +64,19 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 					onLoad: [],
 					onChange: []
 				},
-				middleware: []
-			};
+				middleware: [] };
 
-			self.onLoad = function (pattern, response) {
+			var onLoad = (function (_onLoad) {
+				var _onLoadWrapper = function onLoad(_x, _x2) {
+					return _onLoad.apply(this, arguments);
+				};
+
+				_onLoadWrapper.toString = function () {
+					return _onLoad.toString();
+				};
+
+				return _onLoadWrapper;
+			})(function (pattern, response) {
 
 				self.routes.onLoad.push({ pattern: pattern, response: response });
 
@@ -75,15 +84,25 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 					routes: self.routes,
 					middleware: self.middleware,
 
-					onChange: self.onChange,
-					onLoad: self.onLoad,
-					use: self.use,
+					onChange: onChange,
+					onLoad: onLoad,
+					use: use,
 
-					run: self.run
+					run: run
 				};
-			};
+			});
 
-			self.onChange = function (pattern, response) {
+			var onChange = (function (_onChange) {
+				var _onChangeWrapper = function onChange(_x, _x2) {
+					return _onChange.apply(this, arguments);
+				};
+
+				_onChangeWrapper.toString = function () {
+					return _onChange.toString();
+				};
+
+				return _onChangeWrapper;
+			})(function (pattern, response) {
 
 				self.routes.onChange.push({ pattern: pattern, response: response });
 
@@ -91,15 +110,25 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 					routes: self.routes,
 					middleware: self.middleware,
 
-					onChange: self.onChange,
-					onLoad: self.onLoad,
-					use: self.use,
+					onChange: onChange,
+					onLoad: onLoad,
+					use: use,
 
-					run: self.run
+					run: run
 				};
-			};
+			});
 
-			self.use = function (response) {
+			var use = (function (_use) {
+				var _useWrapper = function use(_x) {
+					return _use.apply(this, arguments);
+				};
+
+				_useWrapper.toString = function () {
+					return _use.toString();
+				};
+
+				return _useWrapper;
+			})(function (response) {
 
 				self.middleware.push(response);
 
@@ -107,24 +136,30 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 					routes: self.routes,
 					middleware: self.middleware,
 
-					onChange: self.onChange,
-					onLoad: self.onLoad,
-					use: self.use,
+					onChange: onChange,
+					onLoad: onLoad,
+					use: use,
 
-					run: self.run
+					run: run
 				};
-			};
+			});
 
-			self.run = function () {
+			var run = function run() {
 
 				window.onload = function () {
 					dispatchRoutes(self.routes.onLoad, self.middleware);
 				};
 
-				onChange(function () {
+				onLocationChange(function () {
 					dispatchRoutes(self.routes.onChange, self.middleware);
 				});
 			};
+
+			self.onLoad = onLoad;
+			self.onChange = onChange;
+
+			self.use = use;
+			self.run = run;
 
 			return self;
 		};
@@ -134,10 +169,10 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 }
 
 var QueryIterator = (function () {
-	function QueryIterator(location) {
+	function QueryIterator(path) {
 		_classCallCheck(this, QueryIterator);
 
-		this.data = {};
+		this.data = parsePath(path);
 
 		return this;
 	}
@@ -167,6 +202,14 @@ var QueryIterator = (function () {
 	var use;
 
 	(function () {
+
+		var parsePath = function (path) {
+
+			var data = {};
+
+			return data;
+		};
+
 		var SELECTORS = ["path", "paths", "dirname", "basename", "rawPaths", "rest", "hash", "rawQuery", "rawQueryParams", "rawQueryParam", "queryParams", "queryParam"];
 
 		var buildSelector = function (selector) {
@@ -186,7 +229,5 @@ var QueryIterator = (function () {
 		use.self = function (context) {};
 
 		use.location = function (location) {};
-
-		use.self(undefined).path;
 	})();
 }

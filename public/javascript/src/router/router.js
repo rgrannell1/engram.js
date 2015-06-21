@@ -29,7 +29,7 @@
 
 	}
 
-	let onChange = callback => {
+	let onLocationChange = callback => {
 
 		var previous
 
@@ -55,13 +55,18 @@
 
 		var self = {
 			routes: {
-				onLoad:     [ ],
-				onChange:   [ ]
+				onLoad:   [ ],
+				onChange: [ ]
 			},
-			middleware: [ ]
+			middleware:   [ ],
+
 		}
 
-		self.onLoad = (pattern, response) => {
+
+
+
+
+		var onLoad = function (pattern, response) {
 
 			self.routes.onLoad.push({pattern, response})
 
@@ -69,16 +74,16 @@
 				routes:     self.routes,
 				middleware: self.middleware,
 
-				onChange:   self.onChange,
-				onLoad:     self.onLoad,
-				use:        self.use,
+				onChange:   onChange,
+				onLoad:     onLoad,
+				use:        use,
 
-				run:        self.run
+				run:        run
 			}
 
 		}
 
-		self.onChange = (pattern, response) => {
+		var onChange = function (pattern, response) {
 
 			self.routes.onChange.push({pattern, response})
 
@@ -86,16 +91,16 @@
 				routes:     self.routes,
 				middleware: self.middleware,
 
-				onChange:   self.onChange,
-				onLoad:     self.onLoad,
-				use:        self.use,
+				onChange:   onChange,
+				onLoad:     onLoad,
+				use:        use,
 
-				run:        self.run
+				run:        run
 			}
 
 		}
 
-		self.use = response => {
+		var use = function (response) {
 
 			self.middleware.push(response)
 
@@ -103,26 +108,35 @@
 				routes:     self.routes,
 				middleware: self.middleware,
 
-				onChange:   self.onChange,
-				onLoad:     self.onLoad,
-				use:        self.use,
+				onChange:   onChange,
+				onLoad:     onLoad,
+				use:        use,
 
-				run:        self.run
+				run:        run
 			}
 
 		}
 
-		self.run = ( ) => {
+		var run = function ( ) {
 
 			window.onload = ( ) => {
 				dispatchRoutes(self.routes.onLoad, self.middleware)
 			}
 
-			onChange(( ) => {
+			onLocationChange(( ) => {
 				dispatchRoutes(self.routes.onChange, self.middleware)
 			})
 
 		}
+
+
+
+
+		self.onLoad   = onLoad
+		self.onChange = onChange
+
+		self.use      = use
+		self.run      = run
 
 		return self
 
@@ -144,11 +158,9 @@
 
 class QueryIterator {
 
-	constructor(location) {
+	constructor(path) {
 
-		this.data = {
-
-		}
+		this.data = parsePath(path)
 
 		return this
 
@@ -172,6 +184,22 @@ class QueryIterator {
 
 
 {
+
+	let parsePath = path => {
+
+		var data = { }
+
+
+
+		return data
+
+	}
+
+
+
+
+
+
 	let SELECTORS = [
 		'path', 'paths', 'dirname', 'basename', 'rawPaths',
 		'rest',
@@ -206,7 +234,5 @@ class QueryIterator {
 	use.location = location => {
 
 	}
-
-	use.self(this).path
 
 }

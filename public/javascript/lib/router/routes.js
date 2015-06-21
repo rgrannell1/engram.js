@@ -59,5 +59,6 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 var route = Router().onChange(function (location) {
 	return true;
 }, function () {
+	console.log("++ ++ ++ ++ ++ ++ ");
 	console.log(window.location.href);
 }).run();
