@@ -1,7 +1,7 @@
 
 {
 
-	let dispatchRoutes = (routes, middleware) {
+	let dispatchRoutes = (routes, middleware) => {
 
 		var location = window.location
 
@@ -13,7 +13,7 @@
 
 			if (isMatch) {
 
-				middleware.forEach({response} => {
+				middleware.forEach(response => {
 					response(location)
 				})
 
@@ -58,12 +58,12 @@
 				onLoad:     [ ],
 				onChange:   [ ]
 			},
-			middleware
+			middleware: [ ]
 		}
 
 		self.onLoad = (pattern, response) => {
 
-			self.routes.onLoad.push({pattern, responses})
+			self.routes.onLoad.push({pattern, response})
 
 			return {
 				routes:     self.routes,
@@ -71,7 +71,9 @@
 
 				onChange:   self.onChange,
 				onLoad:     self.onLoad,
-				use:        self.use
+				use:        self.use,
+
+				run:        self.run
 			}
 
 		}
@@ -86,14 +88,16 @@
 
 				onChange:   self.onChange,
 				onLoad:     self.onLoad,
-				use:        self.use
+				use:        self.use,
+
+				run:        self.run
 			}
 
 		}
 
 		self.use = response => {
 
-			self.use.middleware.push({response})
+			self.middleware.push(response)
 
 			return {
 				routes:     self.routes,
@@ -101,16 +105,18 @@
 
 				onChange:   self.onChange,
 				onLoad:     self.onLoad,
-				use:        self.use
+				use:        self.use,
+
+				run:        self.run
 			}
 
 		}
 
 		self.run = ( ) => {
 
-			window.onload(( ) => {
+			window.onload = ( ) => {
 				dispatchRoutes(self.routes.onLoad, self.middleware)
-			})
+			}
 
 			onChange(( ) => {
 				dispatchRoutes(self.routes.onChange, self.middleware)
@@ -121,5 +127,86 @@
 		return self
 
 	}
+
+
+
+
+
+	var qroute = { }
+
+
+}
+
+
+
+
+
+
+class QueryIterator {
+
+	constructor(location) {
+
+		this.data = {
+
+		}
+
+		return this
+
+	}
+
+	hasNext(selector) {
+
+	}
+
+	peekNext(selector) {
+
+	}
+
+	getNext(selector) {
+
+	}
+
+}
+
+
+
+
+{
+	let SELECTORS = [
+		'path', 'paths', 'dirname', 'basename', 'rawPaths',
+		'rest',
+		'hash',
+		'rawQuery', 'rawQueryParams', 'rawQueryParam', 'queryParams', 'queryParam'
+	]
+
+	let buildSelector = selector => {
+		return predicate => {
+			return predicate.call(this, this.getNext(selector))
+		}
+	}
+
+
+
+	let where = { }
+
+	SELECTORS.forEach(selector => {
+		where.selector = buildSelector(selector)
+	})
+
+
+
+
+
+	var use = { }
+
+	use.self = context => {
+
+	}
+
+	use.location = location => {
+
+	}
+
+	use.self(this).path
 
 }

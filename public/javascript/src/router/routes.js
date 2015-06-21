@@ -70,3 +70,18 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 
 }
 
+
+
+
+
+
+
+var route =
+
+	Router( ).onChange(
+		location => true,
+		( ) => {
+			console.log( window.location.href )
+		}
+	)
+	.run( )
