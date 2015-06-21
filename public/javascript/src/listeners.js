@@ -17,6 +17,10 @@ var listeners = { }
 
 	let isTypeable = event => {
 
+		if (is.undefined(event.key)) {
+			return true
+		}
+
 		return (
 			(event.keyCode >= 41 && event.keyCode < 122) ||
 			(event.keyCode == 32 || event.keyCode > 186)) &&
@@ -43,9 +47,13 @@ var listeners = { }
 			var keyCode = event.keyCode
 
 			if (event.keyCode === eventCode.escape) {
+
 				ENGRAM.eventBus.fire(EventBus.message.PRESS_ESCAPE)
+
 			} else if (event.keyCode === eventCode.backspace) {
+
 				ENGRAM.eventBus.fire(EventBus.message.PRESS_BACKSPACE)
+
 			} else {
 
 				if (isTypeable(event) && !event.ctrlKey && !event.altKey) {

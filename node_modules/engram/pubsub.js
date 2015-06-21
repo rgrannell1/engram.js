@@ -28,6 +28,8 @@ var on = (function (_on) {
 });
 
 on.precond = function (topic, listener) {
+
+	is.never.undefined(topic);
 	is.always["function"](listener, "listener must be a function.");
 };
 
@@ -52,7 +54,10 @@ function fire(topic, data) {
 	return this;
 }
 
-fire.precond = function (topic, data) {};
+fire.precond = function (topic, data) {
+
+	is.never.undefined(topic);
+};
 
 var await = (function (_await) {
 	var _awaitWrapper = function await(_x, _x2) {
@@ -92,7 +97,11 @@ var await = (function (_await) {
 	return this;
 });
 
-await.precond = function (topic, listener) {};
+await.precond = function (topic, listener) {
+
+	is.never.undefined(topic);
+	is.always["function"](listener);
+};
 
 var EventBus = (function (_EventBus) {
 	var _EventBusWrapper = function EventBus() {

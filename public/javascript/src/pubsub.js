@@ -27,6 +27,8 @@ var on = function (topic, listener) {
 }
 
 on.precond = (topic, listener) => {
+
+	is.never.undefined(topic)
 	is.always.function(listener, 'listener must be a function.')
 
 }
@@ -58,6 +60,8 @@ function fire (topic, data) {
 }
 
 fire.precond = (topic, data) => {
+
+	is.never.undefined(topic)
 
 }
 
@@ -97,6 +101,9 @@ var await = function (topic, listener) {
 }
 
 await.precond = (topic, listener) => {
+
+	is.never.undefined(topic)
+	is.always.function(listener)
 
 }
 

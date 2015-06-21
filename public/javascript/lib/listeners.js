@@ -12,6 +12,10 @@ var listeners = {};
 
 		var isTypeable = function (event) {
 
+			if (is.undefined(event.key)) {
+				return true;
+			}
+
 			return (event.keyCode >= 41 && event.keyCode < 122 || (event.keyCode == 32 || event.keyCode > 186)) && event.key.length === 1;
 		};
 
@@ -29,8 +33,10 @@ var listeners = {};
 				var keyCode = event.keyCode;
 
 				if (event.keyCode === eventCode.escape) {
+
 					ENGRAM.eventBus.fire(EventBus.message.PRESS_ESCAPE);
 				} else if (event.keyCode === eventCode.backspace) {
+
 					ENGRAM.eventBus.fire(EventBus.message.PRESS_BACKSPACE);
 				} else {
 

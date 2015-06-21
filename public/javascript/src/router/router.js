@@ -119,9 +119,9 @@
 
 		var run = function ( ) {
 
-			window.onload = ( ) => {
+			$(( ) => {
 				dispatchRoutes(self.routes.onLoad, self.middleware)
-			}
+			})
 
 			onLocationChange(( ) => {
 				dispatchRoutes(self.routes.onChange, self.middleware)
@@ -141,13 +141,6 @@
 		return self
 
 	}
-
-
-
-
-
-	var qroute = { }
-
 
 }
 
@@ -212,6 +205,8 @@ class QueryIterator {
 			return predicate.call(this, this.getNext(selector))
 		}
 	}
+
+
 
 
 

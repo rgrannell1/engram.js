@@ -6,7 +6,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 {
 	var Router;
-	var qroute;
 
 	(function () {
 
@@ -146,9 +145,9 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 			var run = function run() {
 
-				window.onload = function () {
+				$(function () {
 					dispatchRoutes(self.routes.onLoad, self.middleware);
-				};
+				});
 
 				onLocationChange(function () {
 					dispatchRoutes(self.routes.onChange, self.middleware);
@@ -163,8 +162,6 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 			return self;
 		};
-
-		qroute = {};
 	})();
 }
 

@@ -81,7 +81,6 @@ var route =
 	Router( ).onChange(
 		location => true,
 		( ) => {
-			console.log( '++ ++ ++ ++ ++ ++ ' )
 			console.log( window.location.href )
 		}
 	)
