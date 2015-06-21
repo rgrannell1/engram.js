@@ -5,7 +5,7 @@
 	var ith = 0;
 
 	EventBus.message = {
-		UPDATE_URL: ++ith,
+		UPDATED_URL: ++ith,
 		URL_UPDATE: ++ith,
 		DELETE_SUCCESS: ++ith,
 		DELETE_FAILURE: ++ith,

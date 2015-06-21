@@ -1,25 +1,10 @@
 "use strict";
 
-var previous;
-
-setInterval(function () {
-
-	if (previous !== window.location.href) {
-
-		previous = window.location.href;
-
-		ENGRAM.eventBus.fire(EventBus.message.URL_UPDATE, {
-			current: window.location.href,
-			previous: previous
-		});
-	}
-}, 100);
-
 /*
 	mirror any changes to the URL data in the actual location bar.
 */
 
-ENGRAM.eventBus.on(EventBus.message.UPDATE_URL, function (query) {
+ENGRAM.eventBus.on(EventBus.message.URL_UPDATE, function (query) {
 
 	if (is.string(query)) {
 		query.length === 0 ? history.pushState(null, "", "/bookmarks" + window.location.hash) : history.pushState(null, "", "/bookmarks?q=" + encodeURIComponent(query) + "" + window.location.hash);

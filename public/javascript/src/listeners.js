@@ -17,14 +17,11 @@ var listeners = { }
 
 	let isTypeable = event => {
 
-		if (is.undefined(event.key)) {
-			return true
-		}
+		var key = String.fromCharCode(event.keyCode)
 
 		return (
 			(event.keyCode >= 41 && event.keyCode < 122) ||
-			(event.keyCode == 32 || event.keyCode > 186)) &&
-			event.key.length === 1
+			(event.keyCode == 32 || event.keyCode > 186))
 	}
 
 	let $window   = $(window)
@@ -59,7 +56,7 @@ var listeners = { }
 				if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
 
 					ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
-						key: event.key
+						key: String.fromCharCode(event.keyCode)
 					})
 
 				}

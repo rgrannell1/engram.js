@@ -3,32 +3,13 @@
 
 
 
-var previous
-
-setInterval(( ) => {
-
-	if (previous !== window.location.href) {
-
-		previous = window.location.href
-
-		ENGRAM.eventBus.fire(EventBus.message.URL_UPDATE, {
-			current:  window.location.href,
-			previous: previous
-		})
-
-	}
-
-}, 100)
-
-
-
 
 
 /*
 	mirror any changes to the URL data in the actual location bar.
 */
 
-ENGRAM.eventBus.on(EventBus.message.UPDATE_URL, query => {
+ENGRAM.eventBus.on(EventBus.message.URL_UPDATE, query => {
 
 	if (is.string(query)) {
 		query.length === 0
