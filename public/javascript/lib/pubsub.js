@@ -17,6 +17,7 @@ var on = (function (_on) {
 })(function (topic, listener) {
 
 	on.precond(topic, listener);
+	topic = topic + "";
 
 	if (is.undefined(this.topics[topic])) {
 		this.topics[topic] = [];
@@ -37,6 +38,7 @@ on.precond = function (topic, listener) {
 function fire(topic, data) {
 
 	fire.precond(topic, data);
+	topic = topic + "";
 
 	if (topic.length > 0 && !is.undefined(this.topics[topic])) {
 
@@ -72,6 +74,7 @@ var await = (function (_await) {
 })(function (topic, listener) {
 
 	await.precond(topic, listener);
+	topic = topic + "";
 
 	if (is.undefined(this.topics[topic])) {
 		this.topics[topic] = [];

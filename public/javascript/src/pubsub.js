@@ -15,6 +15,7 @@ if (typeof process !== 'undefined' && process.version) {
 var on = function (topic, listener) {
 
 	on.precond(topic, listener)
+	topic = topic + ''
 
 	if (is.undefined(this.topics[topic])) {
 		this.topics[topic] = [ ]
@@ -40,6 +41,7 @@ on.precond = (topic, listener) => {
 function fire (topic, data) {
 
 	fire.precond(topic, data)
+	topic = topic + ''
 
 	if ( topic.length > 0 && !is.undefined(this.topics[topic]) ) {
 
@@ -71,6 +73,7 @@ fire.precond = (topic, data) => {
 var await = function (topic, listener) {
 
 	await.precond(topic, listener)
+	topic = topic + ''
 
 	if (is.undefined(this.topics[topic])) {
 		this.topics[topic] = [ ]
