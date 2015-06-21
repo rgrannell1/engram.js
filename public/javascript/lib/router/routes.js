@@ -17,6 +17,10 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 	history.pushState(null, null, "#" + id);
 });
 
+/*
+	update the url hash.
+*/
+
 {
 	(function () {
 		var $bookmarks = $("#bookmarks");

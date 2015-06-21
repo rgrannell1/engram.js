@@ -29,6 +29,10 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 
 
 
+/*
+	update the url hash.
+*/
+
 {
 	let $bookmarks = $('#bookmarks')
 
