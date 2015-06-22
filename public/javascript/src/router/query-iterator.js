@@ -26,7 +26,7 @@ var parseResource = raw => {
 
 	}
 
-	parts.paths = raw.split('/')
+	parts.paths = raw.split('/').filter(part => part.length > 0)
 
 	return parts
 }
@@ -38,6 +38,21 @@ class QueryIterator {
 
 	constructor(raw) {
 		this.data = parseResource(raw)
+	}
+
+	static fromLocation(location) {
+
+		var raw = [
+			location.pathname,
+			location.search,
+			location.hash
+		]
+		.filter(part => part.length > 0)
+		.join('')
+
+
+		return new QueryIterator(raw)
+
 	}
 
 
@@ -171,19 +186,13 @@ class QueryIterator {
 
 		var out    = ''
 
-		;[
+		return [
 			this.peekNextPaths( ),
 			this.peekNextParams( ),
 			this.peekNextHash( )
 		]
-		.forEach(part => {
-			if (!is.undefined(part)) {
-				out += part
-			}
-		})
-
-
-		return out
+		.filter(part => part.length > 0)
+		.join('')
 
 	}
 
@@ -200,9 +209,3 @@ class QueryIterator {
 	}
 
 }
-
-
-
-var query = new QueryIterator('a/b/d/bookmarks?q=asdds&dd=asdasda#2')
-
-console.log( query )

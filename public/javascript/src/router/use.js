@@ -1,56 +1,28 @@
 
-{
-
-	let parsePath = path => {
-
-		var data = { }
-
-
-
-		return data
-
-	}
+var use   =  { }
 
 
 
 
 
+var where = {
+	path: (predicate) => {
 
-	let SELECTORS = [
-		'path', 'paths', 'dirname', 'basename', 'rawPaths',
-		'rest',
-		'hash',
-		'rawQuery', 'rawQueryParams', 'rawQueryParam', 'queryParams', 'queryParam'
-	]
+		var isMatch  = predicate(this.query.getNextPath( ))
+		this.isMatch = this.isMatch && isMatch
 
-	let buildSelector = selector => {
-		return predicate => {
-			return predicate.call(this, this.getNext(selector))
-		}
-	}
-
-
-
-
-
-	let where = { }
-
-	SELECTORS.forEach(selector => {
-		where.selector = buildSelector(selector)
-	})
-
-
-
-
-
-	var use = { }
-
-	use.self = context => {
+		return this
 
 	}
+}
 
-	use.location = location => {
+use.location = location => {
 
+
+	return {
+		isMatch: true,
+		query:   new QueryIterator.fromLocation(location),
+		where
 	}
 
 }

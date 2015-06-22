@@ -24,7 +24,9 @@ var parseResource = function (raw) {
 		}
 	}
 
-	parts.paths = raw.split("/");
+	parts.paths = raw.split("/").filter(function (part) {
+		return part.length > 0;
+	});
 
 	return parts;
 };
@@ -36,7 +38,20 @@ var QueryIterator = (function () {
 		this.data = parseResource(raw);
 	}
 
-	_prototypeProperties(QueryIterator, null, {
+	_prototypeProperties(QueryIterator, {
+		fromLocation: {
+			value: function fromLocation(location) {
+
+				var raw = [location.pathname, location.search, location.hash].filter(function (part) {
+					return part.length > 0;
+				}).join("");
+
+				return new QueryIterator(raw);
+			},
+			writable: true,
+			configurable: true
+		}
+	}, {
 		peekNextPath: {
 			value: function peekNextPath() {
 
@@ -166,13 +181,11 @@ var QueryIterator = (function () {
 		peekRest: {
 			value: function peekRest() {
 
-				var out = "";[this.peekNextPaths(), this.peekNextParams(), this.peekNextHash()].forEach(function (part) {
-					if (!is.undefined(part)) {
-						out += part;
-					}
-				});
+				var out = "";
 
-				return out;
+				return [this.peekNextPaths(), this.peekNextParams(), this.peekNextHash()].filter(function (part) {
+					return part.length > 0;
+				}).join("");
 			},
 			writable: true,
 			configurable: true
@@ -195,7 +208,3 @@ var QueryIterator = (function () {
 
 	return QueryIterator;
 })();
-
-var query = new QueryIterator("a/b/d/bookmarks?q=asdds&dd=asdasda#2");
-
-console.log(query);

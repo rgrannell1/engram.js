@@ -1,35 +1,22 @@
 "use strict";
 
-{
-	var use;
+var use = {};
 
-	(function () {
+var where = {
+	path: function (predicate) {
 
-		var parsePath = function (path) {
+		var isMatch = predicate(undefined.query.getNextPath());
+		undefined.isMatch = undefined.isMatch && isMatch;
 
-			var data = {};
+		return undefined;
+	}
+};
 
-			return data;
-		};
+use.location = function (location) {
 
-		var SELECTORS = ["path", "paths", "dirname", "basename", "rawPaths", "rest", "hash", "rawQuery", "rawQueryParams", "rawQueryParam", "queryParams", "queryParam"];
-
-		var buildSelector = function (selector) {
-			return function (predicate) {
-				return predicate.call(undefined, undefined.getNext(selector));
-			};
-		};
-
-		var where = {};
-
-		SELECTORS.forEach(function (selector) {
-			where.selector = buildSelector(selector);
-		});
-
-		use = {};
-
-		use.self = function (context) {};
-
-		use.location = function (location) {};
-	})();
-}
+	return {
+		isMatch: true,
+		query: new QueryIterator.fromLocation(location),
+		where: where
+	};
+};

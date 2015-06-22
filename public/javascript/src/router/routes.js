@@ -66,7 +66,11 @@ var route =
 	Router( ).onChange(
 		location => true,
 		( ) => {
-			console.log( window.location.href )
+
+			var predicate = use.location(window.location)
+
+			console.log( predicate )
+
 		}
 	)
 	.run( )
