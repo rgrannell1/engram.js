@@ -45,10 +45,10 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 	})();
 }
 
-var route = Router().onChange(use.location.where.path(function (path) {
+var route = Router().onChange(use.location.where.path(function (path, self) {
 
 	console.log("===============");
-	console.log(undefined);
+	console.log(self);
 
 	return true;
 }).where.path(function (path) {

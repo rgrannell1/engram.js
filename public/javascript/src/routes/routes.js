@@ -65,10 +65,10 @@ var route =
 
 	Router( ).onChange(
 		use.location
-		.where.path(path => {
+		.where.path((path, self) => {
 
 			console.log('===============')
-			console.log(this)
+			console.log(self)
 
 			return true
 		})

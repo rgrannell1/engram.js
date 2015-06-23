@@ -63,16 +63,16 @@ use.location = {
 	compile: function ( ) {
 		return location => {
 
-			var iterator                = new QueryIterator.fromLocation(location)
+			var iterator = new QueryIterator.fromLocation(location)
 
 			for (let part of this.parts) {
 
 				var {method, predicate} = part
 
-				var value               = iterator[method]( )
 				var clone               = QueryIterator.copy(iterator)
+				var value               = iterator[method]( )
 
-				var isMatch             = predicate.call(clone, value)
+				var isMatch             = predicate(value, clone)
 
 				if (!isMatch) {
 					return false
