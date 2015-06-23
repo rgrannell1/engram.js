@@ -64,13 +64,21 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 var route =
 
 	Router( ).onChange(
-		location => true,
+		use.location
+		.where.path(path => {
+
+			console.log('===============')
+			console.log(this)
+
+			return true
+		})
+		.where.path(path => {
+			return true
+		})
+		.compile( ),
+
 		( ) => {
-
-			var predicate = use.location(window.location)
-
-			console.log( predicate )
-
+			console.log('running.')
 		}
 	)
 	.run( )

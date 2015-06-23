@@ -34,10 +34,29 @@ var parseResource = raw => {
 
 
 
+
+
+
+
+
 class QueryIterator {
 
 	constructor(raw) {
 		this.data = parseResource(raw)
+	}
+
+	static copy(iterator) {
+
+		var raw = [
+			iterator.getNextPaths( ),
+			iterator.getNextParams( ),
+			iterator.getNextHash( )
+		]
+		.filter(part => part && part.length > 0)
+		.join('')
+
+		return new QueryIterator(raw)
+
 	}
 
 	static fromLocation(location) {
@@ -55,10 +74,6 @@ class QueryIterator {
 
 	}
 
-
-
-
-
 	peekNextPath( ) {
 
 		var isEmpty = is.undefined(this.data.paths) || this.data.paths.length === 0
@@ -69,7 +84,7 @@ class QueryIterator {
 
 	}
 
-	getNextPath( ) {
+	getNextParam( ) {
 
 		var result = this.peekNextPath( )
 
@@ -95,7 +110,7 @@ class QueryIterator {
 
 	}
 
-	getNextPaths( ) {
+	getNextPath( ) {
 
 		var result      = this.peekNextPaths( )
 		this.data.paths = undefined
@@ -118,7 +133,7 @@ class QueryIterator {
 
 	}
 
-	getNextHash( ) {
+	getNextPaths( ) {
 
 		var result     = this.peekNextHash( )
 		this.data.hash = undefined
@@ -145,7 +160,7 @@ class QueryIterator {
 
 	}
 
-	getNextParams( ) {
+	getNextHash( ) {
 
 		var params       = this.peekNextParams( )
 		this.data.params = undefined
@@ -168,7 +183,7 @@ class QueryIterator {
 
 	}
 
-	getNextParam( ) {
+	getNextParams( ) {
 
 		var result = this.peekNextParam( )
 
