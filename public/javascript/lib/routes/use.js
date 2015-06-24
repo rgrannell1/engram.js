@@ -75,12 +75,13 @@ use.location = {
 
 					if (is.undefined(value)) {
 						return false;
-					}
+					} else {
 
-					var isMatch = predicate.call(clone, value, clone);
+						var isMatch = predicate.call(clone, value, clone);
 
-					if (!isMatch) {
-						return false;
+						if (!isMatch) {
+							return false;
+						}
 					}
 				}
 			} catch (err) {

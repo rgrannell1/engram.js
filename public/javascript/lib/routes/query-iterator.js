@@ -76,8 +76,8 @@ var QueryIterator = (function () {
 			writable: true,
 			configurable: true
 		},
-		getNextParam: {
-			value: function getNextParam() {
+		getNextPath: {
+			value: function getNextPath() {
 
 				var result = this.peekNextPath();
 
@@ -102,8 +102,8 @@ var QueryIterator = (function () {
 			writable: true,
 			configurable: true
 		},
-		getNextPath: {
-			value: function getNextPath() {
+		getNextPaths: {
+			value: function getNextPaths() {
 
 				var result = this.peekNextPaths();
 				this.data.paths = undefined;
@@ -117,16 +117,14 @@ var QueryIterator = (function () {
 			value: function peekNextHash() {
 
 				if (!is.undefined(this.data.hash)) {
-
-					var result = "#" + this.data.hash;
-					return result;
+					return "#" + this.data.hash;
 				}
 			},
 			writable: true,
 			configurable: true
 		},
-		getNextPaths: {
-			value: function getNextPaths() {
+		getNextHash: {
+			value: function getNextHash() {
 
 				var result = this.peekNextHash();
 				this.data.hash = undefined;
@@ -151,8 +149,8 @@ var QueryIterator = (function () {
 			writable: true,
 			configurable: true
 		},
-		getNextHash: {
-			value: function getNextHash() {
+		getNextParams: {
+			value: function getNextParams() {
 
 				var params = this.peekNextParams();
 				this.data.params = undefined;
@@ -174,8 +172,8 @@ var QueryIterator = (function () {
 			writable: true,
 			configurable: true
 		},
-		getNextParams: {
-			value: function getNextParams() {
+		getNextParam: {
+			value: function getNextParam() {
 
 				var result = this.peekNextParam();
 

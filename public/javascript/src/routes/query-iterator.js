@@ -69,10 +69,13 @@ class QueryIterator {
 		.filter(part => part.length > 0)
 		.join('')
 
-
 		return new QueryIterator(raw)
 
 	}
+
+
+
+
 
 	peekNextPath( ) {
 
@@ -84,7 +87,7 @@ class QueryIterator {
 
 	}
 
-	getNextParam( ) {
+	getNextPath( ) {
 
 		var result = this.peekNextPath( )
 
@@ -110,7 +113,7 @@ class QueryIterator {
 
 	}
 
-	getNextPath( ) {
+	getNextPaths( ) {
 
 		var result      = this.peekNextPaths( )
 		this.data.paths = undefined
@@ -125,15 +128,12 @@ class QueryIterator {
 	peekNextHash( ) {
 
 		if (!is.undefined(this.data.hash)) {
-
-			var result     = '#' + this.data.hash
-			return result
-
+			return '#' + this.data.hash
 		}
 
 	}
 
-	getNextPaths( ) {
+	getNextHash( ) {
 
 		var result     = this.peekNextHash( )
 		this.data.hash = undefined
@@ -160,7 +160,7 @@ class QueryIterator {
 
 	}
 
-	getNextHash( ) {
+	getNextParams( ) {
 
 		var params       = this.peekNextParams( )
 		this.data.params = undefined
@@ -183,7 +183,7 @@ class QueryIterator {
 
 	}
 
-	getNextParams( ) {
+	getNextParam( ) {
 
 		var result = this.peekNextParam( )
 

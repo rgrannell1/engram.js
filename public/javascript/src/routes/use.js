@@ -69,19 +69,23 @@ use.location = {
 
 				var {method, predicate} = part
 
-				var clone               = QueryIterator.fromQueryIterator(iterator)
-				var value               = iterator[method]( )
+				var clone = QueryIterator.fromQueryIterator(iterator)
+				var value = iterator[method]( )
+
+
+
 
 				if (is.undefined(value)) {
 					return false
+				} else {
+
+					var isMatch = predicate.call(clone, value, clone)
+
+					if (!isMatch) {
+						return false
+					}
+
 				}
-
-				var isMatch             = predicate.call(clone, value, clone)
-
-				if (!isMatch) {
-					return false
-				}
-
 			}
 
 			return true

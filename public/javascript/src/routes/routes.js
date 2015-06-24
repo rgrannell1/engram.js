@@ -68,7 +68,7 @@ var route =
 		.where.path(path => {
 			return true
 		})
-		.where.path(path => {
+		.where.hash(hash => {
 			return true
 		})
 		.compile( ),

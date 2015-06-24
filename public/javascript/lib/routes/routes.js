@@ -47,7 +47,7 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 
 var route = Router().onChange(use.location.where.path(function (path) {
 	return true;
-}).where.path(function (path) {
+}).where.hash(function (hash) {
 	return true;
 }).compile(), function (location, next) {
 
