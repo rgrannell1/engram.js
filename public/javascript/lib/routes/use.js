@@ -73,6 +73,10 @@ use.location = {
 					var clone = QueryIterator.fromQueryIterator(iterator);
 					var value = iterator[method]();
 
+					if (is.undefined(value)) {
+						return false;
+					}
+
 					var isMatch = predicate.call(clone, value, clone);
 
 					if (!isMatch) {
