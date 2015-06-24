@@ -39,8 +39,8 @@ var QueryIterator = (function () {
 	}
 
 	_prototypeProperties(QueryIterator, {
-		copy: {
-			value: function copy(iterator) {
+		fromQueryIterator: {
+			value: function fromQueryIterator(iterator) {
 
 				var raw = [iterator.getNextPaths(), iterator.getNextParams(), iterator.getNextHash()].filter(function (part) {
 					return part && part.length > 0;

@@ -70,10 +70,10 @@ use.location = {
 					var method = part.method;
 					var predicate = part.predicate;
 
-					var clone = QueryIterator.copy(iterator);
+					var clone = QueryIterator.fromQueryIterator(iterator);
 					var value = iterator[method]();
 
-					var isMatch = predicate(value, clone);
+					var isMatch = predicate.call(clone, value, clone);
 
 					if (!isMatch) {
 						return false;

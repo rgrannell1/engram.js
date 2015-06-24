@@ -45,7 +45,7 @@ class QueryIterator {
 		this.data = parseResource(raw)
 	}
 
-	static copy(iterator) {
+	static fromQueryIterator(iterator) {
 
 		var raw = [
 			iterator.getNextPaths( ),

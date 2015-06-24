@@ -65,11 +65,7 @@ var route =
 
 	Router( ).onChange(
 		use.location
-		.where.path((path, self) => {
-
-			console.log('===============')
-			console.log(self)
-
+		.where.path(path => {
 			return true
 		})
 		.where.path(path => {
@@ -77,8 +73,25 @@ var route =
 		})
 		.compile( ),
 
-		( ) => {
-			console.log('running.')
+		(location, next) => {
+
+			console.log('++ ++ ++ ++ ++')
+			console.log(location)
+			console.log(next)
+
 		}
 	)
 	.run( )
+
+
+
+	/*
+
+	Router( ).onChange(
+		use.location
+		.where.path('/foo')
+		.where.path('/bar')
+		.compile( )
+	)
+
+	*/
