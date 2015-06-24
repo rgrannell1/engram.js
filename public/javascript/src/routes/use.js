@@ -15,7 +15,7 @@ use.location = {
 				condition
 			})
 
-			return use.locationcondition
+			return use.location
 		},
 		paths: condition => {
 
@@ -82,7 +82,6 @@ use.location = {
 
 					var isMatch = testMatch(condition, clone, value)
 
-
 					if (!isMatch) {
 						return false
 					}
@@ -105,19 +104,27 @@ var testMatch = (condition, clone, value) => {
 
 	if (is.function(condition)) {
 
-		// -- TODO wrap `condition` to check.
-
 		return condition.call(clone, value, clone)
 
 	} else if (is.string(condition)) {
 
-		// -- TODO wrap string with predicate check.
+		var wrapped = part => {
+			return condition === part
+		}
+
+		return wrapped(value)
 
 	} else if (is.regexp(condition)) {
 
-		// -- TODO check if regexp
+		var wrapped = part => {
+			return condition.test(part)
+		}
+
+		return wrapped(value)
 
 	} else {
+
+		throw TypeError('unimplemented')
 
 	}
 

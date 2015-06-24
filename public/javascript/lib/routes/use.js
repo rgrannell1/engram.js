@@ -13,7 +13,7 @@ use.location = {
 				condition: condition
 			});
 
-			return use.locationcondition;
+			return use.location;
 		},
 		paths: function (condition) {
 
@@ -92,12 +92,23 @@ var testMatch = function (condition, clone, value) {
 
 	if (is["function"](condition)) {
 
-		// -- TODO wrap `condition` to check.
-
 		return condition.call(clone, value, clone);
-	} else if (is.string(condition)) {} else if (is.regexp(condition)) {} else {}
+	} else if (is.string(condition)) {
+
+		var wrapped = function (part) {
+			return condition === part;
+		};
+
+		return wrapped(value);
+	} else if (is.regexp(condition)) {
+
+		var wrapped = function (part) {
+			return condition.test(part);
+		};
+
+		return wrapped(value);
+	} else {
+
+		throw TypeError("unimplemented");
+	}
 };
-
-// -- TODO wrap string with predicate check.
-
-// -- TODO check if regexp

@@ -45,21 +45,6 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 	})();
 }
 
-var route = Router().onChange(use.location.where.path(function (path) {
-	return true;
-}).where.hash(function (hash) {
-	return hash === "#700";
-}).compile(), function (location, next) {
-
-	alert("number 700 reached!");
-}).run()
-
-/*
-	Router( ).onChange(
-	use.location
-	.where.path('/foo')
-	.where.path('/bar')
-	.compile( )
-)
-	*/
-;
+var route = Router().onChange(use.location.where.path("bookmarks").where.hash("#750").compile(), function (location, next) {
+	alert("matched! number 700 reached!");
+}).run();

@@ -65,31 +65,12 @@ var route =
 
 	Router( ).onChange(
 		use.location
-		.where.path(path => {
-			return true
-		})
-		.where.hash(hash => {
-			return hash === '#700'
-		})
+		.where.path('bookmarks')
+		.where.hash('#750')
 		.compile( ),
 
 		(location, next) => {
-
-			alert( 'number 700 reached!' )
-
+			alert( 'matched! number 700 reached!' )
 		}
 	)
 	.run( )
-
-
-
-	/*
-
-	Router( ).onChange(
-		use.location
-		.where.path('/foo')
-		.where.path('/bar')
-		.compile( )
-	)
-
-	*/
