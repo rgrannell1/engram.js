@@ -6,47 +6,47 @@ use.location = {
 
 	isMatch: true,
 	where: {
-		path: function (predicate) {
+		path: function (condition) {
 
 			use.location.parts.push({
 				method: "getNextPath",
-				predicate: predicate
+				condition: condition
 			});
 
-			return use.location;
+			return use.locationcondition;
 		},
-		paths: function (predicate) {
+		paths: function (condition) {
 
 			use.location.parts.push({
 				method: "getNextPaths",
-				predicate: predicate
+				condition: condition
 			});
 
 			return use.location;
 		},
-		hash: function (predicate) {
+		hash: function (condition) {
 
 			use.location.parts.push({
 				method: "getNextHash",
-				predicate: predicate
+				condition: condition
 			});
 
 			return use.location;
 		},
-		params: function (predicate) {
+		params: function (condition) {
 
 			use.location.parts.push({
 				method: "getNextParams",
-				predicate: predicate
+				condition: condition
 			});
 
 			return use.location;
 		},
-		param: function (predicate) {
+		param: function (condition) {
 
 			use.location.parts.push({
 				method: "getNextParam",
-				predicate: predicate
+				condition: condition
 			});
 
 			return use.location;
@@ -65,7 +65,7 @@ use.location = {
 				var part = _this.parts[ith];
 
 				var method = part.method;
-				var predicate = part.predicate;
+				var condition = part.condition;
 
 				var clone = QueryIterator.fromQueryIterator(iterator);
 				var value = iterator[method]();
@@ -74,7 +74,7 @@ use.location = {
 					return false;
 				} else {
 
-					var isMatch = predicate.call(clone, value, clone);
+					var isMatch = testMatch(condition, clone, value);
 
 					if (!isMatch) {
 						return false;
@@ -87,3 +87,17 @@ use.location = {
 	}
 
 };
+
+var testMatch = function (condition, clone, value) {
+
+	if (is["function"](condition)) {
+
+		// -- TODO wrap `condition` to check.
+
+		return condition.call(clone, value, clone);
+	} else if (is.string(condition)) {} else if (is.regexp(condition)) {} else {}
+};
+
+// -- TODO wrap string with predicate check.
+
+// -- TODO check if regexp

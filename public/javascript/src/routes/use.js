@@ -8,51 +8,50 @@ use.location = {
 
 	isMatch: true,
 	where:   {
-		path: predicate => {
+		path: condition => {
 
 			use.location.parts.push({
 				method: 'getNextPath',
-				predicate
+				condition
 			})
 
-			return use.location
-
+			return use.locationcondition
 		},
-		paths: predicate => {
+		paths: condition => {
 
 			use.location.parts.push({
 				method: 'getNextPaths',
-				predicate
+				condition
 			})
 
 			return use.location
 
 		},
-		hash: predicate => {
+		hash: condition => {
 
 			use.location.parts.push({
 				method: 'getNextHash',
-				predicate
+				condition
 			})
 
 			return use.location
 
 		},
-		params: predicate => {
+		params: condition => {
 
 			use.location.parts.push({
 				method: 'getNextParams',
-				predicate
+				condition
 			})
 
 			return use.location
 
 		},
-		param: predicate => {
+		param: condition => {
 
 			use.location.parts.push({
 				method: 'getNextParam',
-				predicate
+				condition
 			})
 
 			return use.location
@@ -69,7 +68,7 @@ use.location = {
 
 				var part = this.parts[ith]
 
-				var {method, predicate} = part
+				var {method, condition} = part
 
 				var clone = QueryIterator.fromQueryIterator(iterator)
 				var value = iterator[method]( )
@@ -81,7 +80,8 @@ use.location = {
 					return false
 				} else {
 
-					var isMatch = predicate.call(clone, value, clone)
+					var isMatch = testMatch(condition, clone, value)
+
 
 					if (!isMatch) {
 						return false
@@ -93,6 +93,32 @@ use.location = {
 			return true
 
 		}
+	}
+
+}
+
+
+
+
+
+var testMatch = (condition, clone, value) => {
+
+	if (is.function(condition)) {
+
+		// -- TODO wrap `condition` to check.
+
+		return condition.call(clone, value, clone)
+
+	} else if (is.string(condition)) {
+
+		// -- TODO wrap string with predicate check.
+
+	} else if (is.regexp(condition)) {
+
+		// -- TODO check if regexp
+
+	} else {
+
 	}
 
 }

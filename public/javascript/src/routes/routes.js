@@ -69,15 +69,13 @@ var route =
 			return true
 		})
 		.where.hash(hash => {
-			return true
+			return hash === '#700'
 		})
 		.compile( ),
 
 		(location, next) => {
 
-			console.log('++ ++ ++ ++ ++')
-			console.log(location)
-			console.log(next)
+			alert( 'number 700 reached!' )
 
 		}
 	)

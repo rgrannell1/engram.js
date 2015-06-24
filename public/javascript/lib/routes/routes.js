@@ -48,12 +48,10 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 var route = Router().onChange(use.location.where.path(function (path) {
 	return true;
 }).where.hash(function (hash) {
-	return true;
+	return hash === "#700";
 }).compile(), function (location, next) {
 
-	console.log("++ ++ ++ ++ ++");
-	console.log(location);
-	console.log(next);
+	alert("number 700 reached!");
 }).run()
 
 /*
