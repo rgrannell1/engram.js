@@ -60,41 +60,24 @@ use.location = {
 
 			var iterator = new QueryIterator.fromLocation(location);
 
-			var _iteratorNormalCompletion = true;
-			var _didIteratorError = false;
-			var _iteratorError = undefined;
+			for (var ith = 0; ith < _this.parts.length; ++ith) {
 
-			try {
-				for (var _iterator = _this.parts[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-					var part = _step.value;
-					var method = part.method;
-					var predicate = part.predicate;
+				var part = _this.parts[ith];
 
-					var clone = QueryIterator.fromQueryIterator(iterator);
-					var value = iterator[method]();
+				var method = part.method;
+				var predicate = part.predicate;
 
-					if (is.undefined(value)) {
+				var clone = QueryIterator.fromQueryIterator(iterator);
+				var value = iterator[method]();
+
+				if (is.undefined(value)) {
+					return false;
+				} else {
+
+					var isMatch = predicate.call(clone, value, clone);
+
+					if (!isMatch) {
 						return false;
-					} else {
-
-						var isMatch = predicate.call(clone, value, clone);
-
-						if (!isMatch) {
-							return false;
-						}
-					}
-				}
-			} catch (err) {
-				_didIteratorError = true;
-				_iteratorError = err;
-			} finally {
-				try {
-					if (!_iteratorNormalCompletion && _iterator["return"]) {
-						_iterator["return"]();
-					}
-				} finally {
-					if (_didIteratorError) {
-						throw _iteratorError;
 					}
 				}
 			}

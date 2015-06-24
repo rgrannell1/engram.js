@@ -48,9 +48,9 @@ class QueryIterator {
 	static fromQueryIterator(iterator) {
 
 		var raw = [
-			iterator.getNextPaths( ),
-			iterator.getNextParams( ),
-			iterator.getNextHash( )
+			iterator.peekNextPaths( ),
+			iterator.peekNextParams( ),
+			iterator.peekNextHash( )
 		]
 		.filter(part => part && part.length > 0)
 		.join('')

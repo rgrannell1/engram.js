@@ -65,7 +65,9 @@ use.location = {
 
 			var iterator = new QueryIterator.fromLocation(location)
 
-			for (let part of this.parts) {
+			for (var ith = 0; ith < this.parts.length; ++ith) {
+
+				var part = this.parts[ith]
 
 				var {method, predicate} = part
 

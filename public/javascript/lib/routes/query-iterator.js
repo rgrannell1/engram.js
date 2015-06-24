@@ -42,7 +42,7 @@ var QueryIterator = (function () {
 		fromQueryIterator: {
 			value: function fromQueryIterator(iterator) {
 
-				var raw = [iterator.getNextPaths(), iterator.getNextParams(), iterator.getNextHash()].filter(function (part) {
+				var raw = [iterator.peekNextPaths(), iterator.peekNextParams(), iterator.peekNextHash()].filter(function (part) {
 					return part && part.length > 0;
 				}).join("");
 
