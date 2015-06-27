@@ -59,18 +59,34 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 
 
 
+var app = Router( )
 
 
-var route =
 
-	Router( ).onChange(
-		use.location
-		.where.path('bookmarks')
-		.where.hash('#750')
-		.compile( ),
 
-		(location, next) => {
-			alert( 'matched! number 700 reached!' )
-		}
-	)
-	.run( )
+
+app
+.onChange(
+
+	use.location
+	.where.path('bookmarks')
+	.compile( ),
+
+	(location, next) => {
+		console.log( 'something changed.' )
+	}
+
+)
+.onChange(
+
+	use.location
+	.where.path('bookmarks')
+	.where.params(_ => true)
+	.compile( ),
+
+	(location, next) => {
+		console.log( 'parametres changed.' )
+	}
+
+)
+.run( )

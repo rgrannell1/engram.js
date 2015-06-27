@@ -7,6 +7,8 @@
 
 		var dispatchRoutes = function (routes, middleware) {
 
+			dispatchRoutes.precond(routes, middleware);
+
 			var location = window.location;
 
 			for (var ith = 0; ith < routes.length; ++ith) {
@@ -15,6 +17,9 @@
 
 				var _ret2 = (function (ith) {
 					route = routes[ith];
+
+					console.log("c");
+
 					isMatch = route.pattern(location);
 
 					if (isMatch) {
@@ -35,6 +40,12 @@
 
 				if (typeof _ret2 === "object") return _ret2.v;
 			}
+		};
+
+		dispatchRoutes.precond = function (routes, middleware) {
+
+			is.always.array(routes);
+			is.always.array(middleware);
 		};
 
 		var onLocationChange = function (callback) {
