@@ -53,8 +53,12 @@
 
 	var renderTime = $time => {
 
-		var elapsed = secondsBetween(new Date, extractTime($time))
-		$time.text(formatInterval(elapsed))
+		var elapsed   = secondsBetween(new Date, extractTime($time))
+		var formatted = formatInterval(elapsed)
+
+		if ($time.text( ) !== formatted) {
+			$time.text(formatted)
+		}
 
 	}
 

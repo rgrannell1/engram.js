@@ -45,7 +45,11 @@
 		renderTime = function ($time) {
 
 			var elapsed = secondsBetween(new Date(), extractTime($time));
-			$time.text(formatInterval(elapsed));
+			var formatted = formatInterval(elapsed);
+
+			if ($time.text() !== formatted) {
+				$time.text(formatted);
+			}
 		};
 
 		ENGRAM.updateTimes = function () {
