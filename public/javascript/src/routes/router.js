@@ -6,7 +6,7 @@
 		dispatchRoutes.precond(routes, middleware)
 
 		var location = window.location
-
+		var query    = QueryIterator.fromLocation(location)
 
 
 
@@ -23,7 +23,7 @@
 					response(location)
 				})
 
-				route.response(location, ( ) => {
+				route.response(query, ( ) => {
 					dispatchRoutes(routes.slice(ith + 1), middleware)
 				})
 
@@ -55,7 +55,6 @@
 			if (previous !== window.location.href) {
 
 				previous = window.location.href
-
 				callback( )
 
 			}

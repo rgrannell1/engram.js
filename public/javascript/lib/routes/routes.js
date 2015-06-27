@@ -47,11 +47,6 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 
 var app = Router();
 
-app.onChange(use.location.where.path("bookmarks").compile(), function (location, next) {
-	console.log("first route called.");
-	next();
-}).onChange(use.location.where.path("bookmarks").where.params(function (_) {
-	return true;
-}).compile(), function (location, next) {
-	console.log("second route called.");
+Router().onChange(use.location.where.path("bookmarks").compile(), function (query, next) {
+	ENGRAM.searchState.setQuery(query);
 }).run();

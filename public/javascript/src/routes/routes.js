@@ -65,28 +65,15 @@ var app = Router( )
 
 
 
-app
+Router( )
 .onChange(
 
 	use.location
 	.where.path('bookmarks')
 	.compile( ),
 
-	(location, next) => {
-		console.log( 'first route called.' )
-		next( )
-	}
-
-)
-.onChange(
-
-	use.location
-	.where.path('bookmarks')
-	.where.params(_ => true)
-	.compile( ),
-
-	(location, next) => {
-		console.log( 'second route called.' )
+	(query, next) => {
+		ENGRAM.searchState.setQuery(query)
 	}
 
 )

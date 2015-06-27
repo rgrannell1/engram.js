@@ -1,9 +1,5 @@
 "use strict";
 
-var _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
-
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
 var parseResource = function (raw) {
 
 	var parts = {};
@@ -31,190 +27,140 @@ var parseResource = function (raw) {
 	return parts;
 };
 
-var QueryIterator = (function () {
-	function QueryIterator(raw) {
-		_classCallCheck(this, QueryIterator);
+var QueryIterator = function QueryIterator(raw) {
+	var _this = this;
 
-		this.data = parseResource(raw);
-	}
+	var self = {};
 
-	_prototypeProperties(QueryIterator, {
-		fromQueryIterator: {
-			value: function fromQueryIterator(iterator) {
+	this.data = parseResource(raw);
 
-				var raw = [iterator.peekNextPaths(), iterator.peekNextParams(), iterator.peekNextHash()].filter(function (part) {
-					return part && part.length > 0;
-				}).join("");
+	this.peekNextPath = function () {
 
-				return new QueryIterator(raw);
-			},
-			writable: true,
-			configurable: true
-		},
-		fromLocation: {
-			value: function fromLocation(location) {
+		var isEmpty = is.undefined(_this.data.paths) || _this.data.paths.length === 0;
 
-				var raw = [location.pathname, location.search, location.hash].filter(function (part) {
-					return part.length > 0;
-				}).join("");
-
-				return new QueryIterator(raw);
-			},
-			writable: true,
-			configurable: true
+		if (!isEmpty) {
+			return _this.data.paths[0];
 		}
-	}, {
-		peekNextPath: {
-			value: function peekNextPath() {
+	};
 
-				var isEmpty = is.undefined(this.data.paths) || this.data.paths.length === 0;
+	this.getNextPath = function () {
 
-				if (!isEmpty) {
-					return this.data.paths[0];
-				}
-			},
-			writable: true,
-			configurable: true
-		},
-		getNextPath: {
-			value: function getNextPath() {
+		var result = _this.peekNextPath();
 
-				var result = this.peekNextPath();
-
-				if (!is.undefined(result)) {
-					this.data.paths.shift();
-				}
-
-				return result;
-			},
-			writable: true,
-			configurable: true
-		},
-		peekNextPaths: {
-			value: function peekNextPaths() {
-
-				var isEmpty = is.undefined(this.data.paths) || this.data.paths.length === 0;
-
-				if (!isEmpty) {
-					return "/" + this.data.paths.join("/");
-				}
-			},
-			writable: true,
-			configurable: true
-		},
-		getNextPaths: {
-			value: function getNextPaths() {
-
-				var result = this.peekNextPaths();
-				this.data.paths = undefined;
-
-				return result;
-			},
-			writable: true,
-			configurable: true
-		},
-		peekNextHash: {
-			value: function peekNextHash() {
-
-				if (!is.undefined(this.data.hash)) {
-					return "#" + this.data.hash;
-				}
-			},
-			writable: true,
-			configurable: true
-		},
-		getNextHash: {
-			value: function getNextHash() {
-
-				var result = this.peekNextHash();
-				this.data.hash = undefined;
-
-				return result;
-			},
-			writable: true,
-			configurable: true
-		},
-		peekNextParams: {
-			value: function peekNextParams() {
-
-				var isEmpty = is.undefined(this.data.params) || this.data.params.length === 0;
-
-				if (!isEmpty) {
-
-					return "?" + this.data.params.map(function (pair) {
-						return pair.join("=");
-					}).join("&");
-				}
-			},
-			writable: true,
-			configurable: true
-		},
-		getNextParams: {
-			value: function getNextParams() {
-
-				var params = this.peekNextParams();
-				this.data.params = undefined;
-
-				return params;
-			},
-			writable: true,
-			configurable: true
-		},
-		peekNextParam: {
-			value: function peekNextParam() {
-
-				var isEmpty = is.undefined(this.data.params) || this.data.params.length === 0;
-
-				if (!isEmpty) {
-					return this.data.params[0];
-				}
-			},
-			writable: true,
-			configurable: true
-		},
-		getNextParam: {
-			value: function getNextParam() {
-
-				var result = this.peekNextParam();
-
-				var isEmpty = is.undefined(this.data.params) || this.data.params.length === 0;
-
-				if (!isEmpty) {
-					this.data.params.shift();
-				}
-
-				return result;
-			},
-			writable: true,
-			configurable: true
-		},
-		peekRest: {
-			value: function peekRest() {
-
-				var out = "";
-
-				return [this.peekNextPaths(), this.peekNextParams(), this.peekNextHash()].filter(function (part) {
-					return part.length > 0;
-				}).join("");
-			},
-			writable: true,
-			configurable: true
-		},
-		getRest: {
-			value: function getRest() {
-
-				var result = this.peekRest();
-
-				this.data.hash = undefined;
-				this.data.paths = undefined;
-				this.data.params = undefined;
-
-				return result;
-			},
-			writable: true,
-			configurable: true
+		if (!is.undefined(result)) {
+			_this.data.paths.shift();
 		}
-	});
 
-	return QueryIterator;
-})();
+		return result;
+	};
+
+	this.peekNextPaths = function () {
+
+		var isEmpty = is.undefined(_this.data.paths) || _this.data.paths.length === 0;
+
+		if (!isEmpty) {
+			return "/" + _this.data.paths.join("/");
+		}
+	};
+
+	this.getNextPaths = function () {
+
+		var result = _this.peekNextPaths();
+		_this.data.paths = undefined;
+
+		return result;
+	};
+
+	this.peekNextHash = function () {
+
+		if (!is.undefined(_this.data.hash)) {
+			return "#" + _this.data.hash;
+		}
+	};
+
+	this.getNextHash = function () {
+
+		var result = _this.peekNextHash();
+		_this.data.hash = undefined;
+
+		return result;
+	};
+
+	this.peekNextParams = function () {
+
+		var isEmpty = is.undefined(_this.data.params) || _this.data.params.length === 0;
+
+		if (!isEmpty) {
+
+			return "?" + _this.data.params.map(function (pair) {
+				return pair.join("=");
+			}).join("&");
+		}
+	};
+
+	this.getNextParams = function () {
+
+		var params = _this.peekNextParams();
+		_this.data.params = undefined;
+
+		return params;
+	};
+
+	this.peekNextParam = function () {
+
+		var isEmpty = is.undefined(_this.data.params) || _this.data.params.length === 0;
+
+		if (!isEmpty) {
+			return _this.data.params[0];
+		}
+	};
+
+	this.getNextParam = function () {
+
+		var result = _this.peekNextParam();
+
+		var isEmpty = is.undefined(_this.data.params) || _this.data.params.length === 0;
+
+		if (!isEmpty) {
+			_this.data.params.shift();
+		}
+
+		return result;
+	};
+
+	this.peekRest = function () {
+
+		return [_this.peekNextPaths(), _this.peekNextParams(), _this.peekNextHash()].filter(function (part) {
+			return part.length > 0;
+		}).join("");
+	};
+
+	this.getRest = function () {
+
+		var result = _this.peekRest();["hash", "paths", "params"].forEach(function (key) {
+			_this.data[key] = undefined;
+		});
+
+		return result;
+	};
+
+	return this;
+};
+
+QueryIterator.fromQueryIterator = function (iterator) {
+
+	var raw = [iterator.peekNextPaths(), iterator.peekNextParams(), iterator.peekNextHash()].filter(function (part) {
+		return part && part.length > 0;
+	}).join("");
+
+	return new QueryIterator(raw);
+};
+
+QueryIterator.fromLocation = function (location) {
+
+	var raw = [location.pathname, location.search, location.hash].filter(function (part) {
+		return part.length > 0;
+	}).join("");
+
+	return new QueryIterator(raw);
+};
