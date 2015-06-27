@@ -42,11 +42,15 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 		for (var ith = 0; ith < ENGRAM.inFocus.value.length; ++ith) {
 
 			var id          = ENGRAM.inFocus.value[ith].bookmark.bookmarkId
-			var topPosition = $bookmarks.find(`#${id}`).position( ).top - windowTop
+			var topBookmark = $bookmarks.find(`#${id}`)
 
-			if (topPosition >= 0) {
-				ENGRAM.eventBus.fire(EventBus.message.HASH_ID, id)
-				break
+			if (is.object(topBookmark)) {
+				var topPosition = topBookmark.position( ).top - windowTop
+
+				if (topPosition >= 0) {
+					ENGRAM.eventBus.fire(EventBus.message.HASH_ID, id)
+					break
+				}
 			}
 		}
 
@@ -73,7 +77,7 @@ Router( )
 	.compile( ),
 
 	(query, next) => {
-		ENGRAM.searchState.setQuery(query)
+
 	}
 
 )

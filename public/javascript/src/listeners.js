@@ -24,7 +24,7 @@ var listeners = { }
 			(event.keyCode == 32 || event.keyCode > 186))
 	}
 
-	let $window   = $(window)
+	let $window = $(window)
 
 
 
