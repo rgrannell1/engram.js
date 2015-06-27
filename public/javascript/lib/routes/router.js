@@ -17,9 +17,6 @@
 
 				var _ret2 = (function (ith) {
 					route = routes[ith];
-
-					console.log("c");
-
 					isMatch = route.pattern(location);
 
 					if (isMatch) {

@@ -50,10 +50,19 @@ use.location = {
 			});
 
 			return use.location;
+		},
+		rest: function (condition) {
+
+			use.location.parts.push({
+				method: "getRest",
+				condition: condition
+			});
+
+			return use.location;
 		}
 	},
 	parts: [],
-	compile: function compile() {
+	compile: function compile(debug) {
 		var _this = this;
 
 		return function (location) {
@@ -62,6 +71,7 @@ use.location = {
 
 			for (var ith = 0; ith < _this.parts.length; ++ith) {
 
+				// -- for every matched part
 				var part = _this.parts[ith];
 
 				var method = part.method;
@@ -71,10 +81,12 @@ use.location = {
 				var value = iterator[method]();
 
 				if (is.undefined(value)) {
+					// -- that part doesn't exist, so can never be matched.
 					return false;
 				} else {
+					// -- test the match
 
-					var isMatch = testMatch(condition, clone, value);
+					var isMatch = isPartMatch(condition, clone, value);
 
 					if (!isMatch) {
 						return false;
@@ -88,27 +100,26 @@ use.location = {
 
 };
 
-var testMatch = function (condition, clone, value) {
+var isPartMatch = function (condition, clone, part) {
 
 	if (is["function"](condition)) {
 
-		return condition.call(clone, value, clone);
+		var wrapped = function () {
+			return condition.call(clone, part, clone);
+		};
 	} else if (is.string(condition)) {
 
-		var wrapped = function (part) {
+		var wrapped = function () {
 			return condition === part;
 		};
-
-		return wrapped(value);
 	} else if (is.regexp(condition)) {
 
-		var wrapped = function (part) {
+		var wrapped = function () {
 			return condition.test(part);
 		};
-
-		return wrapped(value);
 	} else {
-
 		throw TypeError("unimplemented");
 	}
+
+	return wrapped();
 };

@@ -48,9 +48,10 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 var app = Router();
 
 app.onChange(use.location.where.path("bookmarks").compile(), function (location, next) {
-	console.log("something changed.");
+	console.log("first route called.");
+	next();
 }).onChange(use.location.where.path("bookmarks").where.params(function (_) {
 	return true;
 }).compile(), function (location, next) {
-	console.log("parametres changed.");
+	console.log("second route called.");
 }).run();

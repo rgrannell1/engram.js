@@ -1,5 +1,5 @@
 
-var use   =  { }
+var use =  { }
 
 
 
@@ -56,16 +56,27 @@ use.location = {
 
 			return use.location
 
+		},
+		rest: condition => {
+
+			use.location.parts.push({
+				method: 'getRest',
+				condition
+			})
+
+			return use.location
+
 		}
 	},
 	parts: [ ],
-	compile: function ( ) {
+	compile: function (debug) {
 		return location => {
 
 			var iterator = new QueryIterator.fromLocation(location)
 
 			for (var ith = 0; ith < this.parts.length; ++ith) {
 
+				// -- for every matched part
 				var part = this.parts[ith]
 
 				var {method, condition} = part
@@ -77,10 +88,12 @@ use.location = {
 
 
 				if (is.undefined(value)) {
+					// -- that part doesn't exist, so can never be matched.
 					return false
 				} else {
+					// -- test the match
 
-					var isMatch = testMatch(condition, clone, value)
+					var isMatch = isPartMatch(condition, clone, value)
 
 					if (!isMatch) {
 						return false
@@ -100,32 +113,24 @@ use.location = {
 
 
 
-var testMatch = (condition, clone, value) => {
+var isPartMatch = (condition, clone, part) => {
 
 	if (is.function(condition)) {
 
-		return condition.call(clone, value, clone)
+		var wrapped = ( ) => condition.call(clone, part, clone)
 
 	} else if (is.string(condition)) {
 
-		var wrapped = part => {
-			return condition === part
-		}
-
-		return wrapped(value)
+		var wrapped = ( ) => condition === part
 
 	} else if (is.regexp(condition)) {
 
-		var wrapped = part => {
-			return condition.test(part)
-		}
-
-		return wrapped(value)
+		var wrapped = ( ) => condition.test(part)
 
 	} else {
-
 		throw TypeError('unimplemented')
-
 	}
+
+	return wrapped( )
 
 }

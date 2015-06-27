@@ -73,7 +73,8 @@ app
 	.compile( ),
 
 	(location, next) => {
-		console.log( 'something changed.' )
+		console.log( 'first route called.' )
+		next( )
 	}
 
 )
@@ -85,7 +86,7 @@ app
 	.compile( ),
 
 	(location, next) => {
-		console.log( 'parametres changed.' )
+		console.log( 'second route called.' )
 	}
 
 )

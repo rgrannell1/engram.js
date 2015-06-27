@@ -7,11 +7,13 @@
 
 		var location = window.location
 
+
+
+
+
 		for (let ith = 0; ith < routes.length; ++ith) {
 
 			var route = routes[ith]
-
-			console.log('c')
 
 			var isMatch = route.pattern(location)
 
