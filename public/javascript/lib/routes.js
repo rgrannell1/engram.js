@@ -34,22 +34,21 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 			for (var ith = 0; ith < ENGRAM.inFocus.value.length; ++ith) {
 
 				var id = ENGRAM.inFocus.value[ith].bookmark.bookmarkId;
-				var topPosition = $bookmarks.find("#" + id).position().top - windowTop;
+				var topBookmark = $bookmarks.find("#" + id);
 
-				if (topPosition >= 0) {
-					ENGRAM.eventBus.fire(EventBus.message.HASH_ID, id);
-					break;
+				if (is.object(topBookmark)) {
+					var topPosition = topBookmark.position().top - windowTop;
+
+					if (topPosition >= 0) {
+						ENGRAM.eventBus.fire(EventBus.message.HASH_ID, id);
+						break;
+					}
 				}
 			}
 		});
 	})();
 }
 
-var route = Router().onChange(function (location) {
-	return true;
-}, function () {
+var app = Router({ location: window.location });
 
-	var predicate = use.location(window.location);
-
-	console.log(predicate);
-}).run();
+app.onChange(use.location.where.path("bookmarks").compile(), function (query, next) {}).run();

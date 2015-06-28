@@ -63,14 +63,13 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 
 
 
-var app = Router( )
+var app = Router({location: window.location})
 
 
 
 
 
-Router( )
-.onChange(
+app.onChange(
 
 	use.location
 	.where.path('bookmarks')
