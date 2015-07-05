@@ -51,4 +51,7 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 
 var app = Router({ location: window.location });
 
-app.onChange(use.location.where.path("bookmarks").compile(), function (query, next) {}).run();
+app.onChange(use.location.where.path("bookmarks").compile(), function (query, next) {
+
+	console.log(query);
+}).run();

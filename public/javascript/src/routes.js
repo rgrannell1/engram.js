@@ -77,6 +77,8 @@ app.onChange(
 
 	(query, next) => {
 
+		console.log( query )
+
 	}
 
 )
