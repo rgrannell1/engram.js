@@ -44,7 +44,8 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 			var id          = ENGRAM.inFocus.value[ith].bookmark.bookmarkId
 			var topBookmark = $bookmarks.find(`#${id}`)
 
-			if (is.object(topBookmark)) {
+			if (is.object(topBookmark) && topBookmark.length > 0) {
+
 				var topPosition = topBookmark.position( ).top - windowTop
 
 				if (topPosition >= 0) {
@@ -52,6 +53,7 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 					break
 				}
 			}
+
 		}
 
 
