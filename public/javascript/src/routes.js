@@ -65,7 +65,9 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 
 
 
-var app = Router({location: window.location})
+var app = Router({location: ( ) => {
+	return window.location}
+})
 
 
 
@@ -79,6 +81,7 @@ app.onChange(
 
 	(query, next) => {
 
+		console.log('loaded.')
 		console.log( query )
 
 	}

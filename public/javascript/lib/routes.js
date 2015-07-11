@@ -50,9 +50,13 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 	})();
 }
 
-var app = Router({ location: window.location });
+var app = Router({ location: function () {
+		return window.location;
+	}
+});
 
 app.onChange(use.location.where.path("bookmarks").compile(), function (query, next) {
 
+	console.log("loaded.");
 	console.log(query);
 }).run();
