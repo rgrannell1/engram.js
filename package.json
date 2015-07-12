@@ -9,7 +9,7 @@
 	"scripts": {
 		"start":    "./bin/docopt-engram.js --port=5000 --dbpath='data/engram.db'",
 		"rebuild":  "bash build-docs.sh && bash build-es6.sh",
-		"test":     "node_modules/mocha/bin/mocha node_modules/engram/test --timeout=20000"
+		"test":     "node_modules/mocha/bin/mocha node_modules/engram/test/es5 --timeout=20000"
 	},
 
 	"bin": {

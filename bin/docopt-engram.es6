@@ -27,7 +27,7 @@ Options:
 
 
 var docopt = require('docopt').docopt
-var engram = require('engram/engram')
+var engram = require('engram/es5/engram')
 var args   = docopt(doc)
 
 

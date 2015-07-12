@@ -8,3 +8,6 @@ node_modules/*
 scratchpad.sql
 .sass-cache/
 data-bookmarks.json
+
+es5/routes
+es6/routes
