@@ -1,14 +1,14 @@
 
 {
 	"name":       "engram",
-	"version":    "0.6.0",
+	"version":    "0.7.0",
 
 	"licence":    "MIT",
 	"repository": "https://github.com/rgrannell1/engram.js",
 
 	"scripts": {
-		"start":    "./bin/docopt-engram.js --port=5000 --dbpath='data/engram.db'",
-		"rebuild":  "bash build-docs.sh && bash build-es6.sh",
+		"start":    "node ./bin/docopt-engram.js --port=5000 --dbpath='data/engram.db'",
+		"rebuild":  "bash scripts/build-docs.sh && bash scripts/build-es6.sh",
 		"test":     "node_modules/mocha/bin/mocha node_modules/engram/test/es5 --timeout=20000"
 	},
 
