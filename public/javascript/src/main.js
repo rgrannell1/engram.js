@@ -195,11 +195,6 @@ ENGRAM.eventBus
 	triggerLoad(false)
 
 })
-
-.on(':update-query', ({query}) => {
-	ENGRAM.searchState.setQuery(query)
-})
-.on(':update-query', scoreBookmarks)
 .on(':load-bookmark', bookmark => {
 
 	var query = getURL( )

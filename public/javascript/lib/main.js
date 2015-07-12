@@ -135,11 +135,7 @@ ENGRAM.eventBus.on(":scroll", function detectEdge(_ref) {
 	var scrollPosition = _ref.scrollPosition;
 
 	triggerLoad(false);
-}).on(":update-query", function (_ref) {
-	var query = _ref.query;
-
-	ENGRAM.searchState.setQuery(query);
-}).on(":update-query", scoreBookmarks).on(":load-bookmark", function (bookmark) {
+}).on(":load-bookmark", function (bookmark) {
 
 	var query = getURL();
 

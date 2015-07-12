@@ -65,15 +65,16 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 
 
 
-var app = Router({location: ( ) => {
-	return window.location}
+var app = Router({
+	location: window.location
 })
 
 
 
 
 
-app.onChange(
+app.onAlter(
+	query => query.peekWholeParams( ),
 
 	use.location
 	.where.path('bookmarks')
@@ -81,10 +82,16 @@ app.onChange(
 
 	(query, next) => {
 
-		console.log('loaded.')
-		console.log( query )
+		console.log('-- --')
+
+		ENGRAM.searchState.setQuery(query.peekWhole( ))
+		scoreBookmarks( query.peekWhole( ) )
 
 	}
-
 )
 .run( )
+
+
+//
+// scoreBookmarks
+//
