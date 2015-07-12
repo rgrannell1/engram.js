@@ -8,6 +8,6 @@ var engram = require("engram/es5/engram");
 var args = docopt(doc);
 
 engram({
-    port: args["--port"],
+    port: parseInt(args["--port"], 10),
     dbpath: args["--dbpath"]
 });
