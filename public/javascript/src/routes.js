@@ -65,7 +65,7 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 
 
 
-var app = Router({
+ENGRAM.app = Router({
 	location: window.location
 })
 
@@ -73,7 +73,7 @@ var app = Router({
 
 
 
-app.onAlter(
+ENGRAM.app.onAlter(
 	query => query.peekWholeParams( ),
 
 	use.location
@@ -82,7 +82,7 @@ app.onAlter(
 
 	(query, next) => {
 
-		console.log('-- --')
+		console.log('-- -- ')
 
 		ENGRAM.searchState.setQuery(query.peekWhole( ))
 		scoreBookmarks( query.peekWhole( ) )
@@ -92,6 +92,24 @@ app.onAlter(
 .run( )
 
 
-//
-// scoreBookmarks
-//
+
+
+
+/*
+
+ENGRAM.eventBus.on(EventBus.message.URL_UPDATE, query => {
+
+	app
+	.
+
+	if (is.string(query)) {
+		query.length === 0
+			? history.pushState(null, '', `/bookmarks${window.location.hash}`)
+			: history.pushState(null, '', `/bookmarks?q=${encodeURIComponent(query)}${window.location.hash}`)
+	} else {
+		throw TypeError(`${query} was not a valid URL.`)
+	}
+
+})
+
+*/

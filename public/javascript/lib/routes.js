@@ -50,20 +50,35 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 	})();
 }
 
-var app = Router({
+ENGRAM.app = Router({
 	location: window.location
 });
 
-app.onAlter(function (query) {
+ENGRAM.app.onAlter(function (query) {
 	return query.peekWholeParams();
 }, use.location.where.path("bookmarks").compile(), function (query, next) {
 
-	console.log("-- --");
+	console.log("-- -- ");
 
 	ENGRAM.searchState.setQuery(query.peekWhole());
 	scoreBookmarks(query.peekWhole());
 }).run();
 
-//
-// scoreBookmarks
-//
+/*
+
+ENGRAM.eventBus.on(EventBus.message.URL_UPDATE, query => {
+
+	app
+	.
+
+	if (is.string(query)) {
+		query.length === 0
+			? history.pushState(null, '', `/bookmarks${window.location.hash}`)
+			: history.pushState(null, '', `/bookmarks?q=${encodeURIComponent(query)}${window.location.hash}`)
+	} else {
+		throw TypeError(`${query} was not a valid URL.`)
+	}
+
+})
+
+*/

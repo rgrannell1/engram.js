@@ -21,6 +21,8 @@ var getURL = ( ) => {
 ENGRAM.eventBus
 .on(EventBus.message.PRESS_TYPEABLE, ({key}) => {
 
+	ENGRAM.app.setParams(  )
+
 	ENGRAM.eventBus.fire(EventBus.message.URL_UPDATE, getURL( ) + key)
 
 })

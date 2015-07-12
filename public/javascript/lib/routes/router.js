@@ -271,73 +271,79 @@ if (typeof process !== "undefined" && module.exports) {
 				});
 			};
 
-			self.clearPaths = function () {
-				self.setPaths(undefined);
+			self.url = {};
+
+			self.url.clearPaths = function () {
+				self.url.setPaths(undefined);
 			};
 
-			self.clearHash = function () {
-				self.setHash(undefined);
+			self.url.clearHash = function () {
+				self.url.setHash(undefined);
 			};
 
-			self.clearPath = function () {
-				self.setPath(undefined);
+			self.url.clearPath = function () {
+				self.url.setPath(undefined);
 			};
 
-			self.clearParam = function () {
-				self.setParam(undefined);
+			self.url.clearParam = function () {
+				self.url.setParam(undefined);
 			};
 
-			self.clearParams = function () {
-				self.setParams(undefined);
+			self.url.clearParams = function () {
+				self.url.setParams(undefined);
 			};
 
-			self.clearResource = function () {
-				self.setResource(undefined);
+			self.url.clearResource = function () {
+				self.url.setResource(undefined);
 			};
 
-			self.clearFilter = function () {
-				self.setFilter(undefined);
+			self.url.clearFilter = function () {
+				self.url.setFilter(undefined);
 			};
 
-			self.clear = function () {
-				self.location.setPath("");
+			self.url.clear = function () {
+				self.url.location.setPath("");
 			};
 
-			self.setPaths = function (value) {
+			self.url.setPaths = function (value) {
 
 				var iter = UriIterator.fromPath(self.location);
 				iter.setPaths(value);
 
-				self.set(iter.peekWhole());
+				self.url.set(iter.peekWhole());
 			};
 
-			self.setHash = function (value) {
+			self.url.setHash = function (value) {
 
 				var iter = UriIterator.fromPath(self.location);
 				iter.setHash(value);
 
-				self.set(iter.peekWhole());
+				self.url.set(iter.peekWhole());
 			};
 
-			self.setParams = function (value) {
+			self.url.setParams = function (value) {
 
 				var iter = UriIterator.fromPath(self.location);
 				iter.setParams(value);
 
-				self.set(iter.peekWhole());
+				self.url.set(iter.peekWhole());
 			};
 
-			self.setResource = function (value) {};
+			self.url.setResource = function (value) {};
 
-			self.setFilter = function (value) {};
+			self.url.setFilter = function (value) {};
 
-			self.set = function (path) {
+			self.url.set = function (path) {
 				self.location.setPath(path);
 			};
 
-			self.addPath = function () {};
+			self.url.addPath = function () {};
 
-			self.addParam = function () {};
+			self.url.addParam = function () {};
+
+			self.url.asIterator = function () {
+				return UriIterator(self.location.getPath());
+			};
 
 			self.onLoad = onLoad;
 			self.onChange = onChange;

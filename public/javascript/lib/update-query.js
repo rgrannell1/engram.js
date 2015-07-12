@@ -11,6 +11,8 @@ var getURL = function () {
 ENGRAM.eventBus.on(EventBus.message.PRESS_TYPEABLE, function (_ref) {
 	var key = _ref.key;
 
+	ENGRAM.app.setParams();
+
 	ENGRAM.eventBus.fire(EventBus.message.URL_UPDATE, getURL() + key);
 }).on(EventBus.message.PRESS_BACKSPACE, function (_ref) {
 	var key = _ref.key;
