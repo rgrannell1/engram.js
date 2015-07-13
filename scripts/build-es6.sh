@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
-
-
-cd ..
+cd Code/engram.js
 
 babel node_modules/engram/test/es6 --watch                  --out-dir node_modules/engram/test/es5/ &
 babel node_modules/engram/es6/     --watch                  --out-dir node_modules/engram/es5/      &
