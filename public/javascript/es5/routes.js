@@ -58,27 +58,8 @@ ENGRAM.app.onAlter(function (query) {
 	return query.peekWholeParams();
 }, use.location.where.path("bookmarks").compile(), function (query, next) {
 
-	console.log("-- -- ");
+	console.log(query.data);
 
 	ENGRAM.searchState.setQuery(query.peekWhole());
 	scoreBookmarks(query.peekWhole());
 }).run();
-
-/*
-
-ENGRAM.eventBus.on(EventBus.message.URL_UPDATE, query => {
-
-	app
-	.
-
-	if (is.string(query)) {
-		query.length === 0
-			? history.pushState(null, '', `/bookmarks${window.location.hash}`)
-			: history.pushState(null, '', `/bookmarks?q=${encodeURIComponent(query)}${window.location.hash}`)
-	} else {
-		throw TypeError(`${query} was not a valid URL.`)
-	}
-
-})
-
-*/

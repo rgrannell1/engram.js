@@ -199,6 +199,21 @@ var UriIterator = (function (_UriIterator) {
 		}
 	};
 
+	this.peekParams = function () {
+
+		if (!is.undefined(_this.peekNextParam())) {
+			return _this.data.params;
+		}
+	};
+
+	this.getParams = function () {
+
+		var result = _this.peekParams();
+		_this.data.params = undefined;
+
+		return result;
+	};
+
 	this.peekWhole = function () {
 
 		return [_this.peekNextPaths(), _this.peekWholeParams(), _this.peekWholeHash()].filter(function (part) {

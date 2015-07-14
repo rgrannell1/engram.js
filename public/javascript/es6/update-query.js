@@ -21,9 +21,19 @@ var getURL = ( ) => {
 ENGRAM.eventBus
 .on(EventBus.message.PRESS_TYPEABLE, ({key}) => {
 
-	var iter = ENGRAM.app.url.asIterator( )
+	var iter  = ENGRAM.app.url.asIterator( )
 
-	ENGRAM.app.url.setParams( (iter.peekWholeParams( ) || '') + key )
+	if ( is.undefined(iter.peekParams( )) ) {
+
+		ENGRAM.app.url.setParams(`q=${key}`)
+
+	} else {
+
+		var query = iter.peekParams( ).filter( ({key, value}) => key === 'q')[0]
+		ENGRAM.app.url.setParams(`q=${query.value + key}`)
+
+	}
+
 
 })
 .on(EventBus.message.PRESS_BACKSPACE, ({key}) => {

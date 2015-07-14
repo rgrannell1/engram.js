@@ -13,7 +13,18 @@ ENGRAM.eventBus.on(EventBus.message.PRESS_TYPEABLE, function (_ref) {
 
 	var iter = ENGRAM.app.url.asIterator();
 
-	ENGRAM.app.url.setParams((iter.peekWholeParams() || "") + key);
+	if (is.undefined(iter.peekParams())) {
+
+		ENGRAM.app.url.setParams("q=" + key);
+	} else {
+
+		var query = iter.peekParams().filter(function (_ref2) {
+			var key = _ref2.key;
+			var value = _ref2.value;
+			return key === "q";
+		})[0];
+		ENGRAM.app.url.setParams("q=" + (query.value + key));
+	}
 }).on(EventBus.message.PRESS_BACKSPACE, function (_ref) {
 	var key = _ref.key;
 
