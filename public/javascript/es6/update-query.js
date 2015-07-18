@@ -40,7 +40,13 @@ ENGRAM.eventBus
 
 	var iter = ENGRAM.app.url.asIterator( )
 
-	ENGRAM.app.url.setParams( (iter.peekWholeParams( ) || '').slice(0, -1) )
+	if ( !is.undefined(iter.peekParams( )) ) {
+
+		var query = iter.peekParams( ).filter( ({key, value}) => key === 'q')[0]
+		ENGRAM.app.url.setParams(`q=${ query.value.slice(0, -1) }`)
+
+	}
+
 
 })
 .on(EventBus.message.PRESS_ESCAPE, ({key}) => {

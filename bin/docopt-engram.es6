@@ -12,6 +12,8 @@ var doc = `
 
 Usage:
     engram --port=<port> --dbpath=<dbpath>
+    engram wipe logs
+    engram wipe db
     engram (-h | --help | --version)
 
 Version:
@@ -36,5 +38,8 @@ var args   = docopt(doc)
 
 engram({
 	port:   parseInt(args['--port'], 10),
-	dbpath: args['--dbpath']
+	dbpath: args['--dbpath'],
+	wipe:   args.wipe,
+	db:     args.db,
+	logs:   args.logs
 })

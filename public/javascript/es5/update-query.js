@@ -30,7 +30,15 @@ ENGRAM.eventBus.on(EventBus.message.PRESS_TYPEABLE, function (_ref) {
 
 	var iter = ENGRAM.app.url.asIterator();
 
-	ENGRAM.app.url.setParams((iter.peekWholeParams() || "").slice(0, -1));
+	if (!is.undefined(iter.peekParams())) {
+
+		var query = iter.peekParams().filter(function (_ref2) {
+			var key = _ref2.key;
+			var value = _ref2.value;
+			return key === "q";
+		})[0];
+		ENGRAM.app.url.setParams("q=" + query.value.slice(0, -1));
+	}
 }).on(EventBus.message.PRESS_ESCAPE, function (_ref) {
 	var key = _ref.key;
 
