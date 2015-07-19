@@ -39,7 +39,7 @@ var readDataURL = function (reader, callback) {
 
 var uploadFile = (retries, callback) => {
 
-	var $uploader = $('#uploader-hidden')
+	var $uploader = $(ENGRAM.selectors.UPLOAD_FORM)
 	var files     = $uploader.prop('files')
 
 	if ( is.undefined(files[0]) ) {
@@ -85,7 +85,7 @@ var sendBookmarks = function (bookmarks) {
 
 	$.ajax({
 		type: "POST",
-		url:  '/api/import',
+		url:  ENGRAM.urls.IMPORT,
 
 		dataType : "json",
 		data: JSON.stringify({data: entityBody}),
@@ -102,10 +102,10 @@ var sendBookmarks = function (bookmarks) {
 
 $(( ) => {
 
-	$('#uploader').on('click', event => {
+	$(ENGRAM.selectors.DELETE_BUTTONS).on('click', event => {
 
 		event.preventDefault( )
-		$('#uploader-hidden').trigger('click')
+		$(ENGRAM.selectors.UPLOAD_FORM).trigger('click')
 
 		uploadFile(1000, sendBookmarks)
 

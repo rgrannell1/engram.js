@@ -20,6 +20,17 @@ ENGRAM.DELETEFADE = 250;
 // page to load some more bookmarks?
 ENGRAM.LOADOFFSET = 60;
 
+ENGRAM.urls = {};
+ENGRAM.urls.TEMPLATE_URL = "/public/html/bookmark-template.html";
+
+ENGRAM.selectors = {};
+
+ENGRAM.selectors.BOOKMARK_CONTAINER = "#bookmark-container";
+ENGRAM.selectors.UPLOAD_FORM = "#uploader-hidden";
+ENGRAM.selectors.UPLOAD_UPLOAD_BUTTON = "#uploader";
+ENGRAM.selectors.DELETE_BUTTONS = ".delete-bookmark";
+ENGRAM.selectors.TIMES = ".bookmark time";
+
 ENGRAM.eventBus = EventBus();
 
 {

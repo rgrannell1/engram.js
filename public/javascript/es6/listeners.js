@@ -74,7 +74,7 @@ var listeners = { }
 
 	listeners.deleteBookmark = function ( ) {
 
-		$document.on('click', '.delete-bookmark', function ( ) {
+		$document.on('click', ENGRAM.selectors.DELETE_BUTTONS, function ( ) {
 
 			var $button  = $(this)
 

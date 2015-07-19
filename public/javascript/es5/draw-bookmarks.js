@@ -41,13 +41,13 @@ renderBookmark.precond = function (bookmark, template) {
 	is.always.string(template);
 };
 
-$.get("/public/html/bookmark-template.html", function (template) {
+$.get(ENGRAM.urls.TEMPLATE_URL, function (template) {
 
 	ENGRAM.drawFocus = function (focus) {
 
 		ENGRAM.drawFocus.precond(focus);
 
-		$("#bookmark-container").html(focus.value.map(function (_ref) {
+		$(ENGRAM.selectors.BOOKMARK_CONTAINER).html(focus.value.map(function (_ref) {
 			var bookmark = _ref.bookmark;
 			var _ = _ref._;
 			return renderBookmark(bookmark, template);

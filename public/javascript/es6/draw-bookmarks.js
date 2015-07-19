@@ -66,13 +66,13 @@ renderBookmark.precond = (bookmark, template) => {
 
 
 
-$.get('/public/html/bookmark-template.html', template => {
+$.get(ENGRAM.urls.TEMPLATE_URL, template => {
 
 	ENGRAM.drawFocus = focus => {
 
 		ENGRAM.drawFocus.precond(focus)
 
-		$('#bookmark-container').html(
+		$(ENGRAM.selectors.BOOKMARK_CONTAINER).html(
 			focus.value
 			.map(
 				({bookmark, _}) => renderBookmark(bookmark, template))
