@@ -3,28 +3,31 @@
 
 {
 
-	let ith = 0
+	EventBus.message = { }
 
-	EventBus.message = {
-		UPDATED_URL:      (++ith) + '',
-		URL_UPDATE:       (++ith) + '',
-		DELETE_SUCCESS:   (++ith) + '',
-		DELETE_FAILURE:   (++ith) + '',
-		REDRAW:           (++ith) + '',
-		UPDATE_FOCUS:     (++ith) + '',
-		DELETE:           (++ith) + '',
+	;[
+		'UPDATED_URL',
+		'URL_UPDATE',
+		'DELETE_SUCCESS',
+		'DELETE_FAILURE',
+		'REDRAW',
+		'UPDATE_FOCUS',
+		'DELETE',
 
-		PRESS_ESCAPE:     (++ith) + '',
-		PRESS_BACKSPACE:  (++ith) + '',
-		PRESS_TYPEABLE:   (++ith) + '',
-		SCROLL:           (++ith) + '',
-		STOP:             (++ith) + '',
-		UPDATE_CACHE:     (++ith) + '',
-		LOADED_BOOKMARKS: (++ith) + '',
-		LOAD_BOOKMARK:    (++ith) + '',
-		RESCORE:          (++ith) + '',
-		HASH_ID:          (++ith) + ''
 
-	}
+		'PRESS_ESCAPE',
+		'PRESS_BACKSPACE',
+		'PRESS_TYPEABLE',
+		'SCROLL',
+		'STOP',
+		'UPDATE_CACHE',
+		'LOADED_BOOKMARKS',
+		'LOAD_BOOKMARK',
+		'RESCORE',
+		'HASH_ID'
+	]
+	.forEach((name, ith) => {
+		EventBus.message[name] = ith + ''
+	})
 
 }

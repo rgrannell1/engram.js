@@ -19,15 +19,13 @@ var listeners = {};
 
 		var $window = $(window);
 
-		/*
-  	rebroadcastKeyEvents
-  		convert JS keystroke events into published messages.
-  	*/
+		// -- broadcast keystrokes.
 
 		listeners.rebroadcastKeyEvents = function () {
 
 			$window.keydown(function (event) {
 
+				event.stopPropegation();
 				var keyCode = event.keyCode;
 
 				if (event.keyCode === eventCode.escape) {
@@ -36,14 +34,11 @@ var listeners = {};
 				} else if (event.keyCode === eventCode.backspace) {
 
 					ENGRAM.eventBus.fire(EventBus.message.PRESS_BACKSPACE);
-				} else {
+				} else if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
 
-					if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
-
-						ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
-							key: String.fromCharCode(event.keyCode)
-						});
-					}
+					ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
+						key: String.fromCharCode(event.keyCode)
+					});
 				}
 			});
 		};
@@ -54,6 +49,8 @@ var listeners = {};
 	(function () {
 
 		var $document = $(document);
+
+		// -- broadcast when the user clicks a delete (X) button.
 
 		listeners.deleteBookmark = function () {
 
@@ -75,6 +72,9 @@ var listeners = {};
 
 		var $window = $(window);
 		var $document = $(document);
+		var scrollTimer = undefined;
+
+		// -- broadcast every time the user scrolls (inefficient).
 
 		listeners.onScroll = function () {
 
@@ -92,7 +92,7 @@ var listeners = {};
 			});
 		};
 
-		var scrollTimer = undefined;
+		// -- broadcast every time the user stops scrolling (efficient).
 
 		listeners.onStop = function () {
 

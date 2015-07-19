@@ -11,8 +11,8 @@ var listeners = { }
 {
 
 	let eventCode = {
-		'escape':    27,
-		'backspace': 8
+		escape:    27,
+		backspace: 8
 	}
 
 	let isTypeable = event => {
@@ -22,6 +22,7 @@ var listeners = { }
 		return (
 			(event.keyCode >= 41 && event.keyCode < 122) ||
 			(event.keyCode == 32 || event.keyCode > 186))
+
 	}
 
 	let $window = $(window)
@@ -30,17 +31,13 @@ var listeners = { }
 
 
 
-	/*
-		rebroadcastKeyEvents
-
-		convert JS keystroke events into published messages.
-
-	*/
+	// -- broadcast keystrokes.
 
 	listeners.rebroadcastKeyEvents = ( ) => {
 
 		$window.keydown(event => {
 
+			event.stopPropegation( )
 			var keyCode = event.keyCode
 
 			if (event.keyCode === eventCode.escape) {
@@ -51,15 +48,11 @@ var listeners = { }
 
 				ENGRAM.eventBus.fire(EventBus.message.PRESS_BACKSPACE)
 
-			} else {
+			} else if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
 
-				if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
-
-					ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
-						key: String.fromCharCode(event.keyCode)
-					})
-
-				}
+				ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
+					key: String.fromCharCode(event.keyCode)
+				})
 
 			}
 
@@ -76,6 +69,8 @@ var listeners = { }
 {
 
 	let $document = $(document)
+
+	// -- broadcast when the user clicks a delete (X) button.
 
 	listeners.deleteBookmark = function ( ) {
 
@@ -103,9 +98,13 @@ var listeners = { }
 
 	let $window   = $(window)
 	let $document = $(document)
+	let scrollTimer
 
 
 
+
+
+	// -- broadcast every time the user scrolls (inefficient).
 
 
 	listeners.onScroll = ( ) => {
@@ -126,7 +125,11 @@ var listeners = { }
 
 	}
 
-	let scrollTimer
+
+
+
+
+	// -- broadcast every time the user stops scrolling (efficient).
 
 	listeners.onStop = ( ) => {
 
