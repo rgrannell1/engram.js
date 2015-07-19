@@ -1,6 +1,6 @@
 "use strict";
 
-ENGRAM.eventBus.on(EventBus.message.DELETE, function (_ref) {
+var deleteBookmark = function (_ref) {
 	var id = _ref.id;
 	var $button = _ref.$button;
 
@@ -18,20 +18,25 @@ ENGRAM.eventBus.on(EventBus.message.DELETE, function (_ref) {
 			ENGRAM.eventBus.fire(EventBus.message.DELETE_FAILURE, { id: id, $article: $article });
 		}
 	});
-}).on(EventBus.message.DELETE_SUCCESS, function (_ref) {
-	var id = _ref.id;
-	var _ = _ref._;
+};
 
-	ENGRAM.cache.remove(id);
-}).on(EventBus.message.DELETE_SUCCESS, function (_ref) {
-	var _ = _ref._;
-	var $article = _ref.$article;
+var onDelete = {
+	success: function (_ref) {
+		var id = _ref.id;
+		var _ = _ref._;
 
-	$article.remove();
-}).on(EventBus.message.DELETE_FAILURE, function (_ref) {
-	var id = _ref.id;
-	var $article = _ref.$article;
+		ENGRAM.cache.remove(id);
+		$article.remove();
+	},
+	failure: function (_ref) {
+		var id = _ref.id;
+		var $article = _ref.$article;
 
-	alert("failed to remove bookmark #" + id);
-	$article.show();
-});
+		alert("failed to remove bookmark #" + id);
+		$article.show();
+	}
+};
+
+ENGRAM.eventBus.on(EventBus.message.DELETE, deleteBookmark);
+
+ENGRAM.eventBus.on(EventBus.message.DELETE_SUCCESS, onDelete.success).on(EventBus.message.DELETE_SUCCESS, onDelete.failure).on(EventBus.message.DELETE_FAILURE, onDelete.failure);

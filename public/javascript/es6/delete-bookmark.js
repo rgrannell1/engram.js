@@ -4,8 +4,7 @@
 
 
 
-ENGRAM.eventBus
-.on(EventBus.message.DELETE, ({id, $button}) => {
+var deleteBookmark = ({id, $button}) => {
 
 	var $article = $button.closest('article')
 
@@ -22,16 +21,36 @@ ENGRAM.eventBus
 		}
 	})
 
-})
-.on(EventBus.message.DELETE_SUCCESS, ({id, _}) => {
-	ENGRAM.cache.remove(id)
-})
-.on(EventBus.message.DELETE_SUCCESS, ({_, $article}) => {
-	$article.remove( )
-})
-.on(EventBus.message.DELETE_FAILURE, ({id, $article}) => {
+}
 
-	alert(`failed to remove bookmark #${id}`)
-	$article.show( )
+var onDelete = {
+	success: ({id, _}) => {
 
-})
+		ENGRAM.cache.remove(id)
+		$article.remove( )
+
+	},
+	failure: ({id, $article})=> {
+
+		alert(`failed to remove bookmark #${id}`)
+		$article.show( )
+
+	}
+}
+
+
+
+
+
+ENGRAM.eventBus
+.on(EventBus.message.DELETE, deleteBookmark)
+
+
+
+
+
+ENGRAM.eventBus
+.on(EventBus.message.DELETE_SUCCESS, onDelete.success)
+.on(EventBus.message.DELETE_SUCCESS, onDelete.failure)
+
+.on(EventBus.message.DELETE_FAILURE, onDelete.failure)
