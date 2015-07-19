@@ -3,43 +3,6 @@
 var _defineProperty = function (obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); };
 
 {
-	var listDown;
-	var listUp;
-
-	(function () {
-
-		var listNextById = function (downwards, from, amount) {
-
-			listNextById.precond(downwards, from, amount);
-
-			var filtered = Object.keys(ENGRAM.cache).map(function (key) {
-				return parseInt(key, 10);
-			}).filter(function (id) {
-				return downwards ? id < from : id > from;
-			}).sort(function (num0, num1) {
-				return num1 - num0;
-			}); // -- this is slow if object imp. isn't ordered.
-
-			var sliced = downwards ? filtered.slice(0, amount) : filtered.slice(-amount);
-
-			return sliced.map(function (key) {
-				return ENGRAM.cache[key];
-			});
-		};
-
-		listNextById.precond = function (downwards, from, amount) {
-
-			is.always.boolean(downwards);
-			is.always.number(from);
-			is.always.number(amount);
-		};
-
-		listDown = listNextById.bind({}, true);
-		listUp = listNextById.bind({}, false);
-	})();
-}
-
-{
 
 	var loadState = [new Date(0), new Date(0)];
 
@@ -108,34 +71,30 @@ var triggerLoad = function (downwards) {
 		ENGRAM.eventBus.fire(topic, getNextId());
 	} else {
 		// -- load upwards or downwards by search score.
-
 		throw new Error("loading search results not implemented.");
 	}
 };
 
-ENGRAM.eventBus.on(":scroll", function detectEdge(_ref) {
+triggerLoad.top = function () {
+	return triggerLoad(false);
+};
+triggerLoad.bottom = function () {
+	return triggerLoad(true);
+};
+
+var detectEdge = function (_ref) {
 	var windowTop = _ref.windowTop;
 	var scrollHeight = _ref.scrollHeight;
 	var scrollPosition = _ref.scrollPosition;
 
-	if (scrollHeight - scrollPosition === 0) {
-		ENGRAM.eventBus.fire(":atBottom", { windowTop: windowTop, scrollHeight: scrollHeight, scrollPosition: scrollPosition });
-	} else if (windowTop === 0) {
-		ENGRAM.eventBus.fire(":atTop", { windowTop: windowTop, scrollHeight: scrollHeight, scrollPosition: scrollPosition });
-	}
-}).on(":atBottom", function (_ref) {
-	var windowTop = _ref.windowTop;
-	var scrollHeight = _ref.scrollHeight;
-	var scrollPosition = _ref.scrollPosition;
+	var args = { windowTop: windowTop, scrollHeight: scrollHeight, scrollPosition: scrollPosition };
 
-	triggerLoad(true);
-}).on(":atTop", function (_ref) {
-	var windowTop = _ref.windowTop;
-	var scrollHeight = _ref.scrollHeight;
-	var scrollPosition = _ref.scrollPosition;
+	var topic = scrollHeight - scrollPosition === 0 ? ":atBottom" : ":atTop";
 
-	triggerLoad(false);
-}).on(":load-bookmark", function (bookmark) {
+	ENGRAM.eventBus.fire(":atTop", args);
+};
+
+var onLoadBookmark = function (bookmark) {
 
 	var query = getURL();
 
@@ -150,7 +109,9 @@ ENGRAM.eventBus.on(":scroll", function detectEdge(_ref) {
 	});
 
 	ENGRAM.eventBus.fire(":rescore");
-}).on(":scrollup-bookmarks", loadListUp).on(":scrolldown-bookmarks", loadListDown).on(":loaded-bookmarks", function (_ref) {
+};
+
+ENGRAM.eventBus.on(":scroll", detectEdge).on(":atBottom", triggerLoad.bottom).on(":atTop", triggerLoad.top).on(":load-bookmark", onLoadBookmark).on(":scrollup-bookmarks", loadListUp).on(":scrolldown-bookmarks", loadListDown).on(":loaded-bookmarks", function (_ref) {
 	var originalOffset = _ref.originalOffset;
 	var id = _ref.id;
 

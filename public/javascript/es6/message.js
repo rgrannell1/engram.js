@@ -24,7 +24,11 @@
 		'LOADED_BOOKMARKS',
 		'LOAD_BOOKMARK',
 		'RESCORE',
-		'HASH_ID'
+		'HASH_ID',
+
+		'SCROLLUP_BOOKMARKS',
+		'SCROLLDOWN_BOOKMARKS'
+
 	]
 	.forEach((name, ith) => {
 		EventBus.message[name] = ith + ''

@@ -7,56 +7,6 @@
 
 {
 
-
-	let listNextById = (downwards, from, amount) => {
-
-		listNextById.precond(downwards, from, amount)
-
-
-
-
-
-		var filtered = Object.keys(ENGRAM.cache)
-			.map(
-				key => parseInt(key, 10))
-			.filter(
-				id  => downwards ? id < from : id > from)
-			.sort(
-				(num0, num1) => num1 - num0) // -- this is slow if object imp. isn't ordered.
-
-
-
-
-
-		var sliced = downwards ? filtered.slice(0, amount) : filtered.slice(-amount)
-
-		return sliced.map(key => ENGRAM.cache[key])
-
-	}
-
-	listNextById.precond = (downwards, from, amount) => {
-
-		is.always.boolean(downwards)
-		is.always.number(from)
-		is.always.number(amount)
-
-	}
-
-
-
-
-	var listDown = listNextById.bind({ }, true)
-	var listUp   = listNextById.bind({ }, false)
-
-
-}
-
-
-
-
-
-{
-
 	var loadState = [new Date(0), new Date(0)]
 
 	let loadList = (downwards, from) => {
@@ -155,47 +105,34 @@ var triggerLoad = (downwards) => {
 
 	} else {
 		// -- load upwards or downwards by search score.
-
 		throw new Error('loading search results not implemented.')
-
 	}
+
+}
+
+triggerLoad.top    = ( ) => triggerLoad(false)
+triggerLoad.bottom = ( ) => triggerLoad(true)
+
+
+
+
+
+var detectEdge = ({windowTop, scrollHeight, scrollPosition}) => {
+
+	var args  = {windowTop, scrollHeight, scrollPosition}
+
+	var topic = scrollHeight - scrollPosition === 0
+		? ':atBottom'
+		: ':atTop'
+
+	ENGRAM.eventBus.fire(':atTop', args)
 
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-ENGRAM.eventBus
-.on(':scroll', function detectEdge ({windowTop, scrollHeight, scrollPosition}) {
-
-	if (scrollHeight - scrollPosition === 0) {
-		ENGRAM.eventBus.fire(':atBottom', {windowTop, scrollHeight, scrollPosition})
-	} else if (windowTop === 0) {
-		ENGRAM.eventBus.fire(':atTop', {windowTop, scrollHeight, scrollPosition})
-	}
-
-})
-
-.on(':atBottom', ({windowTop, scrollHeight, scrollPosition}) => {
-	triggerLoad(true)
-})
-.on(':atTop', ({windowTop, scrollHeight, scrollPosition}) => {
-	triggerLoad(false)
-
-})
-.on(':load-bookmark', bookmark => {
+var onLoadBookmark = bookmark => {
 
 	var query = getURL( )
 
@@ -215,7 +152,34 @@ ENGRAM.eventBus
 
 	ENGRAM.eventBus.fire(':rescore')
 
-})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENGRAM.eventBus
+.on(':scroll', detectEdge)
+
+.on(':atBottom', triggerLoad.bottom)
+.on(':atTop',    triggerLoad.top)
+
+.on(':load-bookmark', onLoadBookmark)
 
 .on(':scrollup-bookmarks',   loadListUp)
 .on(':scrolldown-bookmarks', loadListDown)

@@ -37,7 +37,7 @@ var listeners = { }
 
 		$window.keydown(event => {
 
-			event.stopPropegation( )
+			event.stopPropagation( )
 			var keyCode = event.keyCode
 
 			if (event.keyCode === eventCode.escape) {

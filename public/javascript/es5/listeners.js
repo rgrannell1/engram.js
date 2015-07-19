@@ -25,7 +25,7 @@ var listeners = {};
 
 			$window.keydown(function (event) {
 
-				event.stopPropegation();
+				event.stopPropagation();
 				var keyCode = event.keyCode;
 
 				if (event.keyCode === eventCode.escape) {
