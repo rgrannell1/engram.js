@@ -94,7 +94,7 @@ var fillBookmarks = ( ) => {
 
 
 
-var triggerLoad = (downwards) => {
+var triggerLoadBookmarks = (downwards) => {
 
 	if (getURL( ) === '') {
 		// -- load linearly by id up or down.
@@ -110,8 +110,8 @@ var triggerLoad = (downwards) => {
 
 }
 
-triggerLoad.top    = ( ) => triggerLoad(false)
-triggerLoad.bottom = ( ) => triggerLoad(true)
+triggerLoadBookmarks.top    = ( ) => triggerLoadBookmarks(false)
+triggerLoadBookmarks.bottom = ( ) => triggerLoadBookmarks(true)
 
 
 
@@ -132,14 +132,14 @@ var detectEdge = ({windowTop, scrollHeight, scrollPosition}) => {
 
 
 
-var onLoadBookmark = bookmark => {
+
+var createBookmarkCacheEntry = bookmark => {
 
 	var query = getURL( )
 
-	is.always.object(bookmark)
-	is.always.number(bookmark.bookmarkId)
+	ENGRAM.eventBus.fire(ENGRAM.eventBus.message.RESCORE)
 
-	ENGRAM.cache.set(bookmark.bookmarkId, {
+	return {
 		bookmark,
 		metadata: {
 			scores: query.length === 0
@@ -148,9 +148,23 @@ var onLoadBookmark = bookmark => {
 					[query]: scoreTextMatch(query, isSplitSubstring(query), bookmark.title)
 				}
 		}
-	})
+	}
 
-	ENGRAM.eventBus.fire(':rescore')
+}
+
+
+
+var onLoadBookmark = bookmark => {
+
+	onLoadBookmark.precond(bookmark)
+	ENGRAM.cache.set(bookmark.bookmarkId, createBookmarkCacheEntry(bookmark))
+
+}
+
+onLoadBookmark.precond = bookmark => {
+
+	is.always.object(bookmark)
+	is.always.number(bookmark.bookmarkId)
 
 }
 
@@ -172,12 +186,12 @@ var onLoadBookmark = bookmark => {
 
 
 
-
 ENGRAM.eventBus
+
 .on(':scroll', detectEdge)
 
-.on(':atBottom', triggerLoad.bottom)
-.on(':atTop',    triggerLoad.top)
+.on(':atBottom', triggerLoadBookmarks.bottom)
+.on(':atTop',    triggerLoadBookmarks.top)
 
 .on(':load-bookmark', onLoadBookmark)
 

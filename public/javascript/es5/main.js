@@ -61,7 +61,7 @@ var fillBookmarks = function () {
 	}
 };
 
-var triggerLoad = function (downwards) {
+var triggerLoadBookmarks = function (downwards) {
 
 	if (getURL() === "") {
 		// -- load linearly by id up or down.
@@ -75,11 +75,11 @@ var triggerLoad = function (downwards) {
 	}
 };
 
-triggerLoad.top = function () {
-	return triggerLoad(false);
+triggerLoadBookmarks.top = function () {
+	return triggerLoadBookmarks(false);
 };
-triggerLoad.bottom = function () {
-	return triggerLoad(true);
+triggerLoadBookmarks.bottom = function () {
+	return triggerLoadBookmarks(true);
 };
 
 var detectEdge = function (_ref) {
@@ -94,24 +94,33 @@ var detectEdge = function (_ref) {
 	ENGRAM.eventBus.fire(":atTop", args);
 };
 
-var onLoadBookmark = function (bookmark) {
+var createBookmarkCacheEntry = function (bookmark) {
 
 	var query = getURL();
 
-	is.always.object(bookmark);
-	is.always.number(bookmark.bookmarkId);
+	ENGRAM.eventBus.fire(ENGRAM.eventBus.message.RESCORE);
 
-	ENGRAM.cache.set(bookmark.bookmarkId, {
+	return {
 		bookmark: bookmark,
 		metadata: {
 			scores: query.length === 0 ? {} : _defineProperty({}, query, scoreTextMatch(query, isSplitSubstring(query), bookmark.title))
 		}
-	});
-
-	ENGRAM.eventBus.fire(":rescore");
+	};
 };
 
-ENGRAM.eventBus.on(":scroll", detectEdge).on(":atBottom", triggerLoad.bottom).on(":atTop", triggerLoad.top).on(":load-bookmark", onLoadBookmark).on(":scrollup-bookmarks", loadListUp).on(":scrolldown-bookmarks", loadListDown).on(":loaded-bookmarks", function (_ref) {
+var onLoadBookmark = function (bookmark) {
+
+	onLoadBookmark.precond(bookmark);
+	ENGRAM.cache.set(bookmark.bookmarkId, createBookmarkCacheEntry(bookmark));
+};
+
+onLoadBookmark.precond = function (bookmark) {
+
+	is.always.object(bookmark);
+	is.always.number(bookmark.bookmarkId);
+};
+
+ENGRAM.eventBus.on(":scroll", detectEdge).on(":atBottom", triggerLoadBookmarks.bottom).on(":atTop", triggerLoadBookmarks.top).on(":load-bookmark", onLoadBookmark).on(":scrollup-bookmarks", loadListUp).on(":scrolldown-bookmarks", loadListDown).on(":loaded-bookmarks", function (_ref) {
 	var originalOffset = _ref.originalOffset;
 	var id = _ref.id;
 
