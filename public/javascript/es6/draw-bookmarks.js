@@ -27,41 +27,46 @@ var prettifyDate = date => {
 
 
 
-$.get('/public/html/bookmark-template.html', function (template) {
+var renderBookmark = (bookmark, template) => {
 
-	var renderBookmark = bookmark => {
+	renderBookmark.precond(bookmark, template)
 
-		renderBookmark.precond(bookmark)
+	bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime))
 
-		bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime))
+	// -- default to the url, if no title is saved yet.
+	bookmark.displayTitle = bookmark.title
+		? bookmark.title
+		: bookmark.url
 
-		bookmark.displayTitle = bookmark.title
-			? bookmark.title
-			: bookmark.url
+	bookmark.hasTitleFlag = bookmark.title
+		? 'titled'
+		: ''
 
-		bookmark.hasTitleFlag = bookmark.title
-			? 'titled'
-			: ''
+	bookmark.hasStatusCode= bookmark.status_code
+		? 'status-coded'
+		: ''
 
-		bookmark.hasStatusCode= bookmark.status_code
-			? 'status-coded'
-			: ''
+	bookmark.isDeadLink   = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500
+		? 'dead'
+		: ''
 
-		bookmark.isDeadLink   = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500
-			? 'dead'
-			: ''
+	return Mustache.render(template, bookmark)
 
-		return Mustache.render(template, bookmark)
+}
 
-	}
+renderBookmark.precond = (bookmark, template) => {
 
-	renderBookmark.precond = bookmark => {
-		is.always.object(bookmark)
-	}
+	is.always.object(bookmark)
+	is.always.string(template)
 
+}
 
 
 
+
+
+
+$.get('/public/html/bookmark-template.html', template => {
 
 	ENGRAM.drawFocus = focus => {
 
@@ -70,9 +75,9 @@ $.get('/public/html/bookmark-template.html', function (template) {
 		$('#bookmark-container').html(
 			focus.value
 			.map(
-				({bookmark, _}) => renderBookmark(bookmark))
-			.reduce(
-				(html0, html1) => html0 + html1, '')
+				({bookmark, _}) => renderBookmark(bookmark, template))
+			.join('')
+
 		)
 
 		ENGRAM.eventBus.fire(EventBus.message.REDRAW, { })

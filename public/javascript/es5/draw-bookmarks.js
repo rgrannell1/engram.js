@@ -17,28 +17,31 @@ var prettifyDate = function (date) {
 	return dateString + " " + timeString;
 };
 
+var renderBookmark = function (bookmark, template) {
+
+	renderBookmark.precond(bookmark, template);
+
+	bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime));
+
+	// -- default to the url, if no title is saved yet.
+	bookmark.displayTitle = bookmark.title ? bookmark.title : bookmark.url;
+
+	bookmark.hasTitleFlag = bookmark.title ? "titled" : "";
+
+	bookmark.hasStatusCode = bookmark.status_code ? "status-coded" : "";
+
+	bookmark.isDeadLink = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500 ? "dead" : "";
+
+	return Mustache.render(template, bookmark);
+};
+
+renderBookmark.precond = function (bookmark, template) {
+
+	is.always.object(bookmark);
+	is.always.string(template);
+};
+
 $.get("/public/html/bookmark-template.html", function (template) {
-
-	var renderBookmark = function (bookmark) {
-
-		renderBookmark.precond(bookmark);
-
-		bookmark.date = prettifyDate(new Date(1000 * bookmark.ctime));
-
-		bookmark.displayTitle = bookmark.title ? bookmark.title : bookmark.url;
-
-		bookmark.hasTitleFlag = bookmark.title ? "titled" : "";
-
-		bookmark.hasStatusCode = bookmark.status_code ? "status-coded" : "";
-
-		bookmark.isDeadLink = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500 ? "dead" : "";
-
-		return Mustache.render(template, bookmark);
-	};
-
-	renderBookmark.precond = function (bookmark) {
-		is.always.object(bookmark);
-	};
 
 	ENGRAM.drawFocus = function (focus) {
 
@@ -47,10 +50,8 @@ $.get("/public/html/bookmark-template.html", function (template) {
 		$("#bookmark-container").html(focus.value.map(function (_ref) {
 			var bookmark = _ref.bookmark;
 			var _ = _ref._;
-			return renderBookmark(bookmark);
-		}).reduce(function (html0, html1) {
-			return html0 + html1;
-		}, ""));
+			return renderBookmark(bookmark, template);
+		}).join(""));
 
 		ENGRAM.eventBus.fire(EventBus.message.REDRAW, {});
 	};
