@@ -131,13 +131,13 @@ triggerLoadBookmarks.bottom = triggerLoadBookmarks.bind({ }, true)
 
 var detectEdge = ({windowTop, scrollHeight, scrollPosition}) => {
 
-	var args  = {windowTop, scrollHeight, scrollPosition}
+	var topic
 
-	var topic = scrollHeight - scrollPosition === 0
-		? EventBus.message.AT_BOTTOM
-		: EventBus.message.AT_TOP
-
-	ENGRAM.eventBus.fire(EventBus.message.AT_TOP, args)
+	if (scrollHeight - scrollPosition === 0) {
+		ENGRAM.eventBus.fire(EventBus.message.AT_BOTTOM, {windowTop, scrollHeight, scrollPosition})
+	} else if (windowTop === 0) {
+		ENGRAM.eventBus.fire(EventBus.message.AT_TOP, {windowTop, scrollHeight, scrollPosition})
+	}
 
 }
 

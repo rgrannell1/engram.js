@@ -90,11 +90,13 @@ var detectEdge = function (_ref) {
 	var scrollHeight = _ref.scrollHeight;
 	var scrollPosition = _ref.scrollPosition;
 
-	var args = { windowTop: windowTop, scrollHeight: scrollHeight, scrollPosition: scrollPosition };
+	var topic;
 
-	var topic = scrollHeight - scrollPosition === 0 ? EventBus.message.AT_BOTTOM : EventBus.message.AT_TOP;
-
-	ENGRAM.eventBus.fire(EventBus.message.AT_TOP, args);
+	if (scrollHeight - scrollPosition === 0) {
+		ENGRAM.eventBus.fire(EventBus.message.AT_BOTTOM, { windowTop: windowTop, scrollHeight: scrollHeight, scrollPosition: scrollPosition });
+	} else if (windowTop === 0) {
+		ENGRAM.eventBus.fire(EventBus.message.AT_TOP, { windowTop: windowTop, scrollHeight: scrollHeight, scrollPosition: scrollPosition });
+	}
 };
 
 var createBookmarkEntry = function (bookmark) {
