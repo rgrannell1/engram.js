@@ -93,13 +93,16 @@ var fillBookmarks = ( ) => {
 var getNextId = downwards => {
 
 	var nextId = downwards
-		? $(ENGRAM.selectors.ARTICLES).first( ).attr('id')
-		: $(ENGRAM.selectors.ARTICLES).last( ).attr('id')
+		? $(ENGRAM.selectors.ARTICLES).last( ).attr('id')
+		: $(ENGRAM.selectors.ARTICLES).first( ).attr('id')
 
-
-	return downwards
-		? parseInt(nextId, 10) - 1
-		: parseInt(nextId, 10) + 1
+	if (!nextId) {
+		return ENGRAM.BIGINT
+	} else {
+		return downwards
+			? parseInt(nextId, 10) - 1
+			: parseInt(nextId, 10) + 1
+	}
 
 }
 

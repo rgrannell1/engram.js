@@ -63,9 +63,13 @@ var fillBookmarks = function () {
 
 var getNextId = function (downwards) {
 
-	var nextId = downwards ? $(ENGRAM.selectors.ARTICLES).first().attr("id") : $(ENGRAM.selectors.ARTICLES).last().attr("id");
+	var nextId = downwards ? $(ENGRAM.selectors.ARTICLES).last().attr("id") : $(ENGRAM.selectors.ARTICLES).first().attr("id");
 
-	return downwards ? parseInt(nextId, 10) - 1 : parseInt(nextId, 10) + 1;
+	if (!nextId) {
+		return ENGRAM.BIGINT;
+	} else {
+		return downwards ? parseInt(nextId, 10) - 1 : parseInt(nextId, 10) + 1;
+	}
 };
 
 var triggerLoadBookmarks = function (downwards) {
