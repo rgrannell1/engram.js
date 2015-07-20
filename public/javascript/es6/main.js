@@ -32,13 +32,9 @@
 			currentQuery: ''
 		})
 
-
-
-
-
 		var bookmark = downwards
-			? $('#bookmarks article').slice(-1)[0]
-			: $('#bookmarks article').slice(0, 1)[0]
+			? $(ENGRAM.selectors.ARTICLES).slice(-1)[0]
+			: $(ENGRAM.selectors.ARTICLES).slice(0, 1)[0]
 
 		var originalOffset = bookmark.getBoundingClientRect( ).top
 		var id             = $(bookmark).attr('id')
@@ -73,9 +69,9 @@ var fillBookmarks = ( ) => {
 		return
 	}
 
-	var from   = $('#bookmark-container article').length === 0
+	var from   = $(ENGRAM.selectors.ARTICLES).length === 0
 		? ENGRAM.BIGINT
-		: parseInt($('#bookmark-container article:last').attr('id'), 10)
+		: parseInt($(`${ENGRAM.selectors.ARTICLES}:last`).attr('id'), 10)
 
 	var loaded = listDown(from, ENGRAM.MAXLOADED - currentAmount)
 
@@ -94,14 +90,30 @@ var fillBookmarks = ( ) => {
 
 
 
+var getNextId = downwards => {
+
+	var nextId = downwards
+		? $(ENGRAM.selectors.ARTICLES).first( ).attr('id')
+		: $(ENGRAM.selectors.ARTICLES).last( ).attr('id')
+
+
+	return downwards
+		? parseInt(nextId, 10) - 1
+		: parseInt(nextId, 10) + 1
+
+}
+
+
+
+
 var triggerLoadBookmarks = (downwards) => {
 
 	if (getURL( ) === '') {
 		// -- load linearly by id up or down.
 
-		var topic = ':scroll' + (downwards ? 'down' : 'up')  + '-bookmarks'
+		var topic  = 'SCROLL' + (downwards ? 'DOWN' : 'UP')  + '_BOOKMARKS'
 
-		ENGRAM.eventBus.fire(topic, getNextId( ))
+		ENGRAM.eventBus.fire(EventBus.message[topic], getNextId(downwards))
 
 	} else {
 		// -- load upwards or downwards by search score.
@@ -110,8 +122,8 @@ var triggerLoadBookmarks = (downwards) => {
 
 }
 
-triggerLoadBookmarks.top    = ( ) => triggerLoadBookmarks(false)
-triggerLoadBookmarks.bottom = ( ) => triggerLoadBookmarks(true)
+triggerLoadBookmarks.top    = triggerLoadBookmarks.bind({ }, false)
+triggerLoadBookmarks.bottom = triggerLoadBookmarks.bind({ }, true)
 
 
 
@@ -122,10 +134,10 @@ var detectEdge = ({windowTop, scrollHeight, scrollPosition}) => {
 	var args  = {windowTop, scrollHeight, scrollPosition}
 
 	var topic = scrollHeight - scrollPosition === 0
-		? ':atBottom'
-		: ':atTop'
+		? EventBus.message.AT_BOTTOM
+		: EventBus.message.AT_TOP
 
-	ENGRAM.eventBus.fire(':atTop', args)
+	ENGRAM.eventBus.fire(EventBus.message.AT_TOP, args)
 
 }
 
@@ -133,11 +145,11 @@ var detectEdge = ({windowTop, scrollHeight, scrollPosition}) => {
 
 
 
-var createBookmarkCacheEntry = bookmark => {
+var createBookmarkEntry = bookmark => {
 
 	var query = getURL( )
 
-	ENGRAM.eventBus.fire(ENGRAM.eventBus.message.RESCORE)
+	ENGRAM.eventBus.fire(EventBus.message.RESCORE)
 
 	return {
 		bookmark,
@@ -157,7 +169,7 @@ var createBookmarkCacheEntry = bookmark => {
 var onLoadBookmark = bookmark => {
 
 	onLoadBookmark.precond(bookmark)
-	ENGRAM.cache.set(bookmark.bookmarkId, createBookmarkCacheEntry(bookmark))
+	ENGRAM.cache.set(bookmark.bookmarkId, createBookmarkEntry(bookmark))
 
 }
 
@@ -188,19 +200,19 @@ onLoadBookmark.precond = bookmark => {
 
 ENGRAM.eventBus
 
-.on(':scroll', detectEdge)
+.on(EventBus.message.SCROLL, detectEdge)
 
-.on(':atBottom', triggerLoadBookmarks.bottom)
-.on(':atTop',    triggerLoadBookmarks.top)
+.on(EventBus.message.AT_BOTTOM, triggerLoadBookmarks.bottom)
+.on(EventBus.message.AT_TOP,    triggerLoadBookmarks.top)
 
-.on(':load-bookmark', onLoadBookmark)
+.on(EventBus.message.LOAD_BOOKMARK, onLoadBookmark)
 
-.on(':scrollup-bookmarks',   loadListUp)
-.on(':scrolldown-bookmarks', loadListDown)
+.on(EventBus.message.SCROLLUP_BOOKMARKS,   loadListUp)
+.on(EventBus.message.SCROLLDOWN_BOOKMARKS, loadListDown)
 
-.on(':loaded-bookmarks', ({originalOffset, id}) => {
+.on(EventBus.message.LOADED_BOOKMARKS, ({originalOffset, id}) => {
 
-	ENGRAM.eventBus.await(':redraw', ( ) => {
+	ENGRAM.eventBus.await(EventBus.message.REDRAW, ( ) => {
 		$(window).scrollTop($('#' + id).offset( ).top - originalOffset)
 	})
 

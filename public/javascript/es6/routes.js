@@ -34,7 +34,7 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, id => {
 */
 
 {
-	let $bookmarks = $('#bookmarks')
+	let $bookmarks = $(ENGRAM.selectors.BOOKMARKS)
 
 	ENGRAM.eventBus.on(EventBus.message.STOP, ({windowTop, scrollHeight, scrollPosition}) => {
 

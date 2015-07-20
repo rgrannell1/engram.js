@@ -48,7 +48,7 @@
 	}
 
 	var secondsBetween = (recent, old) => {
-		return Math.floor((recent.getTime( ) - old.getTime( ) ) / 1000)
+		return Math.floor((recent - old) / 1000)
 	}
 
 	var renderTime = $time => {

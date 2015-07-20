@@ -19,7 +19,7 @@
 					var nextID = _ref.nextID;
 
 					data.forEach(function (bookmark) {
-						ENGRAM.eventBus.fire(":load-bookmark", bookmark);
+						ENGRAM.eventBus.fire(EventBus.message.LOAD_BOOKMARK, bookmark);
 					});
 
 					callback({ data: data, nextID: nextID });

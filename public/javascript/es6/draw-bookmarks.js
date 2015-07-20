@@ -1,3 +1,4 @@
+
 "use strict"
 
 
@@ -16,10 +17,10 @@ ENGRAM.drawFocus = ( ) => {
 
 var prettifyDate = date => {
 
-	var dateString = date.getFullYear( ) + '-' + (date.getMonth( ) + 1) + '-' + date.getDate( )
-	var timeString = date.getHours( ) + ":" + date.getMinutes( )
+	var dateString = `${date.getFullYear( )}-${(date.getMonth( ) + 1)}-${date.getDate( )}`
+	var timeString = `${date.getHours( )}:${date.getMinutes( )}`
 
-	return dateString + ' ' + timeString
+	return `${dateString} ${timeString}`
 
 }
 

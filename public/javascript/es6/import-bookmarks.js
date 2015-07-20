@@ -102,7 +102,7 @@ var sendBookmarks = function (bookmarks) {
 
 $(( ) => {
 
-	$(ENGRAM.selectors.DELETE_BUTTONS).on('click', event => {
+	$(ENGRAM.selectors.UPLOAD_BUTTON).on('click', event => {
 
 		event.preventDefault( )
 		$(ENGRAM.selectors.UPLOAD_FORM).trigger('click')

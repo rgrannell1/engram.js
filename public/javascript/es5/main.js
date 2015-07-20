@@ -27,7 +27,7 @@ var _defineProperty = function (obj, key, value) { return Object.defineProperty(
 			currentQuery: ""
 		});
 
-		var bookmark = downwards ? $("#bookmarks article").slice(-1)[0] : $("#bookmarks article").slice(0, 1)[0];
+		var bookmark = downwards ? $(ENGRAM.selectors.ARTICLES).slice(-1)[0] : $(ENGRAM.selectors.ARTICLES).slice(0, 1)[0];
 
 		var originalOffset = bookmark.getBoundingClientRect().top;
 		var id = $(bookmark).attr("id");
@@ -48,7 +48,7 @@ var fillBookmarks = function () {
 		return;
 	}
 
-	var from = $("#bookmark-container article").length === 0 ? ENGRAM.BIGINT : parseInt($("#bookmark-container article:last").attr("id"), 10);
+	var from = $(ENGRAM.selectors.ARTICLES).length === 0 ? ENGRAM.BIGINT : parseInt($("" + ENGRAM.selectors.ARTICLES + ":last").attr("id"), 10);
 
 	var loaded = listDown(from, ENGRAM.MAXLOADED - currentAmount);
 
@@ -61,26 +61,29 @@ var fillBookmarks = function () {
 	}
 };
 
+var getNextId = function (downwards) {
+
+	var nextId = downwards ? $(ENGRAM.selectors.ARTICLES).first().attr("id") : $(ENGRAM.selectors.ARTICLES).last().attr("id");
+
+	return downwards ? parseInt(nextId, 10) - 1 : parseInt(nextId, 10) + 1;
+};
+
 var triggerLoadBookmarks = function (downwards) {
 
 	if (getURL() === "") {
 		// -- load linearly by id up or down.
 
-		var topic = ":scroll" + (downwards ? "down" : "up") + "-bookmarks";
+		var topic = "SCROLL" + (downwards ? "DOWN" : "UP") + "_BOOKMARKS";
 
-		ENGRAM.eventBus.fire(topic, getNextId());
+		ENGRAM.eventBus.fire(EventBus.message[topic], getNextId(downwards));
 	} else {
 		// -- load upwards or downwards by search score.
 		throw new Error("loading search results not implemented.");
 	}
 };
 
-triggerLoadBookmarks.top = function () {
-	return triggerLoadBookmarks(false);
-};
-triggerLoadBookmarks.bottom = function () {
-	return triggerLoadBookmarks(true);
-};
+triggerLoadBookmarks.top = triggerLoadBookmarks.bind({}, false);
+triggerLoadBookmarks.bottom = triggerLoadBookmarks.bind({}, true);
 
 var detectEdge = function (_ref) {
 	var windowTop = _ref.windowTop;
@@ -89,16 +92,16 @@ var detectEdge = function (_ref) {
 
 	var args = { windowTop: windowTop, scrollHeight: scrollHeight, scrollPosition: scrollPosition };
 
-	var topic = scrollHeight - scrollPosition === 0 ? ":atBottom" : ":atTop";
+	var topic = scrollHeight - scrollPosition === 0 ? EventBus.message.AT_BOTTOM : EventBus.message.AT_TOP;
 
-	ENGRAM.eventBus.fire(":atTop", args);
+	ENGRAM.eventBus.fire(EventBus.message.AT_TOP, args);
 };
 
-var createBookmarkCacheEntry = function (bookmark) {
+var createBookmarkEntry = function (bookmark) {
 
 	var query = getURL();
 
-	ENGRAM.eventBus.fire(ENGRAM.eventBus.message.RESCORE);
+	ENGRAM.eventBus.fire(EventBus.message.RESCORE);
 
 	return {
 		bookmark: bookmark,
@@ -111,7 +114,7 @@ var createBookmarkCacheEntry = function (bookmark) {
 var onLoadBookmark = function (bookmark) {
 
 	onLoadBookmark.precond(bookmark);
-	ENGRAM.cache.set(bookmark.bookmarkId, createBookmarkCacheEntry(bookmark));
+	ENGRAM.cache.set(bookmark.bookmarkId, createBookmarkEntry(bookmark));
 };
 
 onLoadBookmark.precond = function (bookmark) {
@@ -120,11 +123,11 @@ onLoadBookmark.precond = function (bookmark) {
 	is.always.number(bookmark.bookmarkId);
 };
 
-ENGRAM.eventBus.on(":scroll", detectEdge).on(":atBottom", triggerLoadBookmarks.bottom).on(":atTop", triggerLoadBookmarks.top).on(":load-bookmark", onLoadBookmark).on(":scrollup-bookmarks", loadListUp).on(":scrolldown-bookmarks", loadListDown).on(":loaded-bookmarks", function (_ref) {
+ENGRAM.eventBus.on(EventBus.message.SCROLL, detectEdge).on(EventBus.message.AT_BOTTOM, triggerLoadBookmarks.bottom).on(EventBus.message.AT_TOP, triggerLoadBookmarks.top).on(EventBus.message.LOAD_BOOKMARK, onLoadBookmark).on(EventBus.message.SCROLLUP_BOOKMARKS, loadListUp).on(EventBus.message.SCROLLDOWN_BOOKMARKS, loadListDown).on(EventBus.message.LOADED_BOOKMARKS, function (_ref) {
 	var originalOffset = _ref.originalOffset;
 	var id = _ref.id;
 
-	ENGRAM.eventBus.await(":redraw", function () {
+	ENGRAM.eventBus.await(EventBus.message.REDRAW, function () {
 		$(window).scrollTop($("#" + id).offset().top - originalOffset);
 	});
 });

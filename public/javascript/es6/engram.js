@@ -27,15 +27,17 @@ ENGRAM.LOADOFFSET   = 60
 
 ENGRAM.urls = { }
 ENGRAM.urls.TEMPLATE_URL = '/public/html/bookmark-template.html'
-
+ENGRAM.urls.IMPORT       = '/api/import'
 
 
 
 ENGRAM.selectors = { }
 
+ENGRAM.selectors.BOOKMARKS            = '#bookmarks'
 ENGRAM.selectors.BOOKMARK_CONTAINER   = '#bookmark-container'
+ENGRAM.selectors.ARTICLES             = '#bookmarks article'
 ENGRAM.selectors.UPLOAD_FORM          = '#uploader-hidden'
-ENGRAM.selectors.UPLOAD_UPLOAD_BUTTON = '#uploader'
+ENGRAM.selectors.UPLOAD_BUTTON        = '#uploader'
 ENGRAM.selectors.DELETE_BUTTONS       = '.delete-bookmark'
 ENGRAM.selectors.TIMES                = '.bookmark time'
 

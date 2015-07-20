@@ -39,7 +39,7 @@
 		};
 
 		secondsBetween = function (recent, old) {
-			return Math.floor((recent.getTime() - old.getTime()) / 1000);
+			return Math.floor((recent - old) / 1000);
 		};
 
 		renderTime = function ($time) {

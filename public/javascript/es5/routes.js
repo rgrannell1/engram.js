@@ -23,7 +23,7 @@ ENGRAM.eventBus.on(EventBus.message.HASH_ID, function (id) {
 
 {
 	(function () {
-		var $bookmarks = $("#bookmarks");
+		var $bookmarks = $(ENGRAM.selectors.BOOKMARKS);
 
 		ENGRAM.eventBus.on(EventBus.message.STOP, function (_ref) {
 			var windowTop = _ref.windowTop;

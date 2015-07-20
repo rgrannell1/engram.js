@@ -6,6 +6,9 @@
 	EventBus.message = { }
 
 	;[
+		'AT_TOP',
+		'AT_BOTTOM',
+
 		'UPDATED_URL',
 		'URL_UPDATE',
 		'DELETE_SUCCESS',

@@ -76,7 +76,7 @@ var sendBookmarks = function sendBookmarks(bookmarks) {
 
 $(function () {
 
-	$(ENGRAM.selectors.DELETE_BUTTONS).on("click", function (event) {
+	$(ENGRAM.selectors.UPLOAD_BUTTON).on("click", function (event) {
 
 		event.preventDefault();
 		$(ENGRAM.selectors.UPLOAD_FORM).trigger("click");
