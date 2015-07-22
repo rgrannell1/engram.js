@@ -30,14 +30,24 @@ var listeners = { }
 
 
 
-
 	// -- broadcast keystrokes.
 
 	listeners.rebroadcastKeyEvents = ( ) => {
 
+		$window.keypress(event => {
+
+			if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
+
+				ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
+					key: String.fromCharCode(event.which)
+				})
+
+			}
+
+		})
+
 		$window.keydown(event => {
 
-			event.stopPropagation( )
 			var keyCode = event.keyCode
 
 			if (event.keyCode === eventCode.escape) {
@@ -46,17 +56,13 @@ var listeners = { }
 
 			} else if (event.keyCode === eventCode.backspace) {
 
+				event.preventDefault( )
 				ENGRAM.eventBus.fire(EventBus.message.PRESS_BACKSPACE)
-
-			} else if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
-
-				ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
-					key: String.fromCharCode(event.keyCode)
-				})
 
 			}
 
 		})
+
 
 	}
 

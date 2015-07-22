@@ -23,9 +23,18 @@ var listeners = {};
 
 		listeners.rebroadcastKeyEvents = function () {
 
+			$window.keypress(function (event) {
+
+				if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
+
+					ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
+						key: String.fromCharCode(event.which)
+					});
+				}
+			});
+
 			$window.keydown(function (event) {
 
-				event.stopPropagation();
 				var keyCode = event.keyCode;
 
 				if (event.keyCode === eventCode.escape) {
@@ -33,12 +42,8 @@ var listeners = {};
 					ENGRAM.eventBus.fire(EventBus.message.PRESS_ESCAPE);
 				} else if (event.keyCode === eventCode.backspace) {
 
+					event.preventDefault();
 					ENGRAM.eventBus.fire(EventBus.message.PRESS_BACKSPACE);
-				} else if (isTypeable(event) && !event.ctrlKey && !event.altKey) {
-
-					ENGRAM.eventBus.fire(EventBus.message.PRESS_TYPEABLE, {
-						key: String.fromCharCode(event.keyCode)
-					});
 				}
 			});
 		};
