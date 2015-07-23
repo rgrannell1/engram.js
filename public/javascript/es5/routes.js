@@ -58,8 +58,9 @@ ENGRAM.app.onAlter(function (query) {
 	return query.peekWholeParams();
 }, use.location.where.path("bookmarks").compile(), function (query, next) {
 
-	console.log(query.data);
+	ENGRAM.searchState.setQuery(query.peekWholeParams());
 
-	ENGRAM.searchState.setQuery(query.peekWhole());
-	scoreBookmarks(query.peekWhole());
+	if (query.peekWholeParams()) {
+		scoreBookmarks({ query: query.peekWholeParams() });
+	}
 }).run();
