@@ -38,7 +38,7 @@ on.precond = function (topic, listener) {
 function fire(topic, data) {
 
 	fire.precond(topic, data);
-	topic = topic + "";
+	topic += "";
 
 	if (topic.length > 0 && !is.undefined(this.topics[topic])) {
 
