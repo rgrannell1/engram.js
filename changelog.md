@@ -4,7 +4,53 @@
 
 ## ENHANCEMENTS
 
+* Closed #28: added HTTPS support.
+
+* Fixed client key-capture in chrome.
+
+* The URL hash now dynamically updates as you scroll.
+
+* Improved title-trimming algorithm.
+
+* Closed #22: Added a (currently under-designed) client-side router for improving URLs.
+
+* Seperated out loggers.
+
+* Improved pubSub handling of numeric topics.
+
+* Added support for request-time logging.
+
+* Added support for ignoring some saved bookmark types (css.map and such).
+
+* Added some rudementary statistics logging.
+
+* All pubSub now uses enums instead of strings to represent topics.
+
+* Refactored many selectors into enums.
+
+* Closed #30: Refactored client-side code into many more folders
+
+* Err( ) now logs to its own file.
+
+* Added command-line options to erase the database or logs.
+
+* Refactored project folder layout.
+
+* Added sublime-project file.
+
+* Closed #27: routing language is now part of another module, so this issue belongs to it.
+
+* Closed #26: seperated routing into own module.
+
+* Closed #21: routing is improved over the previous release.
+
 ## BUG-FIXES
+
+* Improved request handling on empty responses.
+
+* Closed #29, #25: re-fixed client scrolling after updates. This bug was not in any release.
+
+* Closed #23: correct character codes are now used in chrome.
 
 
 
@@ -145,7 +191,7 @@ between the import and save routes.
 
 ## ENHANCEMENTS:
 
-* Closed #1: "Support URLs with and without protocol". 
+* Closed #1: "Support URLs with and without protocol".
 
 * Added test for #1.
 
@@ -159,6 +205,6 @@ between the import and save routes.
 
 
 
-# 0.1.0 
+# 0.1.0
 
 The initial release.
