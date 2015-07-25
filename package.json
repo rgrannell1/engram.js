@@ -1,43 +1,33 @@
-
 {
-	"name":       "engram",
-	"version":    "0.7.0",
-
-	"licence":    "MIT",
-	"repository": "https://github.com/rgrannell1/engram.js",
-
-	"scripts": {
-		"start":    "node ./bin/docopt-engram.js --port=5000 --dbpath='data/engram.db'",
-		"rebuild":  "bash scripts/build-docs.sh && bash scripts/build-es6.sh",
-		"test":     "node_modules/mocha/bin/mocha node_modules/engram/test/es5 --timeout=20000"
-	},
-
-	"bin": {
-		"engram":      "node ./bin/docopt-engram.js",
-		"engram-rank": "node ./bin/rank-titles.js"
-	},
-
-	"dependencies": {
-		"is":           "rgrannell1/is",
-		"content-type": "rgrannell1/content-type",
-
-		"colors":       "*",
-
-		"express":      ">=4.10.2",
-		"body-parser":  "*",
-		"request":      "*",
-		"cheerio":      "*",
-
-		"sqlite3":      ">=3.0.5",
-		"content-type": "*",
-		"mustache":     "*",
-		"docopt":       "*",
-		"valid-url":    "*",
-
-		"bunyan":       "*",
-
-		"mocha":        "*",
-		"supertest":    "*",
-		"should":       "*"
-	}
+  "name": "engram",
+  "version": "0.7.0",
+  "licence": "MIT",
+  "repository": "https://github.com/rgrannell1/engram.js",
+  "scripts": {
+    "start": "node ./bin/docopt-engram.js --port=5000 --dbpath='data/engram.db'",
+    "rebuild": "bash scripts/build-docs.sh && bash scripts/build-es6.sh",
+    "test": "node_modules/mocha/bin/mocha node_modules/engram/test/es5 --timeout=20000"
+  },
+  "bin": {
+    "engram": "node ./bin/docopt-engram.js",
+    "engram-rank": "node ./bin/rank-titles.js"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "bunyan": "*",
+    "cheerio": "*",
+    "colors": "*",
+    "content-type": "*",
+    "docopt": "*",
+    "express": ">=4.10.2",
+    "is": "rgrannell1/is",
+    "mocha": "*",
+    "mustache": "*",
+    "pem": "^1.7.2",
+    "request": "*",
+    "should": "*",
+    "sqlite3": ">=3.0.5",
+    "supertest": "*",
+    "valid-url": "*"
+  }
 }
