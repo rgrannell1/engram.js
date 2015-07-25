@@ -12,7 +12,7 @@
 			requestBookmarks.precond(maxID, callback);
 
 			$.ajax({
-				url: "/api/bookmarks?max_id=" + maxID + "&amount=" + ENGRAM.PERREQUEST,
+				url: "/api/bookmarks?maxID=" + maxID + "&amount=" + ENGRAM.PERREQUEST,
 				dataType: "json",
 				success: function (_ref) {
 					var data = _ref.data;
