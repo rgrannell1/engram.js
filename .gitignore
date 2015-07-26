@@ -1,11 +1,14 @@
+
 npm-debug.log
+
 certs/
 log/
 data/
 build/
+
 node_modules/*
 !node_modules/engram
-scratchpad.sql
+
 .sass-cache/
 data-bookmarks.json
 

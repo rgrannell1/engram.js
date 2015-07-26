@@ -4,7 +4,7 @@
   "licence": "MIT",
   "repository": "https://github.com/rgrannell1/engram.js",
   "scripts": {
-    "start": "node ./bin/docopt-engram.js --port=5000 --dbpath='data/engram.db'",
+    "start": "node ./bin/docopt-engram.js",
     "rebuild": "bash scripts/build-docs.sh && bash scripts/build-es6.sh",
     "test": "node_modules/mocha/bin/mocha node_modules/engram/test/es5 --timeout=20000"
   },
@@ -25,6 +25,7 @@
     "docopt": "^0.6.2",
     "express": "^4.13.1",
     "is": "rgrannell1/is",
+    "jshint": "^2.8.0",
     "mustache": "^2.1.3",
     "pem": "^1.7.2",
     "request": "^2.60.0",

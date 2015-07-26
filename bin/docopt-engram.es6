@@ -25,7 +25,7 @@ Description:
 
 Options:
     --port=<port>        The port to run the server on [default: 5000].
-    --dbpath=<dbpath>    The path to which the database should be saved [default: /data/engram.db].
+    --dbpath=<dbpath>    The path to which the database should be saved  [default: data/engram.db].
     --keypath=<path>     [default: certs/key.pem].
     --certpath=<path>    [default: certs/cert.pem].
 `
