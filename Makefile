@@ -1,26 +1,40 @@
 
-
-
-
-
+# -- Node binaries
 BIN := ./node_modules/.bin
 
-JSHINT ?= $(BIN)/jshint
+
+
+
+
+# -- Babel
+BABEL        ?= $(BIN)/babel
+BABEL_FLAGS  ?=
+
+
+
+
+
+# -- JS Hint
+JSHINT       ?= $(BIN)/jshint
 JSHINT_FLAGS ?= --config ~/Code/jshint/global.json
 
 
 
 
-ENGRAM_SERVER ?=  node_modules/engram/es6
-ENGRAM_CLIENT ?=  public/javascript/es6
+# -- Engram server/source code
+ENGRAM_SVR_SRC ?= $(wildcard node_modules/engram/es6/*.js)
+ENGRAM_SVR_TGT ?= $(ENGRAM_SVR_SRC:node_modules/engram/es6/%.js=node_modules/engram/es5/%.js)
 
 
 
 
+# -- Build server source code
 
+node_modules/engram/es5: $(ENGRAM_SVR_TGT)
+node_modules/engram/es5/%.js: node_modules/engram/es6/%.js
 
+	mkdir -p $(@D)
+	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
-
-
-lint:
-	@$(JSHINT) $(ENGRAM_SERVER) $(JSHINT_FLAGS)
+clean:
+	@rm $(ENGRAM_SVR_TGT)
