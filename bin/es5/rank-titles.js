@@ -1,42 +1,42 @@
 #!/usr/bin/env node
-"use strict";
+'use strict';
 
-var doc = "\nUsage:\n    rank\n    rank summarise\n    rank clear\n";
+var doc = '\nUsage:\n    rank\n    rank summarise\n    rank clear\n';
 
-var $ = require("jquery");
-var fs = require("fs");
-var docopt = require("docopt").docopt;
-var colors = require("colors");
+var $ = require('jquery');
+var fs = require('fs');
+var docopt = require('docopt').docopt;
+var colors = require('colors');
 
 var args = docopt(doc);
 
-var URL = require("url");
+var URL = require('url');
 
 var algorithms = {};
 
-algorithms["trim-end"] = function (uri, title) {
+algorithms['trim-end'] = function (uri, title) {
 
 	var url = URL.parse(uri);
 
 	// -- remove the .com
-	var hostname = url.hostname.split(".").slice(0, -1).join(".");
+	var hostname = url.hostname.split('.').slice(0, -1).join('.');
 
-	var regex = new RegExp("(.+):?([ \t].[ \t]" + hostname + "):?", "i");
-	return title.replace(regex, "$1");
+	var regex = new RegExp('(.+):?([ \t].[ \t]' + hostname + '):?', 'i');
+	return title.replace(regex, '$1');
 };
 
-algorithms["trim-delimiter"] = function (uri, title) {
+algorithms['trim-delimiter'] = function (uri, title) {
 
 	var delimiter = /[ \t]+[|\-—»][ \t]+[^|\-—»]+$/g;
 
-	return title.replace(delimiter, "");
+	return title.replace(delimiter, '');
 };
 
-algorithms["trim-pipe"] = function (uri, title) {
-	return title.split(/[ \t]*[|][^|]+/g).join("");
+algorithms['trim-pipe'] = function (uri, title) {
+	return title.split(/[ \t]*[|][^|]+/g).join('');
 };
 
-fs.readFile("data/data-bookmarks.json", "utf8", function (err, data) {
+fs.readFile('data/data-bookmarks.json', 'utf8', function (err, data) {
 
 	if (err) {
 		throw err;
@@ -93,15 +93,15 @@ var surveyResults = function surveyResults(algorithmTitles) {
 		if (!duplicates) {
 
 			return results.map(function (result) {
-				return colors.green("" + result.algorithm + ": " + result.title);
-			}).join("\n");
+				return colors.green(result.algorithm + ': ' + result.title);
+			}).join('\n');
 		} else {
 
 			return results.map(function (result) {
-				return "" + result.algorithm + ": " + result.title;
-			}).join("\n");
+				return result.algorithm + ': ' + result.title;
+			}).join('\n');
 		}
-	}).join("\n\n");
+	}).join('\n\n');
 
 	console.log(result);
 };
