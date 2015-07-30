@@ -8,6 +8,10 @@
 
 * Tidied statistic logging.
 
+* Err( ) now emits an event when constructed.
+
+* Added IDs to all requests.
+
 ## BUG-FIXES
 
 * Cert-related errors are now handled correctly.
