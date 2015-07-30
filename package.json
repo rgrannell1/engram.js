@@ -4,13 +4,13 @@
   "licence": "MIT",
   "repository": "https://github.com/rgrannell1/engram.js",
   "scripts": {
-    "start": "node ./bin/docopt-engram.js",
+    "start": "node ./bin/es5/docopt-engram.js",
     "rebuild": "bash scripts/build-docs.sh && bash scripts/build-es6.sh",
     "test": "node_modules/mocha/bin/mocha node_modules/engram/test/es5 --timeout=20000"
   },
   "bin": {
-    "engram": "node ./bin/docopt-engram.js",
-    "engram-rank": "node ./bin/rank-titles.js"
+    "engram": "node ./bin/es5/docopt-engram.js",
+    "engram-rank": "node ./bin/es5/rank-titles.js"
   },
   "devDependencies": {
     "babel": "^5.8.5",

@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"path": "~/Code/engram.js",
-            "folder_exclude_patterns": ["log", "build", "docs", ".sass_cache"],
+            "folder_exclude_patterns": ["log", "build", "docs", ".sass-cache"],
 		}
 	],
 

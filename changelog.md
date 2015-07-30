@@ -6,6 +6,8 @@
 
 * Added certificate generation in node.
 
+* Tidied statistic logging.
+
 ## BUG-FIXES
 
 * Cert-related errors are now handled correctly.
