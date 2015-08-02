@@ -6,6 +6,8 @@
 
 * Added certificate generation in node.
 
+* Added whitelisted IP checking.
+
 * Tidied statistic logging.
 
 * Err( ) now emits an event when constructed.

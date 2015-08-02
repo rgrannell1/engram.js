@@ -43,6 +43,9 @@ NODEMON_FLAGS ?= --watch node_modules/engram/es5 --watch public/javascript/es5
 
 
 
+ROOT ?= "node_modules/engram/es6"
+
+
 
 
 
@@ -135,6 +138,12 @@ default: build
 nodemon: build
 	$(NODEMON) $(NODEMON_FLAGS) bin/es5/docopt-engram.js
 
+
+
+
+
+jshint: build
+	$(JSHINT) $(JSHINT_FLAGS) node_modules/engram/es6
 
 
 
