@@ -14,7 +14,11 @@
 
 * Added IDs to all requests.
 
+* /api/bookmarks/all now redirects to /api/bookmarks/
+
 ## BUG-FIXES
+
+* Moved GET /bookmark/:id and GET /archive/:id under /api.
 
 * Cert-related errors are now handled correctly.
 

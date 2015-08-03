@@ -1,23 +1,13 @@
 "use strict";
 
-if (typeof process !== "undefined" && process.version) {
-	var is = require("is");
+if (typeof process !== 'undefined' && process.version) {
+	var is = require('is');
 }
 
-var on = (function (_on) {
-	var _onWrapper = function on(_x, _x2) {
-		return _on.apply(this, arguments);
-	};
-
-	_onWrapper.toString = function () {
-		return _on.toString();
-	};
-
-	return _onWrapper;
-})(function (topic, listener) {
+var on = function on(topic, listener) {
 
 	on.precond(topic, listener);
-	topic = topic + "";
+	topic = topic + '';
 
 	if (is.undefined(this.topics[topic])) {
 		this.topics[topic] = [];
@@ -26,23 +16,24 @@ var on = (function (_on) {
 	this.topics[topic].push(listener);
 
 	return this;
-});
+};
 
 on.precond = function (topic, listener) {
 
 	is.never.undefined(topic);
-	is.always["function"](listener, "listener must be a function.");
+	is.always['function'](listener, 'listener must be a function.');
 };
 
-// declaration this way is faster when compiled.
+// -- todo re-add 'is' when it gets faster.
+// -- declaration this way is faster when compiled.
 function fire(topic, data) {
 
+	topic += '';
 	fire.precond(topic, data);
-	topic += "";
 
-	if (topic.length > 0 && !is.undefined(this.topics[topic])) {
+	if (topic && this.topics[topic] && this.topics[topic].length > 0) {
 
-		if (is.undefined(data)) {
+		if (typeof data === 'undefined') {
 			data = {};
 		}
 
@@ -58,37 +49,26 @@ function fire(topic, data) {
 
 fire.precond = function (topic, data) {
 
-	is.never.undefined(topic);
+	if (typeof topic === 'undefined') {
+		throw TypeError('.fire: topic cannot be undefined.');
+	}
 };
 
-var await = (function (_await) {
-	var _awaitWrapper = function await(_x, _x2) {
-		return _await.apply(this, arguments);
-	};
-
-	_awaitWrapper.toString = function () {
-		return _await.toString();
-	};
-
-	return _awaitWrapper;
-})(function (topic, listener) {
+var await = function await(topic, listener) {
 
 	await.precond(topic, listener);
-	topic = topic + "";
+	topic = topic + '';
 
 	if (is.undefined(this.topics[topic])) {
 		this.topics[topic] = [];
 	}
 
-	var decorated = function () {
-		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-			args[_key] = arguments[_key];
-		}
+	var decorated = function decorated() {
 
 		if (decorated.active) {
 
 			decorated.active = false;
-			listener.apply(undefined, args);
+			listener.apply(undefined, arguments);
 		}
 	};
 
@@ -98,25 +78,15 @@ var await = (function (_await) {
 	this.topics[topic].push(decorated);
 
 	return this;
-});
+};
 
 await.precond = function (topic, listener) {
 
 	is.never.undefined(topic);
-	is.always["function"](listener);
+	is.always['function'](listener);
 };
 
-var EventBus = (function (_EventBus) {
-	var _EventBusWrapper = function EventBus() {
-		return _EventBus.apply(this, arguments);
-	};
-
-	_EventBusWrapper.toString = function () {
-		return _EventBus.toString();
-	};
-
-	return _EventBusWrapper;
-})(function () {
+var EventBus = function EventBus() {
 
 	if (!this instanceof EventBus) {
 		return new EventBus();
@@ -128,8 +98,8 @@ var EventBus = (function (_EventBus) {
 		fire: fire,
 		on: on
 	};
-});
+};
 
-if (typeof process !== "undefined" && process.version) {
+if (typeof process !== 'undefined' && process.version) {
 	module.exports = EventBus;
 }

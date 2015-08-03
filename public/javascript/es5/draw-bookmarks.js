@@ -1,3 +1,4 @@
+
 "use strict";
 
 // -- remove this if I find an objective reason
@@ -9,15 +10,15 @@ ENGRAM.drawFocus = function () {
 	}, 100);
 };
 
-var prettifyDate = function (date) {
+var prettifyDate = function prettifyDate(date) {
 
-	var dateString = "" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-	var timeString = "" + date.getHours() + ":" + date.getMinutes();
+	var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	var timeString = date.getHours() + ':' + date.getMinutes();
 
-	return "" + dateString + " " + timeString;
+	return dateString + ' ' + timeString;
 };
 
-var renderBookmark = function (bookmark, template) {
+var renderBookmark = function renderBookmark(bookmark, template) {
 
 	renderBookmark.precond(bookmark, template);
 
@@ -26,11 +27,11 @@ var renderBookmark = function (bookmark, template) {
 	// -- default to the url, if no title is saved yet.
 	bookmark.displayTitle = bookmark.title ? bookmark.title : bookmark.url;
 
-	bookmark.hasTitleFlag = bookmark.title ? "titled" : "";
+	bookmark.hasTitleFlag = bookmark.title ? 'titled' : '';
 
-	bookmark.hasStatusCode = bookmark.status_code ? "status-coded" : "";
+	bookmark.hasStatusCode = bookmark.status_code ? 'status-coded' : '';
 
-	bookmark.isDeadLink = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500 ? "dead" : "";
+	bookmark.isDeadLink = bookmark.status_code && [403, 404, 410].indexOf(bookmark.status_code) !== -1 || bookmark.status_code >= 500 ? 'dead' : '';
 
 	return Mustache.render(template, bookmark);
 };
@@ -47,11 +48,12 @@ $.get(ENGRAM.urls.TEMPLATE_URL, function (template) {
 
 		ENGRAM.drawFocus.precond(focus);
 
+		// -- slowest code on client; fix me.F
 		$(ENGRAM.selectors.BOOKMARK_CONTAINER).html(focus.value.map(function (_ref) {
 			var bookmark = _ref.bookmark;
 			var _ = _ref._;
 			return renderBookmark(bookmark, template);
-		}).join(""));
+		}).join(''));
 
 		ENGRAM.eventBus.fire(EventBus.message.REDRAW, {});
 	};

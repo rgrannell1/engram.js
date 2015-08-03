@@ -14,3 +14,5 @@ data-bookmarks.json
 
 es5/routes
 es6/routes
+
+*.sublime-workspace

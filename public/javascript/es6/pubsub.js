@@ -36,16 +36,16 @@ on.precond = (topic, listener) => {
 
 
 
-
-// declaration this way is faster when compiled.
+// -- todo re-add 'is' when it gets faster.
+// -- declaration this way is faster when compiled.
 function fire (topic, data) {
 
-	fire.precond(topic, data)
 	topic += ''
+	fire.precond(topic, data)
 
-	if ( topic.length > 0 && !is.undefined(this.topics[topic]) ) {
+	if (topic && this.topics[topic] && this.topics[topic].length > 0) {
 
-		if (is.undefined(data)) {
+		if (typeof data === 'undefined') {
 			data = { }
 		}
 
@@ -63,7 +63,9 @@ function fire (topic, data) {
 
 fire.precond = (topic, data) => {
 
-	is.never.undefined(topic)
+	if (typeof topic === 'undefined') {
+		throw TypeError('.fire: topic cannot be undefined.')
+	}
 
 }
 

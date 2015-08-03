@@ -72,7 +72,7 @@ ENGRAM_BIN_TGT    ?= $(ENGRAM_BIN_SRC:bin/es6/%.js=bin/es5/%.js)
 
 
 
-
+.PHONY: clean build nodemon jshint test wipe start bstart
 # -- Build server source code.
 
 node_modules/engram/es5: $(ENGRAM_SVR_TGT)
@@ -160,3 +160,21 @@ clean:
 	@rm $(ENGRAM_SVR_TGT)
 	@rm $(ENGRAM_TEST_TGT)
 	@rm $(ENGRAM_BIN_TGT)
+
+
+
+
+
+wipe: build
+	node bin/es5/docopt-engram.js wipe db
+	node bin/es5/docopt-engram.js wipe logs
+
+
+
+
+
+start: build
+	npm start
+
+bstart: build
+	npm start | bunyan

@@ -73,12 +73,12 @@ $.get(ENGRAM.urls.TEMPLATE_URL, template => {
 
 		ENGRAM.drawFocus.precond(focus)
 
+		// -- slowest code on client; fix me.F
 		$(ENGRAM.selectors.BOOKMARK_CONTAINER).html(
 			focus.value
 			.map(
 				({bookmark, _}) => renderBookmark(bookmark, template))
 			.join('')
-
 		)
 
 		ENGRAM.eventBus.fire(EventBus.message.REDRAW, { })
