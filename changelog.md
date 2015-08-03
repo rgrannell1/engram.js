@@ -4,6 +4,8 @@
 
 ## ENHANCEMENTS
 
+* Added basic authentication
+
 * Added certificate generation in node.
 
 * Added whitelisted IP checking.
