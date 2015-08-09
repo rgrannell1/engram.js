@@ -2,9 +2,11 @@
 # 0.9.0
 ------------------------------------------------------------------------------------------------------------
 
+2015 August 3
+
 ## ENHANCEMENTS
 
-* Added basic authentication
+* Added basic authentication.
 
 * Added certificate generation in node.
 

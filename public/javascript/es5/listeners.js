@@ -10,7 +10,7 @@ var listeners = {};
 			backspace: 8
 		};
 
-		var isTypeable = function (event) {
+		var isTypeable = function isTypeable(event) {
 
 			var key = String.fromCharCode(event.keyCode);
 
@@ -59,12 +59,12 @@ var listeners = {};
 
 		listeners.deleteBookmark = function () {
 
-			$document.on("click", ENGRAM.selectors.DELETE_BUTTONS, function () {
+			$document.on('click', ENGRAM.selectors.DELETE_BUTTONS, function () {
 
 				var $button = $(this);
 
-				var $article = $button.closest("article");
-				var id = parseInt($article.attr("id"), 10);
+				var $article = $button.closest('article');
+				var id = parseInt($article.attr('id'), 10);
 
 				ENGRAM.eventBus.fire(EventBus.message.DELETE, { id: id, $button: $button });
 			});
@@ -83,7 +83,7 @@ var listeners = {};
 
 		listeners.onScroll = function () {
 
-			$window.on("scroll", function () {
+			$window.on('scroll', function () {
 
 				var windowTop = $window.scrollTop();
 
