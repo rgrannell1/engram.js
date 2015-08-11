@@ -43,6 +43,18 @@ NODEMON_FLAGS ?= --watch node_modules/engram/es5 --watch public/javascript/es5
 
 
 
+# -- Sass
+
+SASS       ?= sass
+SASS_FLAGS ?=
+
+
+
+
+
+
+
+
 ROOT ?= "node_modules/engram/es6"
 
 
@@ -67,6 +79,9 @@ ENGRAM_PUBLIC_TGT ?= $(ENGRAM_PUBLIC_SRC:public/javascript/es6/%.js=public/javas
 # -- Engram bin code
 ENGRAM_BIN_SRC    ?= $(wildcard bin/es6/*.js)
 ENGRAM_BIN_TGT    ?= $(ENGRAM_BIN_SRC:bin/es6/%.js=bin/es5/%.js)
+
+ENGRAM_SASS_SRC   ?= $(wildcard public/sass/*.sass)
+ENGRAM_SASS_TGT   ?= $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
 
 
 
@@ -123,12 +138,16 @@ bin/es5/%.js: bin/es6/%.js
 
 
 
+public/css: $()
+public/css/%.css: public/sass/%.sass
+
+	$(SASS) $(SASS_FLAGS) $< $@
+
 
 # -- build all js source code.
 
-build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT)
-
-default: build
+build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT)
+all: build
 
 
 

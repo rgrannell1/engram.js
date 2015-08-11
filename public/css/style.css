@@ -1,6 +1,6 @@
 html {
   font-family: "Sans";
-  color: #3d464d;
+  color: #666666;
   font-size: 16px;
   -webkit-overflow-scrolling: none; }
 
@@ -20,9 +20,9 @@ ul {
 
 a {
   text-decoration: none;
-  color: #072584; }
+  color: #1122CC; }
   a:focus, a:hover {
-    color: #0b77e6; }
+    color: #2336ed; }
 
 article {
   margin-top: 60px;
@@ -48,7 +48,7 @@ header {
   color: grey; }
 
 .dead a {
-  color: #840725; }
+  color: #DD4B39; }
 
 #navbar {
   position: fixed;

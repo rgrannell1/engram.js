@@ -2,17 +2,33 @@
 # 0.9.0
 ------------------------------------------------------------------------------------------------------------
 
-2015 August 3
+2015 August 11
 
 ## ENHANCEMENTS
 
-* Added basic authentication.
+* Closed #36: added basic authentication.
 
 * Added certificate generation in node.
 
 * Added whitelisted IP checking.
 
+* Moved many magic numbers into constants.
+
+* Improved link colouring.
+
+* Sped up pubSub code.
+
+* Closed #41: Refactored top level of Engram server into smaller components.
+
+* Removed unneeded import statements from code.
+
+* Tidied request, response, and error logging.
+
+* Added project makefile to replace bash scripts.
+
 * Tidied statistic logging.
+
+* Closed #36: added security logging.
 
 * Err( ) now emits an event when constructed.
 
@@ -22,10 +38,11 @@
 
 ## BUG-FIXES
 
-* Moved GET /bookmark/:id and GET /archive/:id under /api.
+* Closed #39: Moved GET /bookmark/:id and GET /archive/:id under /api.
 
 * Cert-related errors are now handled correctly.
 
+* Closed #31: Backspace now wipes ?q= in app.
 
 
 
