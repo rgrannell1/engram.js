@@ -10,5 +10,5 @@
 git clone https://github.com/rgrannell1/engram.js.git
 cd engram.js
 
-make build start
+make bstart
 ```
