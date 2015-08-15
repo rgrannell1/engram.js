@@ -195,5 +195,9 @@ wipe: build
 start: build
 	npm start
 
-bstart: build
+bunstart: build
 	npm start | bunyan
+
+bundbstart: build
+	npm start | bunyan --level DEBUG
+

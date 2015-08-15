@@ -13,6 +13,7 @@ var doc = `
 Usage:
     engram [--port=<port>] [--dbpath=<dbpath>] [--keypath=<path>] [--certpath=<path>]
     engram certs                               [--keypath=<path>] [--certpath=<path>]
+    engram (analyse|analyze)
     engram wipe logs
     engram wipe db
     engram (-h | --help | --version)

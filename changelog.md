@@ -2,7 +2,7 @@
 # 0.9.0
 ------------------------------------------------------------------------------------------------------------
 
-2015 August 11
+2015 August 15
 
 ## ENHANCEMENTS
 
@@ -35,6 +35,8 @@
 * Added IDs to all requests.
 
 * /api/bookmarks/all now redirects to /api/bookmarks/
+
+* Added memory usage logging.
 
 ## BUG-FIXES
 
