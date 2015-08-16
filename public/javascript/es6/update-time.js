@@ -1,4 +1,3 @@
-
 "use strict"
 
 
@@ -12,7 +11,6 @@
 		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 	]
 
-	let oneSecond = 1
 	let oneMinute = 60
 	let oneHour   = 3600
 	let oneDay    = 24 * 3600
@@ -23,23 +21,26 @@
 
 	var formatInterval = seconds => {
 
-		var now   = new Date( )
-		var ctime = new Date(now - (1000 * seconds))
+		var formatted = ''
+		var now       = new Date( )
+		var ctime     = new Date(now - 1000 * seconds)
 
 		if (seconds < oneMinute) {
-			return `${seconds}s`
+			formatted = `${seconds}s`
 		} else if (seconds < oneHour) {
-			return `${Math.round(seconds / oneMinute)}m`
+			formatted = `${Math.round(seconds / oneMinute)}m`
 		} else if (seconds < oneDay) {
-			return `${Math.round(seconds / oneHour)}h`
+			formatted = `${Math.round(seconds / oneHour)}h`
 		} else {
 
 			var year = ctime.getFullYear( ) === now.getFullYear( )
 				? ''
 				: ctime.getFullYear( )
 
-			return `${ months[ctime.getMonth( )] } ${ctime.getDate( )} ${year}`
+			formatted = `${ months[ctime.getMonth( )] } ${ctime.getDate( )} ${year}`
 		}
+
+		return formatted
 
 	}
 
@@ -53,7 +54,7 @@
 
 	var renderTime = $time => {
 
-		var elapsed   = secondsBetween(new Date, extractTime($time))
+		var elapsed   = secondsBetween(new Date( ), extractTime($time))
 		var formatted = formatInterval(elapsed)
 
 		if ($time.text( ) !== formatted) {

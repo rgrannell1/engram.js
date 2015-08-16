@@ -10,39 +10,41 @@
 
 		var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-		var oneSecond = 1;
 		var oneMinute = 60;
 		var oneHour = 3600;
 		var oneDay = 24 * 3600;
 
-		formatInterval = function (seconds) {
+		formatInterval = function formatInterval(seconds) {
 
+			var formatted = '';
 			var now = new Date();
 			var ctime = new Date(now - 1000 * seconds);
 
 			if (seconds < oneMinute) {
-				return "" + seconds + "s";
+				formatted = seconds + "s";
 			} else if (seconds < oneHour) {
-				return "" + Math.round(seconds / oneMinute) + "m";
+				formatted = Math.round(seconds / oneMinute) + "m";
 			} else if (seconds < oneDay) {
-				return "" + Math.round(seconds / oneHour) + "h";
+				formatted = Math.round(seconds / oneHour) + "h";
 			} else {
 
-				var year = ctime.getFullYear() === now.getFullYear() ? "" : ctime.getFullYear();
+				var year = ctime.getFullYear() === now.getFullYear() ? '' : ctime.getFullYear();
 
-				return "" + months[ctime.getMonth()] + " " + ctime.getDate() + " " + year;
+				formatted = months[ctime.getMonth()] + " " + ctime.getDate() + " " + year;
 			}
+
+			return formatted;
 		};
 
-		extractTime = function (time) {
-			return new Date(parseInt($(time).attr("data-ctime"), 10) * 1000);
+		extractTime = function extractTime(time) {
+			return new Date(parseInt($(time).attr('data-ctime'), 10) * 1000);
 		};
 
-		secondsBetween = function (recent, old) {
+		secondsBetween = function secondsBetween(recent, old) {
 			return Math.floor((recent - old) / 1000);
 		};
 
-		renderTime = function ($time) {
+		renderTime = function renderTime($time) {
 
 			var elapsed = secondsBetween(new Date(), extractTime($time));
 			var formatted = formatInterval(elapsed);

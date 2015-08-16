@@ -1,4 +1,3 @@
-
 "use strict";
 
 var getURL = function getURL() {

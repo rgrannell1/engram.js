@@ -33,6 +33,13 @@ JSHINT_FLAGS      ?= --config ~/Code/jshint/global.json
 
 
 
+# -- eslint
+
+ESLINT       ?= $(BIN)/eslint
+ESLINT_FLAGS ?=
+
+
+
 
 # -- Nodemon
 
@@ -164,6 +171,8 @@ nodemon: build
 jshint: build
 	$(JSHINT) $(JSHINT_FLAGS) node_modules/engram/es6
 
+eslint: build
+	$(ESLINT) $(ESLINT_FLAGS) .
 
 
 
