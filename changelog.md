@@ -46,6 +46,9 @@
 
 * Closed #31: Backspace now wipes ?q= in app.
 
+## Known-issues
+
+* Request basic headers are currently logged.
 
 
 

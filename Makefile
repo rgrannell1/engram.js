@@ -36,7 +36,7 @@ JSHINT_FLAGS      ?= --config ~/Code/jshint/global.json
 # -- eslint
 
 ESLINT       ?= $(BIN)/eslint
-ESLINT_FLAGS ?=
+ESLINT_FLAGS ?= --config config/eslint-config
 
 
 
