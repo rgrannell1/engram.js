@@ -28,7 +28,10 @@ ENGRAM.eventBus
 
 	} else {
 
-		var query = iter.peekParams( ).filter( ({key, value}) => key === 'q')[0]
+		var query = iter.peekParams( ).filter( ({param, value}) => {
+			return param === 'q'
+		})[0]
+
 		ENGRAM.app.url.setParams(`q=${query.value + key}`)
 
 	}
@@ -42,7 +45,10 @@ ENGRAM.eventBus
 	if ( !is.undefined(iter.peekParams( )) ) {
 
 		// -- TODO this is ugly.
-		var query    = iter.peekParams( ).filter( ({key, value}) => key === 'q')[0]
+		var query    = iter.peekParams( ).filter( ({key, value}) => {
+			return key === 'q'
+		})[0]
+
 		var newValue = query.value.slice(0, -1)
 
 		if (newValue.length === 0) {

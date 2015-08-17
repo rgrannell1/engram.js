@@ -70,8 +70,8 @@ ROOT ?= "node_modules/engram/es6"
 
 # -- Engram server/source code.
 
-ENGRAM_SVR_SRC    ?= $(wildcard node_modules/engram/es6/*.js)
-ENGRAM_SVR_TGT    ?= $(ENGRAM_SVR_SRC:node_modules/engram/es6/%.js=node_modules/engram/es5/%.js)
+ENGRAM_SVR_SRC    ?= $(shell find node_modules/engram/es6 -name '*.js' )
+ENGRAM_SVR_TGT    ?= $(subst es6,es5, $(ENGRAM_SVR_SRC))
 
 # -- Engram test code
 
@@ -154,10 +154,6 @@ public/css/%.css: public/sass/%.sass
 # -- build all js source code.
 
 build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT)
-all: build
-
-
-
 
 # -- watch for any changes to code.
 

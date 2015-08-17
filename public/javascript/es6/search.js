@@ -16,22 +16,22 @@
 
 		align.precond(query, text)
 
-		var query = query.toLowerCase( )
-		var text  = text. toLowerCase( )
+		var lowerQuery = query.toLowerCase( )
+		var lowerText  = text. toLowerCase( )
 
 		var alignResult = {
 			gaps: 0,
-			text,
-			query
+			text:  lowerText,
+			query: lowerQuery
 		}
 
-		var from = locate(query.charAt(0), text, 0)
+		var from = locate(lowerQuery.charAt(0), lowerText, 0)
 		var nextFrom;
 
-		for (let ith = 0; ith < query.length; ++ith) {
-			// assume 'from' never over- or under-runs, as query should always be a substring of text.
+		for (let ith = 0; ith < lowerQuery.length; ++ith) {
+			// assume 'from' never over- or under-runs, as lowerQuery should always be a substring of text.
 
-			nextFrom          = locate(query.charAt(ith), text, from) + 1
+			nextFrom          = locate(lowerQuery.charAt(ith), lowerText, from) + 1
 			alignResult.gaps += (nextFrom - from - 1)
 			from              = nextFrom
 

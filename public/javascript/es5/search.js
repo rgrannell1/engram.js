@@ -4,7 +4,7 @@
 	var align;
 
 	(function () {
-		var locate = function (char, string, from) {
+		var locate = function locate(char, string, from) {
 
 			for (var ith = from; ith < string.length; ++ith) {
 				if (char === string.charAt(ith)) {
@@ -15,26 +15,26 @@
 			return -1;
 		};
 
-		align = function (query, text) {
+		align = function align(query, text) {
 
 			align.precond(query, text);
 
-			var query = query.toLowerCase();
-			var text = text.toLowerCase();
+			var lowerQuery = query.toLowerCase();
+			var lowerText = text.toLowerCase();
 
 			var alignResult = {
 				gaps: 0,
-				text: text,
-				query: query
+				text: lowerText,
+				query: lowerQuery
 			};
 
-			var from = locate(query.charAt(0), text, 0);
+			var from = locate(lowerQuery.charAt(0), lowerText, 0);
 			var nextFrom;
 
-			for (var ith = 0; ith < query.length; ++ith) {
-				// assume 'from' never over- or under-runs, as query should always be a substring of text.
+			for (var ith = 0; ith < lowerQuery.length; ++ith) {
+				// assume 'from' never over- or under-runs, as lowerQuery should always be a substring of text.
 
-				nextFrom = locate(query.charAt(ith), text, from) + 1;
+				nextFrom = locate(lowerQuery.charAt(ith), lowerText, from) + 1;
 				alignResult.gaps += nextFrom - from - 1;
 				from = nextFrom;
 			}
@@ -50,7 +50,7 @@
 	})();
 }
 
-var alignQuality = function (_ref) {
+var alignQuality = function alignQuality(_ref) {
 	var gaps = _ref.gaps;
 	var text = _ref.text;
 
@@ -69,16 +69,16 @@ alignQuality.precond = function (gaps, text) {
 
 	(function () {
 
-		var escapeRegexChar = function (char) {
+		var escapeRegexChar = function escapeRegexChar(char) {
 
-			return ["[", "]", "\\", "^", "-"].indexOf(char) === -1 ? char : "\\" + char;
+			return ['[', ']', '\\', '^', '-'].indexOf(char) === -1 ? char : '\\' + char;
 		};
 
-		isSplitSubstring = function (pattern) {
+		isSplitSubstring = function isSplitSubstring(pattern) {
 
 			isSplitSubstring.precond(pattern);
 
-			var regexp = new RegExp(pattern.split("").map(escapeRegexChar).join(".*?"), "i");
+			var regexp = new RegExp(pattern.split('').map(escapeRegexChar).join('.*?'), 'i');
 
 			return function (string) {
 				return regexp.test(string);
@@ -91,7 +91,7 @@ alignQuality.precond = function (gaps, text) {
 	})();
 }
 
-var scoreTextMatch = function (query, matchesPattern, text) {
+var scoreTextMatch = function scoreTextMatch(query, matchesPattern, text) {
 
 	scoreTextMatch.precond(query, matchesPattern, text);
 
@@ -101,12 +101,12 @@ var scoreTextMatch = function (query, matchesPattern, text) {
 scoreTextMatch.precond = function (query, matchesPattern, text) {
 
 	is.always.string(query);
-	is.always["function"](matchesPattern);
+	is.always['function'](matchesPattern);
 	is.always.string(text);
 };
 
-var scoreBookmarks = function (_ref) {
-	var query = _ref.query;
+var scoreBookmarks = function scoreBookmarks(_ref2) {
+	var query = _ref2.query;
 
 	scoreBookmarks.precond(query);
 

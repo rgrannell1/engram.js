@@ -19,10 +19,12 @@ ENGRAM.eventBus.on(EventBus.message.PRESS_TYPEABLE, function (_ref) {
 	} else {
 
 		var query = iter.peekParams().filter(function (_ref2) {
-			var key = _ref2.key;
+			var param = _ref2.param;
 			var value = _ref2.value;
-			return key === 'q';
+
+			return param === 'q';
 		})[0];
+
 		ENGRAM.app.url.setParams('q=' + (query.value + key));
 	}
 }).on(EventBus.message.PRESS_BACKSPACE, function (_ref3) {
@@ -36,8 +38,10 @@ ENGRAM.eventBus.on(EventBus.message.PRESS_TYPEABLE, function (_ref) {
 		var query = iter.peekParams().filter(function (_ref4) {
 			var key = _ref4.key;
 			var value = _ref4.value;
+
 			return key === 'q';
 		})[0];
+
 		var newValue = query.value.slice(0, -1);
 
 		if (newValue.length === 0) {
