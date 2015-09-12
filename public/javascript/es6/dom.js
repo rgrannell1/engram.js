@@ -20,7 +20,7 @@ dom.fromHTML = { }
 
 
 dom.refreshTimes = $times => {
-	$times.each(function ( ) => {
+	$times.each(function ( ) {
 		dom.update.elemText(dom.toHTML.time(new Date()), $(this))
 	})
 }
@@ -33,4 +33,4 @@ dom.parse.creationTime = $time => {
 
 
 
-exports {dom}
+module.exports = dom

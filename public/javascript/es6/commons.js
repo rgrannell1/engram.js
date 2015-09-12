@@ -133,7 +133,7 @@ commons.data.enum = labels => {
 	var lookup = { }
 
 	messages.forEach((message, ith) => {
-		enum[messages] = ith.toString()
+		lookup[messages] = ith.toString()
 	})
 
 	return lookup
@@ -169,4 +169,4 @@ commons.log.levelNames.forEach(level => {
 
 
 
-export {commons}
+module.exports = commons

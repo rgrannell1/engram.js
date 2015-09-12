@@ -6,7 +6,13 @@
 
 
 
-import 'constants'
-import 'messages'
-import 'commons'
-import 'rest'
+var constants = require('./constants')
+var messages  = require('./messages')
+var commons   = require('./commons')
+var rest      = require('./rest')
+
+
+
+
+
+console.log('running...')

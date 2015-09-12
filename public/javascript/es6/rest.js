@@ -5,13 +5,7 @@
 
 
 
-import 'constants'
-
-
-
-
-
-
+var constants = require('./constants')
 
 
 
@@ -69,5 +63,4 @@ rest.importBookmarks = (data, onOk, onErr) => {
 
 
 
-
-export {rest}
+module.exports = rest

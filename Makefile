@@ -52,7 +52,6 @@ ESLINT_FLAGS ?= --config config/eslint-config
 # -- Nodemon
 
 NODEMON       ?= $(BIN)/nodemon
-NODEMON_FLAGS ?= --watch node_modules/engram/es5 --watch public/javascript/es5
 
 
 
@@ -85,11 +84,6 @@ ENGRAM_SVR_TGT    ?= $(subst es6,es5, $(ENGRAM_SVR_SRC))
 
 ENGRAM_TEST_SRC   ?= $(wildcard node_modules/engram/test/es6/*.js)
 ENGRAM_TEST_TGT   ?= $(ENGRAM_TEST_SRC:node_modules/engram/test/es6/%.js=node_modules/engram/test/es5/%.js)
-
-# -- Engram public code
-
-ENGRAM_PUBLIC_SRC ?= $(shell find public/javascript/es6 -name '*.js')
-ENGRAM_PUBLIC_TGT    ?= $(subst es6,es5, $(ENGRAM_PUBLIC_SRC))
 
 # -- Engram bin code
 ENGRAM_BIN_SRC    ?= $(wildcard bin/es6/*.js)
@@ -127,16 +121,10 @@ node_modules/engram/test/es5/%.js: node_modules/engram/test/es6/%.js
 
 
 
-
-# -- browserify public source code.
-# -- todo allow nesting
-public/javascript/es5: $(ENGRAM_PUBLIC_TGT)
-public/javascript/es5/%.js: public/javascript/es6/%.js
+public/javascript/es5/bundle.js: public/javascript/es6/main.js
 
 	mkdir -p $(@D)
-	$(BROWSERIFY) $(BROWSERIFY_FLAGS) -o $@ -- $<
-
-
+	$(BROWSERIFY) $< --outfile $@
 
 
 
@@ -161,7 +149,7 @@ public/css/%.css: public/sass/%.sass
 
 # -- build all js source code.
 
-build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT)
+build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) public/javascript/es5/bundle.js
 
 
 
