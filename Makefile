@@ -6,8 +6,16 @@ BIN := ./node_modules/.bin
 
 
 
+# -- Browserify.
 
-# -- Babel.
+BROWSERIFY       ?= $(BIN)/browserify
+BROWSERIFY_FLAGS ?= -t es6ify
+
+
+
+
+
+# -- Mocha.
 
 MOCHA       ?= $(BIN)/mocha
 MOCHA_FLAGS ?=
@@ -70,7 +78,7 @@ ROOT ?= "node_modules/engram/es6"
 
 # -- Engram server/source code.
 
-ENGRAM_SVR_SRC    ?= $(shell find node_modules/engram/es6 -name '*.js' )
+ENGRAM_SVR_SRC    ?= $(shell find node_modules/engram/es6 -name '*.js')
 ENGRAM_SVR_TGT    ?= $(subst es6,es5, $(ENGRAM_SVR_SRC))
 
 # -- Engram test code
@@ -80,8 +88,8 @@ ENGRAM_TEST_TGT   ?= $(ENGRAM_TEST_SRC:node_modules/engram/test/es6/%.js=node_mo
 
 # -- Engram public code
 
-ENGRAM_PUBLIC_SRC ?= $(wildcard public/javascript/es6/*.js)
-ENGRAM_PUBLIC_TGT ?= $(ENGRAM_PUBLIC_SRC:public/javascript/es6/%.js=public/javascript/es5/%.js)
+ENGRAM_PUBLIC_SRC ?= $(shell find public/javascript/es6 -name '*.js')
+ENGRAM_PUBLIC_TGT    ?= $(subst es6,es5, $(ENGRAM_PUBLIC_SRC))
 
 # -- Engram bin code
 ENGRAM_BIN_SRC    ?= $(wildcard bin/es6/*.js)
@@ -120,13 +128,13 @@ node_modules/engram/test/es5/%.js: node_modules/engram/test/es6/%.js
 
 
 
-# -- Build client source code.
-
+# -- browserify public source code.
+# -- todo allow nesting
 public/javascript/es5: $(ENGRAM_PUBLIC_TGT)
 public/javascript/es5/%.js: public/javascript/es6/%.js
 
 	mkdir -p $(@D)
-	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
+	$(BROWSERIFY) $(BROWSERIFY_FLAGS) -o $@ -- $<
 
 
 
@@ -154,6 +162,10 @@ public/css/%.css: public/sass/%.sass
 # -- build all js source code.
 
 build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT)
+
+
+
+
 
 # -- watch for any changes to code.
 
@@ -198,11 +210,10 @@ wipe: build
 
 
 start: build
-	npm start
+	node ./bin/es5/docopt-engram.js
 
 bunstart: build
-	npm start | bunyan
+	node ./bin/es5/docopt-engram.js | bunyan
 
 bundbstart: build
-	npm start | bunyan --level DEBUG
-
+	node ./bin/es5/docopt-engram.js | bunyan --level DEBUG
