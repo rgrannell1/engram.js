@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="resources/mocha.css">
+	</head>
+	<body>
+
+		<div id="mocha"></div>
+
+		<script src="resources/mocha.js"></script>
+		<script src="resources/chai.js"></script>
+		<script>
+
+			mocha.ui('bdd')
+			mocha.reporter('html')
+			expect = chai.expect
+
+		</script>
+
+		<!-- load client side code here -->
+
+		<script>
+
+			if (window.mochaPhantomJS) {
+				mochaPhantomJS.run()
+			} else {
+				mocha.run()
+			}
+
+		</script>
+
+	</body>
+</html>
