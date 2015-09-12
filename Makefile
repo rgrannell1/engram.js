@@ -80,10 +80,19 @@ ROOT ?= "node_modules/engram/es6"
 ENGRAM_SVR_SRC    ?= $(shell find node_modules/engram/es6 -name '*.js')
 ENGRAM_SVR_TGT    ?= $(subst es6,es5, $(ENGRAM_SVR_SRC))
 
+# -- Engram public code
+
+ENGRAM_PUBLIC_SRC ?= $(wildcard public/javascript/es6/*.js)
+ENGRAM_PUBLIC_TGT ?= $(ENGRAM_PUBLIC_SRC:public/javascript/es6/%.js=public/javascript/es5/%.js)
+
 # -- Engram test code
 
 ENGRAM_TEST_SRC   ?= $(wildcard node_modules/engram/test/es6/*.js)
 ENGRAM_TEST_TGT   ?= $(ENGRAM_TEST_SRC:node_modules/engram/test/es6/%.js=node_modules/engram/test/es5/%.js)
+
+
+ENGRAM_PUBLIC_TEST_TGT ?= $(wildcard public-test/tests/*.js)
+
 
 # -- Engram bin code
 ENGRAM_BIN_SRC    ?= $(wildcard bin/es6/*.js)
@@ -91,6 +100,11 @@ ENGRAM_BIN_TGT    ?= $(ENGRAM_BIN_SRC:bin/es6/%.js=bin/es5/%.js)
 
 ENGRAM_SASS_SRC   ?= $(wildcard public/sass/*.sass)
 ENGRAM_SASS_TGT   ?= $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
+
+
+
+
+
 
 
 
@@ -121,7 +135,25 @@ node_modules/engram/test/es5/%.js: node_modules/engram/test/es6/%.js
 
 
 
-public/javascript/es5/bundle.js: public/javascript/es6/main.js
+# -- Build client source code.
+
+public/javascript/es5: $(ENGRAM_PUBLIC_TGT)
+public/javascript/es5/%.js: public/javascript/es6/%.js
+
+	mkdir -p $(@D)
+	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
+
+
+
+
+public-test/bundle.js: $(public-test/tests/%.js)
+
+	mkdir -p $(@D)
+	$(shell rm $@)
+	$(shell echo '' > $@)
+	$(shell cat public-test/tests/*.js > $@)
+
+public/javascript/es5/bundle.js: public/javascript/es5/main.js
 
 	mkdir -p $(@D)
 	$(BROWSERIFY) $< --outfile $@
@@ -149,7 +181,7 @@ public/css/%.css: public/sass/%.sass
 
 # -- build all js source code.
 
-build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) public/javascript/es5/bundle.js
+build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLIC_TGT) public/javascript/es5/bundle.js public-test/bundle.js
 
 
 

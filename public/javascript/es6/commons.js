@@ -72,8 +72,8 @@ commons.date.addUnit        = {
 		return Math.floor((newer - older) / factor)
 	}
 
-	commons.date.interval.s  = interval.bind({ }, 1000)
-	commons.date.interval.ms = interval.bind({ }, 1)
+	commons.date.interval.s  = timeInterval.bind({ }, 1000)
+	commons.date.interval.ms = timeInterval.bind({ }, 1)
 
 }
 
@@ -132,15 +132,15 @@ commons.data.enum = labels => {
 
 	var lookup = { }
 
-	messages.forEach((message, ith) => {
-		lookup[messages] = ith.toString()
+	labels.forEach((label, ith) => {
+		lookup[label] = ith.toString()
 	})
 
 	return lookup
 
 }
 
-commons.date.string.locate = (char, string, from = 0) => {
+commons.data.string.locate = (char, string, from = 0) => {
 
 	for (let ith = from; ith < string.length; ++ith) {
 		if (char === string.charAt(ith)) {
@@ -161,7 +161,7 @@ commons.log.formatMessage = (level, message, data) => {
 }
 
 commons.log.levelNames.forEach(level => {
-	commons.log[level] = formatMessage.bind({ }, level)
+	commons.log[level] = commons.log.formatMessage.bind({ }, level)
 })
 
 
