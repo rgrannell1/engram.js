@@ -14,7 +14,7 @@ describe('commons.date.formatInterval', function ( ) {
 
 describe('commons.data.enum', function ( ) {
 
-	it ('maps cases to numbers', function ( ) {
+	it('each case is assigned an index', function ( ) {
 
 		var testData = commons.data.enum(['0', '1', '2'])
 
