@@ -8,6 +8,11 @@ ENGRAM_DOCOPT ?= ./bin/es5/docopt-engram.js
 
 
 
+NODE ?= node
+
+
+
+
 
 # -- Browserify.
 
@@ -23,6 +28,9 @@ MOCHA_FLAGS ?=
 
 BABEL        ?= $(BIN)/babel
 BABEL_FLAGS  ?=
+
+# -- Bunyan.
+BUNYAN       ?= bunyan
 
 # -- JS Hint.
 
@@ -209,8 +217,8 @@ clean:
 # -- Remove Engram database or logs
 
 wipe: build
-	node $(ENGRAM_DOCOPT) wipe db
-	node $(ENGRAM_DOCOPT) wipe logs
+	$(NODE) $(ENGRAM_DOCOPT) wipe db
+	$(NODE) $(ENGRAM_DOCOPT) wipe logs
 
 
 
@@ -219,10 +227,10 @@ wipe: build
 # -- Start Engram
 
 start: build
-	node $(ENGRAM_DOCOPT)
+	$(NODE) $(ENGRAM_DOCOPT)
 
 bunstart: build
-	node $(ENGRAM_DOCOPT) | bunyan
+	$(NODE) $(ENGRAM_DOCOPT) | $(BUNYAN)
 
 bundbstart: build
-	node $(ENGRAM_DOCOPT) | bunyan --level DEBUG
+	$(NODE) $(ENGRAM_DOCOPT) | $(BUNYAN) --level DEBUG
