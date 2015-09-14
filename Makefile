@@ -35,12 +35,12 @@ BUNYAN       ?= bunyan
 # -- JS Hint.
 
 JSHINT       ?= $(BIN)/jshint
-JSHINT_FLAGS ?= --config ~/Code/jshint/global.json
+JSHINT_FLAGS ?= --config config/jshint-config.json
 
 # -- eslint
 
 ESLINT       ?= $(BIN)/eslint
-ESLINT_FLAGS ?= --config config/eslint-config
+ESLINT_FLAGS ?= --config config/eslint-config.json
 
 # -- Sass
 
@@ -75,7 +75,12 @@ ENGRAM_BIN_TGT    ?= $(ENGRAM_BIN_SRC:bin/es6/%.js=bin/es5/%.js)
 ENGRAM_SASS_SRC   ?= $(wildcard public/sass/*.sass)
 ENGRAM_SASS_TGT   ?= $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
 
+# -- Browserify bundles
+ENGRAM_TEST_BUNDLE_SRC   ?= public/javascript/es5/main.js $(public-test/tests/%.js)
+ENGRAM_PUBLIC_BUNDLE_SRC ?= public/javascript/es5/main.js
 
+ENGRAM_TEST_BUNDLE_TGT   ?= public-test/bundle.js
+ENGRAM_PUBLIC_BUNDLE_TGT ?= public/javascript/es5/bundle.js
 
 
 
@@ -116,7 +121,7 @@ node_modules/engram/test/es5/%.js: node_modules/engram/test/es6/%.js
 
 # -- Build public test bundle
 
-public-test/bundle.js: public/javascript/es5/main.js $(public-test/tests/%.js)
+$(ENGRAM_TEST_BUNDLE_TGT): $(ENGRAM_TEST_BUNDLE_SRC)
 
 	# -- todo replace with proper browserify code, main runner module.
 	# -- add requirement for other bundle module.
@@ -142,7 +147,7 @@ public/javascript/es5/%.js: public/javascript/es6/%.js
 
 # -- Build client test bundle
 
-public/javascript/es5/bundle.js: public/javascript/es5/main.js
+$(ENGRAM_PUBLIC_BUNDLE_TGT): $(ENGRAM_PUBLIC_BUNDLE_SRC)
 
 	mkdir -p $(@D)
 	$(BROWSERIFY) $< --outfile $@
@@ -176,7 +181,7 @@ public/css/%.css: public/sass/%.sass
 # -- build all js source code.
 
 build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLIC_TGT)
-	public/javascript/es5/bundle.js public-test/bundle.js
+	$(ENGRAM_PUBLIC_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT)
 
 
 
@@ -209,7 +214,8 @@ clean:
 	@rm $(ENGRAM_SVR_TGT)
 	@rm $(ENGRAM_TEST_TGT)
 	@rm $(ENGRAM_BIN_TGT)
-
+	@rm $(ENGRAM_PUBLIC_BUNDLE_TGT)
+	@rm $(ENGRAM_TEST_BUNDLE_TGT)
 
 
 
