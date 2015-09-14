@@ -2,6 +2,9 @@
 # -- Node binaries
 BIN := ./node_modules/.bin
 
+ENGRAM_DOCOPT ?= ./bin/es5/docopt-engram.js
+
+
 
 
 
@@ -23,8 +26,8 @@ BABEL_FLAGS  ?=
 
 # -- JS Hint.
 
-JSHINT            ?= $(BIN)/jshint
-JSHINT_FLAGS      ?= --config ~/Code/jshint/global.json
+JSHINT       ?= $(BIN)/jshint
+JSHINT_FLAGS ?= --config ~/Code/jshint/global.json
 
 # -- eslint
 
@@ -125,6 +128,10 @@ public/javascript/es5/%.js: public/javascript/es6/%.js
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
+
+
+
+
 # -- Build client test bundle
 
 public/javascript/es5/bundle.js: public/javascript/es5/main.js
@@ -147,19 +154,27 @@ bin/es5/%.js: bin/es6/%.js
 
 
 
+# -- Build public css.
+
 public/css: $()
 public/css/%.css: public/sass/%.sass
 
 	$(SASS) $(SASS_FLAGS) $< $@
 
 
+
+
+
 # -- build all js source code.
 
-build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLIC_TGT) public/javascript/es5/bundle.js public-test/bundle.js
+build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLIC_TGT)
+	public/javascript/es5/bundle.js public-test/bundle.js
 
 
 
 
+
+# -- Code linters
 
 jshint: build
 	$(JSHINT) $(JSHINT_FLAGS) node_modules/engram/es6
@@ -169,10 +184,15 @@ eslint: build
 
 
 
-# -- run the mocha tests
+
+
+# -- Run the mocha tests
 
 test: build
 	$(MOCHA) $(MOCHA_FLAGS) node_modules/engram/test/es5
+
+
+
 
 
 # -- Remove all ES5.
@@ -186,19 +206,23 @@ clean:
 
 
 
+# -- Remove Engram database or logs
+
 wipe: build
-	node bin/es5/docopt-engram.js wipe db
-	node bin/es5/docopt-engram.js wipe logs
+	node $(ENGRAM_DOCOPT) wipe db
+	node $(ENGRAM_DOCOPT) wipe logs
 
 
 
 
+
+# -- Start Engram
 
 start: build
-	node ./bin/es5/docopt-engram.js
+	node $(ENGRAM_DOCOPT)
 
 bunstart: build
-	node ./bin/es5/docopt-engram.js | bunyan
+	node $(ENGRAM_DOCOPT) | bunyan
 
 bundbstart: build
-	node ./bin/es5/docopt-engram.js | bunyan --level DEBUG
+	node $(ENGRAM_DOCOPT) | bunyan --level DEBUG
