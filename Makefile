@@ -11,65 +11,30 @@ BIN := ./node_modules/.bin
 BROWSERIFY       ?= $(BIN)/browserify
 BROWSERIFY_FLAGS ?= -t es6ify
 
-
-
-
-
 # -- Mocha.
 
 MOCHA       ?= $(BIN)/mocha
 MOCHA_FLAGS ?=
-
-
-
 
 # -- Babel.
 
 BABEL        ?= $(BIN)/babel
 BABEL_FLAGS  ?=
 
-
-
-
-
 # -- JS Hint.
 
 JSHINT            ?= $(BIN)/jshint
 JSHINT_FLAGS      ?= --config ~/Code/jshint/global.json
-
-
-
-
 
 # -- eslint
 
 ESLINT       ?= $(BIN)/eslint
 ESLINT_FLAGS ?= --config config/eslint-config
 
-
-
-
-# -- Nodemon
-
-NODEMON       ?= $(BIN)/nodemon
-
-
-
-
-
 # -- Sass
 
 SASS       ?= sass
 SASS_FLAGS ?=
-
-
-
-
-
-
-
-
-ROOT ?= "node_modules/engram/es6"
 
 
 
@@ -90,9 +55,7 @@ ENGRAM_PUBLIC_TGT ?= $(ENGRAM_PUBLIC_SRC:public/javascript/es6/%.js=public/javas
 ENGRAM_TEST_SRC   ?= $(wildcard node_modules/engram/test/es6/*.js)
 ENGRAM_TEST_TGT   ?= $(ENGRAM_TEST_SRC:node_modules/engram/test/es6/%.js=node_modules/engram/test/es5/%.js)
 
-
 ENGRAM_PUBLIC_TEST_TGT ?= $(wildcard public-test/tests/*.js)
-
 
 # -- Engram bin code
 ENGRAM_BIN_SRC    ?= $(wildcard bin/es6/*.js)
@@ -111,6 +74,11 @@ ENGRAM_SASS_TGT   ?= $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
 
 
 .PHONY: clean build nodemon jshint test wipe start bstart
+
+
+
+
+
 # -- Build server source code.
 
 node_modules/engram/es5: $(ENGRAM_SVR_TGT)
@@ -135,6 +103,20 @@ node_modules/engram/test/es5/%.js: node_modules/engram/test/es6/%.js
 
 
 
+# -- Build public test bundle
+
+public-test/bundle.js: public/javascript/es5/main.js $(public-test/tests/%.js)
+
+	# -- todo replace with proper browserify code, main runner module.
+	# -- add requirement for other bundle module.
+
+	mkdir -p $(@D)
+	$(BROWSERIFY) $< --outfile $@
+
+
+
+
+
 # -- Build client source code.
 
 public/javascript/es5: $(ENGRAM_PUBLIC_TGT)
@@ -143,15 +125,7 @@ public/javascript/es5/%.js: public/javascript/es6/%.js
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
-
-
-
-public-test/bundle.js: $(public-test/tests/%.js)
-
-	mkdir -p $(@D)
-	$(shell rm $@)
-	$(shell echo '' > $@)
-	$(shell cat public-test/tests/*.js > $@)
+# -- Build client test bundle
 
 public/javascript/es5/bundle.js: public/javascript/es5/main.js
 
@@ -182,15 +156,6 @@ public/css/%.css: public/sass/%.sass
 # -- build all js source code.
 
 build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLIC_TGT) public/javascript/es5/bundle.js public-test/bundle.js
-
-
-
-
-
-# -- watch for any changes to code.
-
-nodemon: build
-	$(NODEMON) $(NODEMON_FLAGS) bin/es5/docopt-engram.js
 
 
 
