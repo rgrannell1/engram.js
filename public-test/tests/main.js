@@ -1,5 +1,5 @@
 
-require('../../public/javascript/es5/main')
+require('./test-environment')
 require('./test-commons')
 
 

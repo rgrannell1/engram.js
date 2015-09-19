@@ -53,36 +53,49 @@ SASS_FLAGS ?=
 
 
 
+
+
+
+
+
+# -- PATHS
+
+SERVER_ES5_PATH = node_modules/engram/es5
+SERVER_ES6_PATH = node_modules/engram/es6
+
+
+
+
 # -- Engram server/source code.
 
-ENGRAM_SVR_SRC    ?= $(shell find node_modules/engram/es6 -name '*.js')
-ENGRAM_SVR_TGT    ?= $(subst es6,es5, $(ENGRAM_SVR_SRC))
+ENGRAM_SVR_SRC    = $(shell find $(SERVER_ES6_PATH) -name '*.js')
+ENGRAM_SVR_TGT    = $(subst es6,es5, $(ENGRAM_SVR_SRC))
 
 # -- Engram public code
 
-ENGRAM_PUBLIC_SRC ?= $(wildcard public/javascript/es6/*.js)
-ENGRAM_PUBLIC_TGT ?= $(ENGRAM_PUBLIC_SRC:public/javascript/es6/%.js=public/javascript/es5/%.js)
+ENGRAM_PUBLIC_SRC = $(wildcard public/javascript/es6/*.js)
+ENGRAM_PUBLIC_TGT = $(ENGRAM_PUBLIC_SRC:public/javascript/es6/%.js=public/javascript/es5/%.js)
 
 # -- Engram test code
 
-ENGRAM_TEST_SRC   ?= $(wildcard node_modules/engram/test/es6/*.js)
-ENGRAM_TEST_TGT   ?= $(ENGRAM_TEST_SRC:node_modules/engram/test/es6/%.js=node_modules/engram/test/es5/%.js)
+ENGRAM_TEST_SRC   = $(wildcard node_modules/engram/test/es6/*.js)
+ENGRAM_TEST_TGT   = $(ENGRAM_TEST_SRC:node_modules/engram/test/es6/%.js=node_modules/engram/test/es5/%.js)
 
-ENGRAM_PUBLIC_TEST_TGT ?= $(wildcard public-test/tests/*.js)
+ENGRAM_PUBLIC_TEST_TGT = $(wildcard public-test/tests/*.js)
 
 # -- Engram bin code
-ENGRAM_BIN_SRC    ?= $(wildcard bin/es6/*.js)
-ENGRAM_BIN_TGT    ?= $(ENGRAM_BIN_SRC:bin/es6/%.js=bin/es5/%.js)
+ENGRAM_BIN_SRC    = $(wildcard bin/es6/*.js)
+ENGRAM_BIN_TGT    = $(ENGRAM_BIN_SRC:bin/es6/%.js=bin/es5/%.js)
 
-ENGRAM_SASS_SRC   ?= $(wildcard public/sass/*.sass)
-ENGRAM_SASS_TGT   ?= $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
+ENGRAM_SASS_SRC   = $(wildcard public/sass/*.sass)
+ENGRAM_SASS_TGT   = $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
 
 # -- Browserify bundles
-ENGRAM_TEST_BUNDLE_SRC   ?= public/javascript/es5/main.js public-test/tests/main.js
-ENGRAM_PUBLIC_BUNDLE_SRC ?= public/javascript/es5/main.js
+ENGRAM_TEST_BUNDLE_SRC   = public-test/tests/main.js
+ENGRAM_PUBLIC_BUNDLE_SRC = public/javascript/es5/main.js
 
-ENGRAM_TEST_BUNDLE_TGT   ?= public-test/bundle.js
-ENGRAM_PUBLIC_BUNDLE_TGT ?= public/javascript/es5/bundle.js
+ENGRAM_TEST_BUNDLE_TGT   = public-test/bundle.js
+ENGRAM_PUBLIC_BUNDLE_TGT = public/javascript/es5/bundle.js
 
 
 
@@ -109,10 +122,12 @@ build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TG
 
 
 
-# -- Build server source code.
 
-node_modules/engram/es5: $(ENGRAM_SVR_TGT)
-node_modules/engram/es5/%.js: node_modules/engram/es6/%.js
+
+
+
+$(SERVER_ES5_PATH): $(ENGRAM_SVR_TGT)
+$(SERVER_ES5_PATH)/%.js: node_modules/engram/es6/%.js
 
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
@@ -136,7 +151,6 @@ node_modules/engram/test/es5/%.js: node_modules/engram/test/es6/%.js
 # -- Build public test bundle
 
 $(ENGRAM_TEST_BUNDLE_TGT): $(ENGRAM_TEST_BUNDLE_SRC)
-
 	# -- todo replace with proper browserify code, main runner module.
 	# -- add requirement for other bundle module.
 
@@ -180,10 +194,9 @@ bin/es5/%.js: bin/es6/%.js
 
 
 
-
 # -- Build public css.
 
-public/css: $()
+public/css:
 public/css/%.css: public/sass/%.sass
 
 	$(SASS) $(SASS_FLAGS) $< $@
