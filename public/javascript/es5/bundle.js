@@ -12,7 +12,7 @@ commons.log = {};
 
 commons.date.formatDate = function (date) {
 
-	var dateString = [date.getFullYear(), date.getMonth() + 1, date.getDate].join('-');
+	var dateString = [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-');
 
 	var timeString = [date.getHours(), date.getMinutes()].join(':');
 
@@ -83,10 +83,6 @@ commons.date.formatElapsed.s = function (seconds) {
 	commons.date.formatInterval.s = formatInterval.bind({}, 1000);
 	commons.date.formatInterval.ms = formatInterval.bind({}, 1);
 }
-
-commons.date.formatInterval = function (newer, older) {
-	return commons.date.formatDate(commons.date.interval.s(newer, older));
-};
 
 commons.data['enum'] = function (labels) {
 

@@ -20,7 +20,7 @@ commons.date.formatDate = date => {
 	var dateString = [
 		date.getFullYear( ),
 		date.getMonth( ) + 1,
-		date.getDate
+		date.getDate( )
 	].join('-')
 
 	var timeString = [
@@ -121,9 +121,6 @@ commons.date.formatElapsed.s  = seconds => {
 
 }
 
-commons.date.formatInterval = (newer, older) => {
-	return commons.date.formatDate(commons.date.interval.s(newer, older))
-}
 
 
 

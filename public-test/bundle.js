@@ -1,23 +1,37 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
-require('./test-environment')
+"use strict"
+
+
+
+
+
+if (!window.ENGRAM) {
+	throw Error('missing engram dependency.')
+} else {
+	console.log('-- loading tests.')
+}
+
+
+
+
 require('./test-commons')
 
-
-
-
-
-
-console.log('-- loading tests.')
-
-},{"./test-commons":2,"./test-environment":3}],2:[function(require,module,exports){
+},{"./test-commons":2}],2:[function(require,module,exports){
 
 "use script"
 
 
 
-var commons = window.ENGRAM.commons
 
+
+var expect = chai.expect
+
+
+
+
+
+var commons = window.ENGRAM.commons
 
 
 
@@ -28,6 +42,7 @@ describe('commons.date.formatDate', function ( ) {
 
 describe('commons.date.formatInterval', function ( ) {
 
+
 })
 
 describe('commons.data.enum', function ( ) {
@@ -36,7 +51,7 @@ describe('commons.data.enum', function ( ) {
 
 		var testData = commons.data.enum(['0', '1', '2'])
 
-		expect(testData).to.be.a('array')
+		expect(testData).to.be.a('object')
 
 		Object.keys(testData).forEach(function (label, ith) {
 
@@ -57,13 +72,19 @@ describe('commons.date.interval.ms', function ( ) {
 
 })
 
-describe('commons.date.string.locate', function ( ) {
+describe('commons.data.string.locate', function ( ) {
+
+	it('correctly locates characters', function ( ) {
+
+		expect(commons.data.string.locate('', '')).to.equal(-1)
+		expect(commons.data.string.locate('a', '')).to.equal(-1)
+
+		expect(commons.data.string.locate('a', 'aaa')).to.equal(0)
+		expect(commons.data.string.locate('a', 'aaa', 1)).to.equal(1)
+		expect(commons.data.string.locate('a', 'aaa', 2)).to.equal(2)
+
+	})
 
 })
 
-},{}],3:[function(require,module,exports){
-
-if (!window.ENGRAM) {
-	throw Error('missing engram dependency.')
-}
 },{}]},{},[1]);
