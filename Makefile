@@ -12,7 +12,9 @@ NODE ?= node
 
 
 
+# -- Chrome
 
+CHROME ?= chromium-browser
 
 # -- Browserify.
 
@@ -76,7 +78,7 @@ ENGRAM_SASS_SRC   ?= $(wildcard public/sass/*.sass)
 ENGRAM_SASS_TGT   ?= $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
 
 # -- Browserify bundles
-ENGRAM_TEST_BUNDLE_SRC   ?= public/javascript/es5/main.js $(public-test/tests/%.js)
+ENGRAM_TEST_BUNDLE_SRC   ?= public/javascript/es5/main.js public-test/tests/main.js
 ENGRAM_PUBLIC_BUNDLE_SRC ?= public/javascript/es5/main.js
 
 ENGRAM_TEST_BUNDLE_TGT   ?= public-test/bundle.js
@@ -89,8 +91,20 @@ ENGRAM_PUBLIC_BUNDLE_TGT ?= public/javascript/es5/bundle.js
 
 
 
-.PHONY: clean build nodemon jshint test wipe start bunstart bundbstart
+.PHONY: clean build nodemon eslint jshint test wipe start bunstart bundbstart
 
+
+
+
+
+
+
+
+
+
+# -- build all js source code.
+
+build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_PUBLIC_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT)
 
 
 
@@ -177,32 +191,28 @@ public/css/%.css: public/sass/%.sass
 
 
 
-
-# -- build all js source code.
-
-build: $(ENGRAM_SVR_TGT) $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_BIN_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLIC_TGT)
-	$(ENGRAM_PUBLIC_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT)
-
-
-
-
-
-# -- Code linters
+# -- Code linters.
 
 jshint: build
 	$(JSHINT) $(JSHINT_FLAGS) node_modules/engram/es6
 
 eslint: build
-	$(ESLINT) $(ESLINT_FLAGS) .
+	$(ESLINT) $(ESLINT_FLAGS) node_modules/engram/es6
 
 
 
 
 
-# -- Run the mocha tests
+# -- Run the mocha tests.
 
-test: build
+test: test-client test-server
+
+test-client: build
+	$(CHROME) public-test/runner.html &
+
+test-server: build
 	$(MOCHA) $(MOCHA_FLAGS) node_modules/engram/test/es5
+
 
 
 
@@ -220,7 +230,7 @@ clean:
 
 
 
-# -- Remove Engram database or logs
+# -- Remove Engram database or logs.
 
 wipe: build
 	$(NODE) $(ENGRAM_DOCOPT) wipe db
@@ -230,7 +240,7 @@ wipe: build
 
 
 
-# -- Start Engram
+# -- Start Engram.
 
 start: build
 	$(NODE) $(ENGRAM_DOCOPT)

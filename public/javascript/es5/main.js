@@ -6,4 +6,4 @@ var messages = require('./messages');
 var commons = require('./commons');
 var rest = require('./rest');
 
-console.log('running...');
+console.log('main: loaded all browser modules');

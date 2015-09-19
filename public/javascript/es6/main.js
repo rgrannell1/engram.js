@@ -15,4 +15,5 @@ var rest      = require('./rest')
 
 
 
-console.log('running...')
+
+console.log('main: loaded all browser modules')
