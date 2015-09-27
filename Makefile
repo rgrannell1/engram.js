@@ -17,8 +17,8 @@ ENGRAM_DOCOPT = ./bin/docopt-engram.js
 
 
 
-NODE = node
-
+NODE       = node
+NODE_FLAGS = --harmony_destructuring
 
 
 # -- Chrome
@@ -221,8 +221,8 @@ clean:
 # -- Remove Engram database or logs.
 
 wipe: build
-	$(NODE) $(ENGRAM_DOCOPT) wipe db
-	$(NODE) $(ENGRAM_DOCOPT) wipe logs
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) wipe db
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) wipe logs
 
 
 
@@ -231,10 +231,10 @@ wipe: build
 # -- Start Engram.
 
 start: build
-	$(NODE) $(ENGRAM_DOCOPT)
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT)
 
 bunstart: build
-	$(NODE) $(ENGRAM_DOCOPT) | $(BUNYAN)
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN)
 
 bundbstart: build
-	$(NODE) $(ENGRAM_DOCOPT) | $(BUNYAN) --level DEBUG
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN) --level DEBUG
