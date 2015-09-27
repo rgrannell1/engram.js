@@ -134,10 +134,9 @@ build: $(ENGRAM_TEST_TGT) $(ENGRAM_PUBLIC_TGT) $(ENGRAM_SASS_TGT) $(ENGRAM_PUBLI
 
 
 
-
-
-# -- Build server test code.
 $(ENGRAM_TEST_TGT): $(ENGRAM_TEST_SRC)
+
+	# Make: building server test code.
 
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
@@ -146,10 +145,9 @@ $(ENGRAM_TEST_TGT): $(ENGRAM_TEST_SRC)
 
 
 
-# -- Build public test bundle
 $(ENGRAM_TEST_BUNDLE_TGT): $(ENGRAM_TEST_BUNDLE_SRC)
-	# -- todo replace with proper browserify code, main runner module.
-	# -- add requirement for other bundle module.
+
+	# Make: Build public test bundle.
 
 	mkdir -p $(@D)
 	$(BROWSERIFY) $< --outfile $@
@@ -158,41 +156,55 @@ $(ENGRAM_TEST_BUNDLE_TGT): $(ENGRAM_TEST_BUNDLE_SRC)
 
 
 
-# -- Build client source code.
 $(ENGRAM_PUBLIC_TGT): $(ENGRAM_PUBLIC_SRC)
+
+	# Make: Build client source code.
 
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
-# -- Install library dependencies.
+
+
+
+
 $(ENGRAM_PUBLIC_LIB_TGT): $(ENGRAM_PUBLIC_LIB_SRC)
-	 cp -f $< $@
+
+	# Make: install library dependencies.
+
+	cp -f $< $@
 
 
 
-# -- Build client test bundle
 
 $(ENGRAM_PUBLIC_BUNDLE_TGT): $(ENGRAM_PUBLIC_BUNDLE_SRC)
 
+	# Make: build client test bundle
+
 	mkdir -p $(@D)
 	$(BROWSERIFY) $< --outfile $@
 
 
-# -- Build public css.
 
 $(ENGRAM_SASS_TGT): $(ENGRAM_SASS_SRC)
+
+	# Make: build public css.
+
 	$(SASS) $(SASS_FLAGS) $< $@
 
 
 
 
 
-# -- Code linters.
-
 jshint: build
+
+	# Make: JShint
+
 	$(JSHINT) $(JSHINT_FLAGS) $(SERVER_ES6_PATH)
 
 eslint: build
+
+	# Make: ESHint
+
 	$(ESLINT) $(ESLINT_FLAGS) $(SERVER_ES6_PATH)
 
 
@@ -203,10 +215,18 @@ eslint: build
 
 test: test-client test-server
 
+	# Make: Run client and server tests.
+
 test-client: build
+
+	# Make: Run client tests.
+
 	$(CHROME) $(CLIENT_RUNNER_PATH) &
 
 test-server: build
+
+	# Make: Run server tests.
+
 	$(MOCHA) $(MOCHA_FLAGS) $(SERVER_TEST_ES5_PATH)
 
 
@@ -216,11 +236,21 @@ test-server: build
 # -- Remove all ES5.
 
 clean:
-	@rm $(ALL_TGT)
+
+	# Make: removing compiled code.
+
+	@rm -f $(ALL_TGT)
+
+
+
+
 
 # -- Remove Engram database or logs.
 
 wipe: build
+
+	# Make: wiping database code and logs.
+
 	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) wipe db
 	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) wipe logs
 
