@@ -18,4 +18,4 @@ es6/routes
 *.sublime-workspace
 :memory
 
-*/es5/*
+es5/
