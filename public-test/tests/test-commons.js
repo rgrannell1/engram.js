@@ -66,3 +66,15 @@ describe('commons.data.string.locate', function ( ) {
 	})
 
 })
+
+describe('commons.log.formatMessage', function ( ) {
+
+	it('constructs a valid message', function ( ) {
+
+		expect(commons.log.formatMessage('level', 'message')).to.equal('level: message')
+		expect(commons.log.formatMessage('level', 'message', {x: 1})).to.equal('level: message {"x": 1}')
+
+
+	})
+
+})

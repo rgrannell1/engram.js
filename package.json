@@ -6,10 +6,7 @@
   "scripts": {
     "start": "node ./bin/es5/docopt-engram.js"
   },
-  "bin": {
-    "engram": "node ./bin/es5/docopt-engram.js",
-    "engram-rank": "node ./bin/es5/rank-titles.js"
-  },
+  "license": "MIT",
   "devDependencies": {
     "babel": "^5.8.5",
     "babel-eslint": "^4.0.6",

@@ -1,53 +1,52 @@
 
 # -- Node binaries
-BIN := ./node_modules/.bin
-
-ENGRAM_DOCOPT ?= ./bin/es5/docopt-engram.js
-
+BIN           = ./node_modules/.bin
+ENGRAM_DOCOPT = ./bin/es5/docopt-engram.js
 
 
 
 
-NODE ?= node
+
+NODE = node
 
 
 
 # -- Chrome
 
-CHROME ?= chromium-browser
+CHROME = chromium-browser
 
 # -- Browserify.
 
-BROWSERIFY       ?= $(BIN)/browserify
-BROWSERIFY_FLAGS ?= -t es6ify
+BROWSERIFY       = $(BIN)/browserify
+BROWSERIFY_FLAGS = -t es6ify
 
 # -- Mocha.
 
-MOCHA       ?= $(BIN)/mocha
-MOCHA_FLAGS ?=
+MOCHA       = $(BIN)/mocha
+MOCHA_FLAGS =
 
 # -- Babel.
 
-BABEL        ?= $(BIN)/babel
-BABEL_FLAGS  ?=
+BABEL        = $(BIN)/babel
+BABEL_FLAGS  =
 
 # -- Bunyan.
-BUNYAN       ?= bunyan
+BUNYAN       = bunyan
 
 # -- JS Hint.
 
-JSHINT       ?= $(BIN)/jshint
-JSHINT_FLAGS ?= --config config/jshint-config.json
+JSHINT       = $(BIN)/jshint
+JSHINT_FLAGS = --config config/jshint-config.json
 
 # -- eslint
 
-ESLINT       ?= $(BIN)/eslint
-ESLINT_FLAGS ?= --config config/eslint-config.json
+ESLINT       = $(BIN)/eslint
+ESLINT_FLAGS = --config config/eslint-config.json
 
 # -- Sass
 
-SASS       ?= sass
-SASS_FLAGS ?=
+SASS       = sass
+SASS_FLAGS =
 
 
 
@@ -63,6 +62,10 @@ SASS_FLAGS ?=
 SERVER_ES5_PATH = node_modules/engram/es5
 SERVER_ES6_PATH = node_modules/engram/es6
 
+PUBLIC_ES5_PATH = public/javascript/es5
+PUBLIC_ES6_PATH = public/javascript/es6
+
+
 
 
 
@@ -73,8 +76,8 @@ ENGRAM_SVR_TGT    = $(subst es6,es5, $(ENGRAM_SVR_SRC))
 
 # -- Engram public code
 
-ENGRAM_PUBLIC_SRC = $(wildcard public/javascript/es6/*.js)
-ENGRAM_PUBLIC_TGT = $(ENGRAM_PUBLIC_SRC:public/javascript/es6/%.js=public/javascript/es5/%.js)
+ENGRAM_PUBLIC_SRC = $(shell find $(PUBLIC_ES6_PATH) -name '*.js')
+ENGRAM_PUBLIC_TGT = $(subst es6,es5, $(ENGRAM_PUBLIC_SRC))
 
 # -- Engram test code
 
@@ -92,10 +95,10 @@ ENGRAM_SASS_TGT   = $(ENGRAM_SASS_SRC:public/sass/%.sass=public/css/%.css)
 
 # -- Browserify bundles
 ENGRAM_TEST_BUNDLE_SRC   = public-test/tests/main.js
-ENGRAM_PUBLIC_BUNDLE_SRC = public/javascript/es5/main.js
+ENGRAM_PUBLIC_BUNDLE_SRC = $(PUBLIC_ES5_PATH)/main.js
 
 ENGRAM_TEST_BUNDLE_TGT   = public-test/bundle.js
-ENGRAM_PUBLIC_BUNDLE_TGT = public/javascript/es5/bundle.js
+ENGRAM_PUBLIC_BUNDLE_TGT = $(PUBLIC_ES5_PATH)/bundle.js
 
 
 
@@ -162,9 +165,7 @@ $(ENGRAM_TEST_BUNDLE_TGT): $(ENGRAM_TEST_BUNDLE_SRC)
 
 
 # -- Build client source code.
-
-public/javascript/es5: $(ENGRAM_PUBLIC_TGT)
-public/javascript/es5/%.js: public/javascript/es6/%.js
+$(ENGRAM_PUBLIC_TGT): $(ENGRAM_PUBLIC_SRC)
 
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@

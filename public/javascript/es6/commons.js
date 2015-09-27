@@ -11,7 +11,7 @@ commons.data.string = { }
 commons.date        = { }
 commons.messages    = { }
 commons.log         = { }
-
+commons.external    = { }
 
 
 
@@ -154,7 +154,7 @@ commons.data.string.locate = (char, string, from = 0) => {
 
 commons.log.levelNames    = ['trace', 'info', 'summary', 'warning-low', 'warning-high', 'error', 'fatal']
 commons.log.formatMessage = (level, message, data) => {
-	return level + ':' + message + ' ' + JSON.stringify(data)
+	return level + ': ' + message + data ? ' ' + JSON.stringify(data) : ''
 }
 
 commons.log.levelNames.forEach(level => {
@@ -162,6 +162,17 @@ commons.log.levelNames.forEach(level => {
 })
 
 
+
+
+
+
+commons.external.toShareLink = url => {
+	return `http://www.twitter.com/share?url=${url}`
+}
+
+commons.external.toArchiveLink = id => {
+	return `archive/${id}`
+}
 
 
 

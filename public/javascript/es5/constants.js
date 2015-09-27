@@ -1,31 +1,60 @@
 
 "use strict";
 
-var constants = {};
-constants.urls = {};
-constants.selectors = {};
-constants.date = {};
+var view = function view(model) {
 
-constants.date.SHORT_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	var bookmarkLink = m('a', {
+		href: model.url(),
+		'class': 'title --hastitle--',
+		rel: 'external noreferrer'
+	}, model.displayTitle());
 
-constants.date.MINUTE_IN_S = 60;
-constants.date.HOUR_IN_S = 3600;
-constants.date.DAY_IN_S = 24 * 3600;
+	var hostLink = m('a', {
+		href: model.hosturl(),
+		'class': 'hosturl',
+		rel: 'external noreferrer'
+	}, model.hostname());
 
-constants.date.S_IN_MS = constants.date.S_IN_MS * 1000;
-constants.date.MINUTE_IN_MS = constants.date.S_IN_MS * 60;
-constants.date.HOUR_IN_MS = constants.date.S_IN_MS * 3600;
-constants.date.DAY_IN_MS = constants.date.S_IN_MS * 24 * 3600;
+	var timeDisplay = m('time', {
+		title: model.date()
+	}, '&#160;');
 
-constants.urls.BOOKMARK_TEMPLATE = '/public/html/bookmark-template.html';
-constants.urls.IMPORT = '/api/import';
+	var twitterLink = m('a', {
+		title: 'Share Link...',
+		href: commons.external.toShareLink(model.url()),
+		target: '_blank'
+	}, '&#x1f381');
 
-constants.selectors.BOOKMARKS = '#bookmarks';
-constants.selectors.BOOKMARK_CONTAINER = '#bookmark-container';
-constants.selectors.ARTICLES = '#bookmarks article';
-constants.selectors.UPLOAD_FORM = '#uploader-hidden';
-constants.selectors.UPLOAD_BUTTON = '#uploader';
-constants.selectors.DELETE_BUTTONS = '.delete-bookmark';
-constants.selectors.TIMES = '.bookmark time';
+	var archiveLink = m('a', {
+		title: 'Show Archive...',
+		href: commons.external.toArchiveLink(model.bookmarkId()),
+		target: '_blank'
+	}, '#x1F5C3');
 
-module.exports = constants;
+	var deleteLink = m('a', {
+		title: 'Delete',
+		href: 'javascript:void(0)'
+	}, '&#x2716');
+
+	var divider = m('span', {
+		'class': 'divider'
+	}, '|');
+
+	return m('article', [m('ul', [m('li', [bookmarkLink, divider, hostLink]), m('li', [timeDisplay]), m('li', [twitterLink, divider, archiveLink, divider, deleteLink])])]);
+};
+
+var Bookmark = function Bookmark(data) {
+
+	var model = {};
+
+	Object.keys(data).forEach(function (prop) {
+		model[prop] = m.prop(data[prop]);
+	});
+
+	return {
+		controller: ctrl,
+		view: view.bind({}, model)
+	};
+};
+
+module.exports = Bookmark;

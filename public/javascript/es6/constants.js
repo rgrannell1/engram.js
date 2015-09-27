@@ -9,6 +9,7 @@ var constants       = { }
 constants.urls      = { }
 constants.selectors = { }
 constants.date      = { }
+constants.view      = { }
 
 
 
@@ -45,6 +46,10 @@ constants.selectors.UPLOAD_FORM        = '#uploader-hidden'
 constants.selectors.UPLOAD_BUTTON      = '#uploader'
 constants.selectors.DELETE_BUTTONS     = '.delete-bookmark'
 constants.selectors.TIMES              = '.bookmark time'
+
+
+
+
 
 
 

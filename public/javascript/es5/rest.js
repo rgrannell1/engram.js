@@ -1,48 +1,60 @@
 
 "use strict";
 
-var constants = require('./constants');
+var view = function view(model) {
 
-var rest = {};
+	var bookmarkLink = m('a', {
+		href: model.url(),
+		'class': 'title --hastitle--',
+		rel: 'external noreferrer'
+	}, model.displayTitle());
 
-rest.getTemplate = function (onOk, onErr) {
+	var hostLink = m('a', {
+		href: model.hosturl(),
+		'class': 'hosturl',
+		rel: 'external noreferrer'
+	}, model.hostname());
 
-	$.get(constants.urls.BOOKMARK_TEMPLATE).done(onOk).always(onErr);
+	var timeDisplay = m('time', {
+		title: model.date()
+	}, '&#160;');
+
+	var twitterLink = m('a', {
+		title: 'Share Link...',
+		href: commons.external.toShareLink(model.url()),
+		target: '_blank'
+	}, '&#x1f381');
+
+	var archiveLink = m('a', {
+		title: 'Show Archive...',
+		href: commons.external.toArchiveLink(model.bookmarkId()),
+		target: '_blank'
+	}, '#x1F5C3');
+
+	var deleteLink = m('a', {
+		title: 'Delete',
+		href: 'javascript:void(0)'
+	}, '&#x2716');
+
+	var divider = m('span', {
+		'class': 'divider'
+	}, '|');
+
+	return m('article', [m('ul', [m('li', [bookmarkLink, divider, hostLink]), m('li', [timeDisplay]), m('li', [twitterLink, divider, archiveLink, divider, deleteLink])])]);
 };
 
-rest.deleteBookmark = function (id, onOk, onErr) {
+var Bookmark = function Bookmark(data) {
 
-	$.ajax({
-		url: '/api/bookmarks/' + id,
-		type: 'DELETE',
-		success: onOk,
-		failure: onErr
+	var model = {};
+
+	Object.keys(data).forEach(function (prop) {
+		model[prop] = m.prop(data[prop]);
 	});
+
+	return {
+		controller: ctrl,
+		view: view.bind({}, model)
+	};
 };
 
-rest.getBookmarks = function (maxID, amount, onOk, onErr) {
-
-	$.ajax({
-		url: '/api/bookmarks?maxID=' + maxID + '&amount=' + amount,
-		dataType: 'json',
-		success: onOk,
-		failure: onErr
-	});
-};
-
-rest.importBookmarks = function (data, onOk, onErr) {
-
-	$.ajax({
-		type: 'POST',
-		url: constants.urls.IMPORT,
-		dataType: 'json',
-		data: data,
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		success: onOk,
-		failure: onErr
-	});
-};
-
-module.exports = rest;
+module.exports = Bookmark;
