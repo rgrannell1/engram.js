@@ -12,6 +12,18 @@ var constants = require('./constants')
 
 
 var rest = { }
+rest.url = { }
+
+rest.url.shareLink = url => {
+	return `http://www.twitter.com/share?url=${url}`
+}
+
+rest.url.archiveLink = id => {
+	return `archive/${id}`
+}
+
+
+
 
 rest.getTemplate = (onOk, onErr) => {
 
