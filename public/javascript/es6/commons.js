@@ -12,6 +12,9 @@ commons.date        = { }
 commons.messages    = { }
 commons.log         = { }
 commons.external    = { }
+commons.mithril     = { }
+
+
 
 
 
@@ -165,15 +168,17 @@ commons.log.levelNames.forEach(level => {
 
 
 
+commons.mithril.propObj = obj => {
 
-commons.external.toShareLink = url => {
-	return `http://www.twitter.com/share?url=${url}`
+	var model = { }
+
+	Object.keys(obj).forEach(key => {
+		model[key] = m.prop(obj[key])
+	})
+
+	return model
+
 }
-
-commons.external.toArchiveLink = id => {
-	return `archive/${id}`
-}
-
 
 
 

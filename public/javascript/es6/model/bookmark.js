@@ -5,7 +5,8 @@
 
 
 
-var rest = require('../rest')
+var rest    = require('../rest')
+var commons = require('../commons')
 
 
 
@@ -49,7 +50,7 @@ var view = model => {
 
 		title: model.date( )
 
-	}, '&#160;')
+	}, model.date( ))
 
 
 
@@ -61,7 +62,7 @@ var view = model => {
 		href:  rest.url.shareLink(model.url( )),
 		target: '_blank'
 
-	}, '&#x1f381;')
+	}, '🎁 ')
 
 	buttons.archive = m('a', {
 
@@ -70,14 +71,14 @@ var view = model => {
 		class: 'archive',
 		target: '_blank'
 
-	}, '&#x1F5C3;')
+	}, '🎁 ')
 
 	buttons.delete  = m('a', {
 		title: 'Delete',
 		href:  'javascript:void(0)',
 		class: 'delete-bookmark',
 		role:  'button'
-	}, '&#x2716;')
+	}, String.fromCharCode(10006))
 
 
 
@@ -98,11 +99,10 @@ var view = model => {
 		buttons.share,
 		seperator,
 
-		buttons.article,
+		buttons.archive,
 		seperator,
 
-		buttons.delete,
-		seperator
+		buttons.delete
 
 	])
 
@@ -132,16 +132,12 @@ var ctrl = ( ) => {
 
 
 var Bookmark = data => {
-
-	var model = { }
-
-	Object.keys(data).forEach(prop => {
-		model[prop] = m.prop(data[prop])
-	})
-
-	return {view: view.bind({ }, model, ctrl)}
-
+	return {
+		view: view.bind({ }, commons.mithril.propObj(data)),
+		ctrl
+	}
 }
+
 
 
 
