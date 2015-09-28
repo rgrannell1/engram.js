@@ -6,18 +6,22 @@ log/
 data/
 build/
 
-node_modules/*
-!node_modules/engram
 
 .sass-cache/
 data-bookmarks.json
 
-es5/routes
+es5/
 es6/routes
 
 *.sublime-workspace
-:memory
 
 es5/
 
 public/css
+
+lib/
+bundle.js
+
+
+node_modules/*
+!node_modules/engram

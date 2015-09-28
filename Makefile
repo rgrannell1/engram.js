@@ -128,7 +128,7 @@ ENGRAM_CLIENT_TGT_PATH            = $(CLIENT_ES5_PATH)
 
 all: es6ify-client es6ify-server add-client-dependencies browserify-client cssify-client
 
-ALL_TGT = $(ENGRAM_ALL_CLIENT_TGT)
+ALL_TGT = $(ENGRAM_ALL_CLIENT_TGT) $(ENGRAM_CLIENT_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT)
 
 
 

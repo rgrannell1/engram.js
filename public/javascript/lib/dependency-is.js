@@ -1,145 +1,127 @@
 
-var a = function (str, val) {
+"use strict";
 
-	if (Object.prototype.toString.call(str) !== '[object String]') {
-		throw TypeError('a: the argument matching "str" must be a string.')
+var commons = {};
+
+commons.data = {};
+commons.data.string = {};
+commons.date = {};
+commons.messages = {};
+commons.log = {};
+commons.external = {};
+
+commons.date.formatDate = function (date) {
+
+	var dateString = [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-');
+
+	var timeString = [date.getHours(), date.getMinutes()].join(':');
+
+	return dateString + ' ' + timeString;
+};
+
+commons.date.formatElapsed = {};
+commons.date.formatInterval = {};
+commons.date.interval = {};
+commons.date.addUnit = {
+	second: function second(time) {
+		return time + 's';
+	},
+	minute: function minute(time) {
+		return time + 'm';
+	},
+	hour: function hour(time) {
+		return time + 'h';
+	},
+	month: function month(time) {
+
+		var day = constants.date.SHORT_MONTHS[time.getMonth()];
+		var month = time.getDate();
+
+		return day + ' ' + month;
+	},
+	year: function year(time) {
+
+		var day = constants.date.SHORT_MONTHS[time.getMonth()];
+		var month = time.getDate();
+		var year = time.getFullYear();
+
+		return day + ' ' + month + ' ' + year;
 	}
+};
 
-	return Object.prototype.toString.call(val).toLowerCase() ===
-		"[object " + str.toLowerCase() + "]"
+{
+
+	var timeInterval = function timeInterval(factor, newer, older) {
+		return Math.floor((newer - older) / factor);
+	};
+
+	commons.date.interval.s = timeInterval.bind({}, 1000);
+	commons.date.interval.ms = timeInterval.bind({}, 1);
 }
 
+commons.date.formatElapsed.ms = function (millis) {
 
+	if (millis < constants.date.MINUTE_IN_MS) {
 
+		return commons.date.addUnit.second(millis / constants.date.S_IN_MS);
+	} else if (millis < constants.date.HOUR_IN_MS) {
 
+		return commons.date.addUnit.minute(millis / constants.date.S_IN_MS);
+	} else if (millis < constants.date.DAY_IN_MS) {} else {}
+};
 
-var what = function (val) {
-	return Object.prototype.toString.call(val).toLowerCase().slice(8, -1)
+commons.date.formatElapsed.s = function (seconds) {
+	return commons.date.formatElapsed.ms(constants.date.S_IN_MS * seconds);
+};
+
+{
+
+	var formatInterval = function formatInterval(factor, newer, older) {
+		return commons.date.formatElapsed(commons.date.interval.ms(newer, older));
+	};
+
+	commons.date.formatInterval.s = formatInterval.bind({}, 1000);
+	commons.date.formatInterval.ms = formatInterval.bind({}, 1);
 }
 
+commons.data['enum'] = function (labels) {
 
+	var lookup = {};
 
+	labels.forEach(function (label, ith) {
+		lookup[label] = ith.toString();
+	});
 
+	return lookup;
+};
 
-var classes = ['array', 'boolean', 'date', 'error', 'function', 'location',
-	'null', 'number', 'object', 'regexp', 'string', 'symbol', 'undefined']
+commons.data.string.locate = function (char, string) {
+	var from = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
 
-
-
-
-
-var is = ( function () {
-
-	return classes.reduce(function (self, key) {
-
-		self[key] = a.bind(null, key)
-		return self
-
-	}, a)
-
-} )()
-
-
-
-var always = ( function () {
-
-	var always = function (str, val, message) {
-
-		if (!is[str](val)) {
-
-			var messageClass = Object.prototype.toString.call(message)
-
-			if (messageClass === '[object Function]') {
-				// -- supply information to a function callback.
-
-				throw TypeError( message(val, str, what(val)) )
-
-			} else if (messageClass === '[object String]') {
-
-				throw TypeError(message)
-
-			} else {
-
-				var message = 'always.' + str + ': value was not a ' + str + ' (actual type was ' + what(val) + ')'
-
-				if (arguments.callee && arguments.callee.name) {
-					message = arguments.callee.name += message
-				}
-
-				throw TypeError(message)
-
-			}
-
+	for (var ith = from; ith < string.length; ++ith) {
+		if (char === string.charAt(ith)) {
+			return ith;
 		}
 	}
 
-	return classes.reduce(function (self, key) {
+	return -1;
+};
 
-		self[key] = always.bind(null, key)
-		return self
+commons.log.levelNames = ['trace', 'info', 'summary', 'warning-low', 'warning-high', 'error', 'fatal'];
+commons.log.formatMessage = function (level, message, data) {
+	return level + ': ' + message + data ? ' ' + JSON.stringify(data) : '';
+};
 
-	}, always)
+commons.log.levelNames.forEach(function (level) {
+	commons.log[level] = commons.log.formatMessage.bind({}, level);
+});
 
-} )()
+commons.external.toShareLink = function (url) {
+	return 'http://www.twitter.com/share?url=' + url;
+};
 
+commons.external.toArchiveLink = function (id) {
+	return 'archive/' + id;
+};
 
-
-
-
-var never = ( function () {
-
-	var never = function (str, val, message) {
-
-		if (is[str](val)) {
-
-			var messageClass = Object.prototype.toString.call(message)
-
-			if (messageClass === '[object Function]') {
-				// -- supply information to a function callback.
-
-				throw TypeError( message(val, str, what(val)) )
-
-			} else if (messageClass === '[object String]') {
-
-				throw TypeError(message)
-
-			} else {
-
-				var message = 'never.' + str + ': value was a ' + str
-
-				if (arguments.callee && arguments.callee.name) {
-					message = arguments.callee.name += message
-				}
-
-				throw TypeError(message)
-
-			}
-
-		}
-	}
-
-	return classes.reduce(function (self, key) {
-
-		self[key] = never.bind(null, key)
-		return self
-
-	}, never)
-
-} )()
-
-
-
-
-
-is.a      = a
-is.what   = what
-is.always = always
-is.never  = never
-
-
-
-
-
-if (typeof module !== "undefined") {
-	module.exports = is
-}
+module.exports = commons;
