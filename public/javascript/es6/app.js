@@ -4,28 +4,31 @@
 
 
 
-var app = { }
+
+var Bookmark  = require('./model/bookmark')
 
 
 
 
 
-app.view = ctrl => {
+var elem = Bookmark({
+
+	url:          'http://mithril.js.org/mithril.mount.html',
+	displayTitle: 'Mount',
+	hosturl:      'http://mithril.js.org',
+	hostname:     'mithril',
+	date:         new Date( ),
+	bookmarkId:   '0'
+
+})
 
 
 
-}
 
-
-
-var ctrl = { }
+var app = elem // todo change
 
 
 
 
 
-app.controller = ( ) => {
-
-
-
-}
+module.exports = app

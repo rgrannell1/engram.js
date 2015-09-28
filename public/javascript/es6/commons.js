@@ -4,6 +4,11 @@
 
 
 
+
+var constants = require('./constants')
+
+
+
 var commons         = { }
 
 commons.data        = { }
@@ -17,6 +22,11 @@ commons.mithril     = { }
 
 
 
+
+/*
+	format a date object as a human-readable exact
+	date-time format.
+*/
 
 commons.date.formatDate = date => {
 
@@ -42,23 +52,28 @@ commons.date.formatDate = date => {
 commons.date.formatElapsed  = { }
 commons.date.formatInterval = { }
 commons.date.interval       = { }
+
 commons.date.addUnit        = {
 	second: time => `${time}s`,
 	minute: time => `${time}m`,
 	hour:   time => `${time}h`,
 	month:  time => {
 
-		var day   = constants.date.SHORT_MONTHS[time.getMonth( )]
-		var month = time.getDate( )
+		var date = new Date(time)
+
+		var day   = constants.date.SHORT_MONTHS[date.getMonth( )]
+		var month = date.getDate( )
 
 		return `${day} ${month}`
 
 	},
 	year:   time => {
 
-		var day   = constants.date.SHORT_MONTHS[time.getMonth( )]
-		var month = time.getDate( )
-		var year  = time.getFullYear( )
+		var date = new Date(time)
+
+		var day   = constants.date.SHORT_MONTHS[date.getMonth( )]
+		var month = date.getDate( )
+		var year  = date.getFullYear( )
 
 		return `${day} ${month} ${year}`
 
@@ -83,8 +98,10 @@ commons.date.addUnit        = {
 
 
 
-
+// -- redo; terrible code.
 commons.date.formatElapsed.ms = millis => {
+
+	console.log(constants.date)
 
 	if (millis < constants.date.MINUTE_IN_MS) {
 
@@ -96,9 +113,17 @@ commons.date.formatElapsed.ms = millis => {
 
 	} else if (millis < constants.date.DAY_IN_MS) {
 
+		var now   = new Date( )
+		var ctime = new Date(now - millis)
+
+		var month = constants.date.SHORT_MONTHS[ctime.getMonth( )]
+		var date  = ctime.getDate( )
+
+		return `${month} ${date}`
 
 	} else {
 
+		return 'UNIMPLEMENTED'
 
 	}
 
@@ -167,6 +192,11 @@ commons.log.levelNames.forEach(level => {
 
 
 
+
+/*
+	associate each field in an object with
+	m.prop setter/getter pair.
+*/
 
 commons.mithril.propObj = obj => {
 

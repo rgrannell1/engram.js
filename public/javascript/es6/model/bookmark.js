@@ -5,36 +5,82 @@
 
 
 
-var rest    = require('../rest')
-var commons = require('../commons')
+var rest      = require('../rest')
+var commons   = require('../commons')
+var constants = require('../constants')
+
 
 
 
 
 var view = model => {
 
-	var buttons = { }
-	var links   = { }
-	var info    = { }
-	var rows    = { }
+	var rows = [
+
+		m('li', [
+			view.bookmarkLink(model),
+			view.seperator( ),
+			view.hostLink(model)
+		]),
+		m('li', [view.date(model)] ),
+		m('li', [
+
+			view.shareButton(model),
+			view.seperator( ),
+			view.archiveButton(model),
+			view.seperator( ),
+			view.deleteButton(model)
+
+		])
+
+	]
+
+	var articleProperties = {
+
+		class: `bookmarkId`,
+		id:    model.bookmarkId( )
+
+	}
+
+	return m('article', articleProperties, [
+		m('ul', rows)
+	])
+
+}
 
 
 
 
-	var seperator = m('span', {class: 'seperator'}, '|')
+
+view.date = model => {
+
+	var tidyDate = 'UNDEFINED'
+
+	return m('time', {
+
+		title: commons.date.formatDate(model.date( ))
+
+	}, tidyDate)
+
+}
 
 
 
 
+view.bookmarkLink = model => {
 
-	links.bookmark = m('a', {
+	return m('a', {
 
 		href: model.url( ),
 		rel:  'external noreferrer'
 
 	}, model.displayTitle( ))
 
-	links.host = m('a', {
+}
+
+view.hostLink = model => {
+
+	return m('a', {
 
 		href:  model.hosturl( ),
 		class: 'hosturl',
@@ -42,88 +88,53 @@ var view = model => {
 
 	}, model.hostname( ))
 
-
-
-
-
-	info.date = m('time', {
-
-		title: model.date( )
-
-	}, model.date( ))
+}
 
 
 
 
 
-	buttons.share = m('a', {
+view.seperator = ( ) => {
+	return m('span', {class: 'seperator'}, '|')
+}
 
-		title: 'Share Link...',
-		href:  rest.url.shareLink(model.url( )),
-		target: '_blank'
 
-	}, '🎁 ')
 
-	buttons.archive = m('a', {
+
+
+view.deleteButton = model => {
+
+	return m('a', {
+		title: 'Delete',
+		href:  'javascript:void(0)',
+		class: 'delete-bookmark',
+		role:  'button'
+	}, constants.unicode.HEAVY_MULTIPLICATION)
+
+}
+
+view.archiveButton = model => {
+
+	return m('a', {
 
 		title: 'Show Archive...',
 		href:  rest.url.archiveLink(model.bookmarkId( )),
 		class: 'archive',
 		target: '_blank'
 
-	}, '🎁 ')
-
-	buttons.delete  = m('a', {
-		title: 'Delete',
-		href:  'javascript:void(0)',
-		class: 'delete-bookmark',
-		role:  'button'
-	}, String.fromCharCode(10006))
-
-
-
-
-
-	rows.info = m('li', [info.date])
-
-	rows.links = m('li', [
-
-		links.bookmark,
-		seperator,
-		links.host
-
-	])
-
-	rows.actions = m('li', [
-
-		buttons.share,
-		seperator,
-
-		buttons.archive,
-		seperator,
-
-		buttons.delete
-
-	])
-
-
-
-
-
-	var elem = m('article', {
-
-		class: `bookmarkId`,
-		id:    model.bookmarkId( )
-
-	}, [
-		m('ul', [rows.links, rows.info, rows.actions])
-	])
-
-	return elem
+	}, constants.unicode.CARD_FILE_BOX)
 
 }
 
-var ctrl = ( ) => {
+view.shareButton = model => {
+
+	return m('a', {
+
+		title: 'Share Link...',
+		href:  rest.url.shareLink(model.url( )),
+		target: '_blank'
+
+	}, constants.unicode.WRAPPED_PRESENT)
 
 }
 
@@ -133,8 +144,7 @@ var ctrl = ( ) => {
 
 var Bookmark = data => {
 	return {
-		view: view.bind({ }, commons.mithril.propObj(data)),
-		ctrl
+		view: view.bind({ }, commons.mithril.propObj(data))
 	}
 }
 

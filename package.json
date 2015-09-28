@@ -3,9 +3,6 @@
   "version": "0.9.0",
   "licence": "MIT",
   "repository": "https://github.com/rgrannell1/engram.js",
-  "scripts": {
-    "start": "node ./bin/es5/docopt-engram.js"
-  },
   "license": "MIT",
   "devDependencies": {
     "babel": "^5.8.5",

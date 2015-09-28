@@ -10,6 +10,7 @@ constants.urls      = { }
 constants.selectors = { }
 constants.date      = { }
 constants.view      = { }
+constants.unicode   = { }
 
 
 
@@ -23,17 +24,10 @@ constants.date.MINUTE_IN_S  = 60
 constants.date.HOUR_IN_S    = 3600
 constants.date.DAY_IN_S     = 24 * 3600
 
-constants.date.S_IN_MS      = constants.date.S_IN_MS * 1000
+constants.date.S_IN_MS      = 1000
 constants.date.MINUTE_IN_MS = constants.date.S_IN_MS * 60
 constants.date.HOUR_IN_MS   = constants.date.S_IN_MS * 3600
 constants.date.DAY_IN_MS    = constants.date.S_IN_MS * 24 * 3600
-
-
-
-
-
-constants.urls.BOOKMARK_TEMPLATE = '/public/html/bookmark-template.html'
-constants.urls.IMPORT            = '/api/import'
 
 
 
@@ -47,6 +41,13 @@ constants.selectors.UPLOAD_BUTTON      = '#uploader'
 constants.selectors.DELETE_BUTTONS     = '.delete-bookmark'
 constants.selectors.TIMES              = '.bookmark time'
 
+
+
+
+
+constants.unicode.WRAPPED_PRESENT      = '🎁 '
+constants.unicode.CARD_FILE_BOX        = ' 	🗃 '
+constants.unicode.HEAVY_MULTIPLICATION = String.fromCharCode(10006)
 
 
 
