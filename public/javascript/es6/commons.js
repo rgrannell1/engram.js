@@ -13,6 +13,7 @@ var commons         = { }
 
 commons.data        = { }
 commons.data.string = { }
+commons.data.array  = { }
 commons.date        = { }
 commons.messages    = { }
 commons.log         = { }
@@ -177,6 +178,52 @@ commons.data.string.locate = (char, string, from = 0) => {
 
 
 
+commons.data.array.maxBy = (fn, array) => {
+
+	commons.data.array.maxBy.precond(fn, arrary)
+
+
+
+
+
+	return array.reduce((max, elem) => {
+
+		var magnitude = fn(elem)
+
+		return magnitude > max.magnitude ? {elem, magnitude} : max
+
+	}, {value: undefined, magnitude: -Infinity})
+}
+
+commons.data.array.maxBy.precond = (fn, array) => {
+
+	is.always.function(fn)
+	is.always.array(array)
+
+}
+
+
+
+
+
+commons.data.string.pluck = string => object => {
+
+	commons.data.string.pluck.precond(string, object)
+
+	return object[string]
+}
+
+commons.data.string.pluck.precond = (string, object) => {
+
+	is.always.string(string)
+	is.always.object(object)
+
+}
+
+
+
+
+
 commons.log.levelNames    = ['trace', 'info', 'summary', 'warning-low', 'warning-high', 'error', 'fatal']
 commons.log.formatMessage = (level, message, data) => {
 	return level + ': ' + message + data ? ' ' + JSON.stringify(data) : ''
@@ -206,6 +253,20 @@ commons.mithril.propObj = obj => {
 	return model
 
 }
+
+
+
+
+
+/*
+	invoke each mithril view.
+*/
+
+commons.mithril.invokeView = comp => {
+	return comp.view(comp.ctrl)
+}
+
+
 
 
 

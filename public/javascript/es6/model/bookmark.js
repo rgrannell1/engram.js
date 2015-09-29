@@ -151,13 +151,9 @@ var Bookmark = data => {
 		model: commons.mithril.propObj(data)
 	}
 
-	ctrl.deleteBookmark = ( ) => {
+	ctrl.deleteBookmark = ( ) 	=> {
 		// -- unload this resource, delete from server using service.
 	}
-
-
-
-
 
 	return {
 		view: view.bind({ }, ctrl),
