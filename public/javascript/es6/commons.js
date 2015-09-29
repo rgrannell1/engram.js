@@ -107,29 +107,22 @@ commons.date.isCurrentYear = date => {
 
 commons.date.formatElapsed.ms = millis => {
 
+	var unit
 	var previousDate = new Date( ) - millis
 
 	if (millis < constants.date.MINUTE_IN_MS) {
-
-		return commons.date.addUnit.second(millis / constants.date.S_IN_MS)
-
+		unit = 'second'
 	} else if (millis < constants.date.HOUR_IN_MS) {
-
-		return commons.date.addUnit.minute(millis / constants.date.S_IN_MS)
-
+		unit = 'minute'
 	} else if (millis < constants.date.DAY_IN_MS) {
-
-		return commons.date.addUnit.hour(millis / constants.date.S_IN_MS)
-
+		unit = 'hour'
 	} else if (commons.date.isCurrentYear(previousDate)) {
-
-		return commons.date.addUnit.month(millis / constants.date.S_IN_MS)
-
+		unit = 'month'
 	} else {
-
-		return commons.date.addUnit.year(millis / constants.date.S_IN_MS)
-
+		unit = 'year'
 	}
+
+	return commons.date.addUnit[unit](millis / constants.date.S_IN_MS)
 
 }
 
