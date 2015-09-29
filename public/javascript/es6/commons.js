@@ -98,31 +98,36 @@ commons.date.addUnit        = {
 
 
 
+
+commons.date.isCurrentYear = date => {
+	return new Date( ).getFullYear === date.getFullYear
+}
+
+
+
 commons.date.formatElapsed.ms = millis => {
 
+	var previousDate = new Date( ) - millis
+
 	if (millis < constants.date.MINUTE_IN_MS) {
-		// -- seconds range
 
 		return commons.date.addUnit.second(millis / constants.date.S_IN_MS)
 
 	} else if (millis < constants.date.HOUR_IN_MS) {
-		// -- minutes range
 
 		return commons.date.addUnit.minute(millis / constants.date.S_IN_MS)
 
 	} else if (millis < constants.date.DAY_IN_MS) {
-		// -- hours range
 
 		return commons.date.addUnit.hour(millis / constants.date.S_IN_MS)
 
+	} else if (commons.date.isCurrentYear(previousDate)) {
+
+		return commons.date.addUnit.month(millis / constants.date.S_IN_MS)
+
 	} else {
-		// -- month - years range
 
-		var isSameYear = new Date( ).getFullYear === (new Date( ) - millis).getFullYear
-
-		return isSameYear
-			? commons.date.addUnit.month(millis / constants.date.S_IN_MS)
-			: commons.date.addUnit.year(millis / constants.date.S_IN_MS)
+		return commons.date.addUnit.year(millis / constants.date.S_IN_MS)
 
 	}
 
