@@ -13,23 +13,23 @@ var constants = require('../constants')
 
 
 
-var view = (model, ctrl) => {
+var view = ctrl => {
 
-	var rows = [
+	var rows  = [
 
 		m('li', [
-			view.bookmarkLink(model),
+			view.bookmarkLink(ctrl),
 			view.seperator( ),
-			view.hostLink(model)
+			view.hostLink(ctrl)
 		]),
-		m('li', [view.date(model)] ),
+		m('li', [view.date(ctrl)] ),
 		m('li', [
 
-			view.shareButton(model),
+			view.shareButton(ctrl),
 			view.seperator( ),
-			view.archiveButton(model),
+			view.archiveButton(ctrl),
 			view.seperator( ),
-			view.deleteButton(model, ctrl)
+			view.deleteButton(ctrl)
 
 		])
 
@@ -38,7 +38,7 @@ var view = (model, ctrl) => {
 	var articleProperties = {
 
 		class: `bookmarkId`,
-		id:    model.bookmarkId( )
+		id:    ctrl.model.bookmarkId( )
 
 	}
 
@@ -52,13 +52,13 @@ var view = (model, ctrl) => {
 
 
 
-view.date = model => {
+view.date = ctrl => {
 
-	var tidyDate = commons.date.formatInterval.ms(new Date( ), model.date( ))
+	var tidyDate = commons.date.formatInterval.ms(new Date( ), ctrl.model.date( ))
 
 	return m('time', {
 
-		title: commons.date.formatDate(model.date( ))
+		title: commons.date.formatDate(ctrl.model.date( ))
 
 	}, tidyDate)
 
@@ -67,26 +67,26 @@ view.date = model => {
 
 
 
-view.bookmarkLink = model => {
+view.bookmarkLink = ctrl => {
 
 	return m('a', {
 
-		href: model.url( ),
+		href: ctrl.model.url( ),
 		rel:  'external noreferrer'
 
-	}, model.displayTitle( ))
+	}, ctrl.model.displayTitle( ))
 
 }
 
-view.hostLink = model => {
+view.hostLink = ctrl => {
 
 	return m('a', {
 
-		href:  model.hosturl( ),
+		href:  ctrl.model.hosturl( ),
 		class: 'hosturl',
 		rel:   'external noreferrer'
 
-	}, model.hostname( ))
+	}, ctrl.model.hostname( ))
 
 }
 
@@ -102,7 +102,7 @@ view.seperator = ( ) => {
 
 
 
-view.deleteButton = (model, ctrl) => {
+view.deleteButton = ctrl => {
 
 	return m('a', {
 
@@ -110,18 +110,18 @@ view.deleteButton = (model, ctrl) => {
 		href:  'javascript:void(0)',
 		class: 'delete-bookmark',
 		role:  'button',
-		click: ctrl.deleteBookmark.bind({ }, model)
+		click: ctrl.deleteBookmark.bind({ }, ctrl.model)
 
 	}, constants.unicode.HEAVY_MULTIPLICATION)
 
 }
 
-view.archiveButton = model => {
+view.archiveButton = ctrl => {
 
 	return m('a', {
 
 		title: 'Show Archive...',
-		href:  rest.url.archiveLink(model.bookmarkId( )),
+		href:  rest.url.archiveLink(ctrl.model.bookmarkId( )),
 		class: 'archive',
 		target: '_blank'
 
@@ -129,12 +129,12 @@ view.archiveButton = model => {
 
 }
 
-view.shareButton = model => {
+view.shareButton = ctrl => {
 
 	return m('a', {
 
 		title: 'Share Link...',
-		href:  rest.url.shareLink(model.url( )),
+		href:  rest.url.shareLink(ctrl.model.url( )),
 		target: '_blank'
 
 	}, constants.unicode.WRAPPED_PRESENT)
@@ -147,9 +147,11 @@ view.shareButton = model => {
 
 var Bookmark = data => {
 
-	var ctrl = { }
+	var ctrl = {
+		model: commons.mithril.propObj(data)
+	}
 
-	ctrl.deleteBookmark = model => {
+	ctrl.deleteBookmark = ( ) => {
 		// -- unload this resource, delete from server using service.
 	}
 
@@ -158,7 +160,7 @@ var Bookmark = data => {
 
 
 	return {
-		view: view.bind({ }, commons.mithril.propObj(data), ctrl),
+		view: view.bind({ }, ctrl),
 		ctrl
 	}
 
