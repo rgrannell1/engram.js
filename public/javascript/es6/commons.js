@@ -98,32 +98,31 @@ commons.date.addUnit        = {
 
 
 
-// -- redo; terrible code.
 commons.date.formatElapsed.ms = millis => {
 
-	console.log(constants.date)
-
 	if (millis < constants.date.MINUTE_IN_MS) {
+		// -- seconds range
 
 		return commons.date.addUnit.second(millis / constants.date.S_IN_MS)
 
 	} else if (millis < constants.date.HOUR_IN_MS) {
+		// -- minutes range
 
 		return commons.date.addUnit.minute(millis / constants.date.S_IN_MS)
 
 	} else if (millis < constants.date.DAY_IN_MS) {
+		// -- hours range
 
-		var now   = new Date( )
-		var ctime = new Date(now - millis)
-
-		var month = constants.date.SHORT_MONTHS[ctime.getMonth( )]
-		var date  = ctime.getDate( )
-
-		return `${month} ${date}`
+		return commons.date.addUnit.hour(millis / constants.date.S_IN_MS)
 
 	} else {
+		// -- month - years range
 
-		return 'UNIMPLEMENTED'
+		var isSameYear = new Date( ).getFullYear === (new Date( ) - millis).getFullYear
+
+		return isSameYear
+			? commons.date.addUnit.month(millis / constants.date.S_IN_MS)
+			: commons.date.addUnit.year(millis / constants.date.S_IN_MS)
 
 	}
 
@@ -141,7 +140,7 @@ commons.date.formatElapsed.s  = seconds => {
 {
 
 	let formatInterval = (factor, newer, older) => {
-		return commons.date.formatElapsed(commons.date.interval.ms(newer, older))
+		return commons.date.formatElapsed.ms(commons.date.interval.ms(newer, older))
 	}
 
 	commons.date.formatInterval.s  = formatInterval.bind({ }, 1000)

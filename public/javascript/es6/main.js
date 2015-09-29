@@ -35,4 +35,4 @@ console.log('main: loaded.')
 
 
 
-m.mount(document.body, app)
+m.mount(document.getElementById('bookmark-container'), app)

@@ -13,7 +13,7 @@ var constants = require('../constants')
 
 
 
-var view = model => {
+var view = (model, ctrl) => {
 
 	var rows = [
 
@@ -29,7 +29,7 @@ var view = model => {
 			view.seperator( ),
 			view.archiveButton(model),
 			view.seperator( ),
-			view.deleteButton(model)
+			view.deleteButton(model, ctrl)
 
 		])
 
@@ -54,7 +54,7 @@ var view = model => {
 
 view.date = model => {
 
-	var tidyDate = 'UNDEFINED'
+	var tidyDate = commons.date.formatInterval.ms(new Date( ), model.date( ))
 
 	return m('time', {
 
@@ -102,13 +102,16 @@ view.seperator = ( ) => {
 
 
 
-view.deleteButton = model => {
+view.deleteButton = (model, ctrl) => {
 
 	return m('a', {
+
 		title: 'Delete',
 		href:  'javascript:void(0)',
 		class: 'delete-bookmark',
-		role:  'button'
+		role:  'button',
+		click: ctrl.deleteBookmark.bind({ }, model)
+
 	}, constants.unicode.HEAVY_MULTIPLICATION)
 
 }
@@ -143,9 +146,22 @@ view.shareButton = model => {
 
 
 var Bookmark = data => {
-	return {
-		view: view.bind({ }, commons.mithril.propObj(data))
+
+	var ctrl = { }
+
+	ctrl.deleteBookmark = model => {
+		// -- unload this resource, delete from server using service.
 	}
+
+
+
+
+
+	return {
+		view: view.bind({ }, commons.mithril.propObj(data), ctrl),
+		ctrl
+	}
+
 }
 
 

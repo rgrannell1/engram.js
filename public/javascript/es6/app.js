@@ -17,7 +17,7 @@ var elem = Bookmark({
 	displayTitle: 'Mount',
 	hosturl:      'http://mithril.js.org',
 	hostname:     'mithril',
-	date:         new Date( ),
+	date:         new Date(1400000000),
 	bookmarkId:   '0'
 
 })
