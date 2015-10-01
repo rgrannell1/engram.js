@@ -28,6 +28,8 @@ var view = ctrl => {
 
 var BookmarkList = bookmarks => {
 
+	BookmarkList.precond(bookmarks)
+
 	// -- need to allow updates to slice shown,
 	// -- bookmarks stored, mithril rendering.
 
@@ -53,6 +55,14 @@ var BookmarkList = bookmarks => {
 		view: view.bind({ }, ctrl),
 		ctrl
 	}
+
+}
+
+BookmarkList.precond = bookmarks => {
+
+	is.always.array(bookmarks)
+
+	bookmarks.forEach(Bookmark.precond)
 
 }
 
