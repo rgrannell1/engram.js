@@ -226,7 +226,7 @@ commons.data.string.pluck.precond = (string, object) => {
 
 commons.log.levelNames    = ['trace', 'info', 'summary', 'warning-low', 'warning-high', 'error', 'fatal']
 commons.log.formatMessage = (level, message, data) => {
-	return level + ': ' + message + data ? ' ' + JSON.stringify(data) : ''
+	return level + ': ' + message + (data ? ' ' + JSON.stringify(data) : '')
 }
 
 commons.log.levelNames.forEach(level => {
