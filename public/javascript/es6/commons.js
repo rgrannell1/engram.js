@@ -11,9 +11,14 @@ var constants = require('./constants')
 
 var commons         = { }
 
-commons.data        = { }
-commons.data.string = { }
-commons.data.array  = { }
+commons.data        = {
+	string: { },
+	array:  { },
+	object: { }
+}
+
+commons.assert      = { }
+
 commons.date        = { }
 commons.messages    = { }
 commons.log         = { }
@@ -223,6 +228,21 @@ commons.data.string.pluck.precond = (string, object) => {
 
 
 
+commons.data.object.containsProperties = (props, object) => {
+
+	var hasAllProps = true
+
+	Object.keys(object).forEach(prop => {
+		hasAllProps = hasAllProps && props.indexOf(prop) !== -1
+	})
+
+	return hasAllProps
+
+}
+
+
+
+
 
 commons.log.levelNames    = ['trace', 'info', 'summary', 'warning-low', 'warning-high', 'error', 'fatal']
 commons.log.formatMessage = (level, message, data) => {
@@ -268,6 +288,26 @@ commons.mithril.invokeView = comp => {
 	return comp.view(comp.ctrl)
 }
 
+
+
+
+
+commons.assert.hasProperties = (props, object) => {
+
+	var hasAllProps = commons.data.object.containsProperties(props, object)
+
+	if (!hasAllProps) {
+
+		var message = 'object did not contain expected properties'
+
+		message += '\n' + JSON.stringify(props)
+		message += '\n' + JSON.stringify(Object.keys(object))
+
+		throw new Error(message)
+
+	}
+
+}
 
 
 

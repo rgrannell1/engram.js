@@ -109,8 +109,7 @@ view.deleteButton = ctrl => {
 		title: 'Delete',
 		href:  'javascript:void(0)',
 		class: 'delete-bookmark',
-		role:  'button',
-		click: ctrl.deleteBookmark.bind({ }, ctrl.model)
+		role:  'button'
 
 	}, constants.unicode.HEAVY_MULTIPLICATION)
 
@@ -147,12 +146,10 @@ view.shareButton = ctrl => {
 
 var Bookmark = data => {
 
+	Bookmark.precond(data)
+
 	var ctrl = {
 		model: commons.mithril.propObj(data)
-	}
-
-	ctrl.deleteBookmark = ( ) 	=> {
-		// -- unload this resource, delete from server using service.
 	}
 
 	return {
@@ -162,6 +159,20 @@ var Bookmark = data => {
 
 }
 
+Bookmark.precond = data => {
+
+	is.always.object(data)
+
+	commons.assert.hasProperties([
+		'bookmarkId',
+		'date',
+		'url',
+		'displayTitle',
+		'hosturl',
+		'hostname'
+	], data)
+
+}
 
 
 

@@ -328,7 +328,7 @@ test-server: all
 clean:
 
 	# Make: removing compiled code.
-	@rm $(ALL_TGT)
+	-rm $(ALL_TGT)
 
 
 

@@ -23,6 +23,15 @@ rest.url.archiveLink = id => {
 	return `archive/${id}`
 }
 
+rest.url.getBookmarks = (maxID, amount) => {
+	return `api/bookmarks?maxID=${maxID}&amount=${amount}`
+}
+
+rest.url.importBookmarks = ( ) => {
+	return '/import'
+}
+
+
 
 
 
@@ -45,13 +54,13 @@ rest.deleteBookmark = (id, onOk, onErr) => {
 
 }
 
-rest.getBookmarks = (maxID, amount, onOk, onErr) => {
+rest.getBookmarks = (maxID, amount, callbacks) => {
 
 	$.ajax({
-		url:      `/api/bookmarks?maxID=${maxID}&amount=${amount}`,
+		url:      rest.url.getBookmarks(maxID, amount),
 		dataType: 'json',
-		success:  onOk,
-		failure:  onErr
+		success:  callbacks.success,
+		failure:  callbacks.failure
 	})
 
 }
@@ -60,9 +69,9 @@ rest.importBookmarks = (data, onOk, onErr) => {
 
 	$.ajax({
 		type:     'POST',
-		url:      constants.urls.IMPORT,
+		url:      rest.url.importBookmarks( ),
 		dataType: 'json',
-        data:     data,
+        data,
         headers:  {
         	'Content-Type': 'application/json'
         },

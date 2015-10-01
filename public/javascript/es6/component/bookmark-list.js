@@ -44,7 +44,7 @@ var BookmarkList = bookmarks => {
 			}
 		},
 		add: bookmark => {
-			ctrl.model.bookmarks.push(bookmarks)
+			ctrl.model.bookmarks( ).push(bookmark)
 			m.redraw.strategy('diff')
 		}
 	}

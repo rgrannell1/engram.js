@@ -28,9 +28,21 @@ window.ENGRAM.rest      = rest
 
 
 
-commons.log.info('main: loaded.', {
+commons.log.summary('loaded client-side code.', {
 	is:      typeof window.is !== 'undefined',
 	mithril: typeof window.m  !== 'undefined'
+})
+
+
+
+
+app.ctrl.add({
+	bookmarkId:   1,
+	date:         new Date(1400000000),
+	url:          'http://example.com',
+	displayTitle: 'Example',
+	hosturl:      'http://example.com',
+	hostname:     'example'
 })
 
 
