@@ -11,7 +11,7 @@ var constants = require('./constants')
 var messages  = require('./messages')
 var commons   = require('./commons')
 var rest      = require('./rest')
-
+var is        = require('./dependency-is')
 
 
 
@@ -29,7 +29,10 @@ window.ENGRAM.rest      = rest
 
 
 
-console.log('main: loaded.')
+commons.log.info('main: loaded.', {
+	is:      typeof window.is !== 'undefined',
+	mithril: typeof window.m  !== 'undefined'
+})
 
 
 

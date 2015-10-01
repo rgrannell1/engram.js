@@ -17,7 +17,7 @@ var view = ctrl => {
 
 	return m('section', {id: 'bookmarks'}, [
 		m('section', {id: 'bokmark-container'},
-			ctrl.model( ).map(Bookmark).map(commons.mithril.invokeView))
+			ctrl.model.bookmarks( ).map(Bookmark).map(commons.mithril.invokeView))
 	])
 
 }
@@ -31,7 +31,9 @@ var BookmarkList = bookmarks => {
 	// -- need to allow updates to slice shown,
 	// -- bookmarks stored, mithril rendering.
 
-	var maxId = commons.data.array.maxBy(commons.data.string.pluck('bookmarkId'))
+	var maxId = commons.data.array.maxBy(commons.data.string.pluck('bookmarkId'), bookmarks)
+
+	// -- add ordering function, slicing function.
 
 	var ctrl  = {
 		model: {
@@ -43,7 +45,7 @@ var BookmarkList = bookmarks => {
 		},
 		add: bookmark => {
 			ctrl.model.bookmarks.push(bookmarks)
-			m.redraw.strategy()
+			m.redraw.strategy('diff')
 		}
 	}
 

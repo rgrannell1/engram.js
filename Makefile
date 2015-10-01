@@ -52,6 +52,12 @@ SASS_FLAGS =
 
 
 
+URL_IS      = https://raw.githubusercontent.com/rgrannell1/is/master/lib/is-min.js
+URL_MITHRIL = https://cdnjs.cloudflare.com/ajax/libs/mithril/0.2.0/mithril.min.js
+
+
+
+
 # -- PATHS -- #
 
 SERVER_ES5_PATH = node_modules/engram/es5
@@ -116,6 +122,7 @@ ENGRAM_CLIENT_MODEL_TGT_PATH      = $(CLIENT_ES5_PATH)/model
 ENGRAM_CLIENT_VIEW_TGT_PATH       = $(CLIENT_ES5_PATH)/view
 ENGRAM_CLIENT_TGT_PATH            = $(CLIENT_ES5_PATH)
 
+ENGRAM_CLIENT_DEPENDENCY_PATH     = public/javascript/lib
 
 
 
@@ -198,6 +205,16 @@ $(ENGRAM_CLIENT_TGT_PATH)/%.js: $(ENGRAM_CLIENT_SRC_PATH)/%.js
 
 
 
+install-dependencies:
+
+install-is:
+	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-is.js $(URL_IS)
+
+install-mithril:
+	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-is.js $(URL_MITHRIL)
+
+
+
 
 
 browserify-client: es6ify-client $(ENGRAM_CLIENT_BUNDLE_TGT)
@@ -237,7 +254,7 @@ $(ENGRAM_TEST_TGT): $(ENGRAM_TEST_SRC)
 
 
 
-browserify-client-test: $(ENGRAM_TEST_BUNDLE_TGT)
+browserify-client-test: es6ify-client $(ENGRAM_TEST_BUNDLE_TGT)
 
 $(ENGRAM_TEST_BUNDLE_TGT): $(ENGRAM_TEST_BUNDLE_SRC)
 

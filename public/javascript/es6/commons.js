@@ -180,7 +180,7 @@ commons.data.string.locate = (char, string, from = 0) => {
 
 commons.data.array.maxBy = (fn, array) => {
 
-	commons.data.array.maxBy.precond(fn, arrary)
+	commons.data.array.maxBy.precond(fn, array)
 
 
 
@@ -230,7 +230,9 @@ commons.log.formatMessage = (level, message, data) => {
 }
 
 commons.log.levelNames.forEach(level => {
-	commons.log[level] = commons.log.formatMessage.bind({ }, level)
+	commons.log[level] = (message, data) => {
+		console.log(commons.log.formatMessage(level, message, data))
+	}
 })
 
 
