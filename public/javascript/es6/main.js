@@ -6,12 +6,11 @@
 
 
 
-var app       = require('./app')
-var constants = require('./constants')
-var messages  = require('./messages')
-var commons   = require('./commons')
-var rest      = require('./rest')
-
+var app           = require('./app')
+var constants     = require('./constants')
+var messages      = require('./messages')
+var commons       = require('./commons')
+var rest          = require('./rest')
 
 
 
@@ -36,14 +35,21 @@ commons.log.summary('loaded client-side code.', {
 
 
 
-app.ctrl.add({
-	bookmarkId:   1,
-	date:         new Date(1400000000),
-	url:          'http://example.com',
-	displayTitle: 'Example',
-	hosturl:      'http://example.com',
-	hostname:     'example'
-})
+var fn = ( ) => {
+
+	app.ctrl.add({
+		bookmarkId:   1,
+		date:         new Date(1400000000),
+		url:          'http://example.com',
+		displayTitle: 'Example',
+		hosturl:      'http://example.com',
+		hostname:     'example'
+	})
+
+}
+
+fn( )
+fn( )
 
 
 

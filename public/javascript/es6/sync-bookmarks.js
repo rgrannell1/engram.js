@@ -3,28 +3,23 @@
 
 
 
-var onFetch = {
-	success: (callback, data) => {
+// this is a very dumb general adapter at the moment; fix.
 
-		callback(data)
-
-	},
-	failure: (callback, res) => {
-
-		callback(res)
-
-	}
-}
-
-
-
-
-
-var syncBookmarks = (app, callbacks) => {
+var syncBookmarks = callbacks => {
 
 	rest.getBookmarks(MAXID, AMOUNT, {
-		success: onFetch.success.bind({ }, callbacks.success),
-		failure: onFetch.failure.bind({ }, callbacks.failure)
+		success: data => {
+
+			callbacks.success(data)
+
+			// save the bookmarks, re-request.
+
+		},
+		failure: res => {
+
+			callbacks.failure(data)
+
+		}
 	})
 
 }

@@ -4,16 +4,31 @@
 
 
 
-var commons      = require('./commons')
+var commons       = require('./commons')
 
-var Bookmark     = require('./component/bookmark')
-var BookmarkList = require('./component/bookmark-list')
-
-
-
+var Bookmark      = require('./component/bookmark')
+var BookmarkList  = require('./component/bookmark-list')
+var syncBookmarks = require('./sync-bookmarks')
 
 
-var app = BookmarkList([ ])
+
+
+
+var bookmarks = BookmarkList([ ])
+
+
+
+
+
+syncBookmarks(bookmarks, {
+	success: ( ) => { },
+	failure: ( ) => { },
+})
+
+
+
+
+var app = bookmarks
 
 
 
