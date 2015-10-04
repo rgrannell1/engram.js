@@ -21,7 +21,7 @@ module.exports = function(config) {
 
         'public/javascript/es5/bundle.js',
 
-        'public-test/tests/bundle.js'
+        'public-test/bundle.js'
     ],
 
 
