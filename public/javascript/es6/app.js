@@ -20,14 +20,6 @@ var bookmarks = BookmarkList([ ])
 
 
 
-syncBookmarks(bookmarks, {
-	success: ( ) => { },
-	failure: ( ) => { },
-})
-
-
-
-
 var app = bookmarks
 
 

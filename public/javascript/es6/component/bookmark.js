@@ -54,11 +54,12 @@ var view = ctrl => {
 
 view.date = ctrl => {
 
-	var tidyDate = commons.date.formatInterval.ms(new Date( ), ctrl.model.date( ))
+	var cdate    = new Date(ctrl.model.ctime( ))
+	var tidyDate = commons.date.formatInterval.ms(new Date( ), cdate)
 
 	return m('time', {
 
-		title: commons.date.formatDate(ctrl.model.date( ))
+		title: commons.date.formatDate(cdate)
 
 	}, tidyDate)
 
@@ -74,7 +75,7 @@ view.bookmarkLink = ctrl => {
 		href: ctrl.model.url( ),
 		rel:  'external noreferrer'
 
-	}, ctrl.model.displayTitle( ))
+	}, ctrl.model.title( ))
 
 }
 
@@ -165,11 +166,11 @@ Bookmark.precond = data => {
 
 	commons.assert.hasProperties([
 		'bookmarkId',
-		'date',
-		'url',
-		'displayTitle',
-		'hosturl',
+		'ctime',
 		'hostname'
+		'hosturl',
+		'title',
+		'url',
 	], data)
 
 }

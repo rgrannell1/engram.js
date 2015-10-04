@@ -300,8 +300,8 @@ commons.assert.hasProperties = (props, object) => {
 
 		var message = 'object did not contain expected properties'
 
-		message += '\n' + JSON.stringify(props)
-		message += '\n' + JSON.stringify(Object.keys(object))
+		message += '\n' + JSON.stringify(props.sort( ))
+		message += '\n' + JSON.stringify(Object.keys(object).sort( ))
 
 		throw new Error(message)
 

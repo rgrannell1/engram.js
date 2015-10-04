@@ -11,6 +11,7 @@ var constants     = require('./constants')
 var messages      = require('./messages')
 var commons       = require('./commons')
 var rest          = require('./rest')
+var syncBookmarks = require('./sync-bookmarks')
 
 
 
@@ -35,21 +36,18 @@ commons.log.summary('loaded client-side code.', {
 
 
 
-var fn = ( ) => {
 
-	app.ctrl.add({
-		bookmarkId:   1,
-		date:         new Date(1400000000),
-		url:          'http://example.com',
-		displayTitle: 'Example',
-		hosturl:      'http://example.com',
-		hostname:     'example'
-	})
+syncBookmarks(app, {
+	success: body => {
 
-}
+		console.log( body )
+		m.redraw( )
 
-fn( )
-fn( )
+	},
+	failure: res  => {
+
+	}
+})
 
 
 
