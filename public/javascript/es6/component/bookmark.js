@@ -58,9 +58,7 @@ view.date = ctrl => {
 	var tidyDate = commons.date.formatInterval.ms(new Date( ), cdate)
 
 	return m('time', {
-
 		title: commons.date.formatDate(cdate)
-
 	}, tidyDate)
 
 }

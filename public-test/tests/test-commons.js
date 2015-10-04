@@ -78,3 +78,19 @@ describe('commons.log.formatMessage', function ( ) {
 	})
 
 })
+
+describe('commons.data.array.difference', function ( ) {
+
+	it('returns the empty array where appropriate', function ( ) {
+
+		expect( commons.data.array.difference([ ], [ ]) ).to.deep.equal(['b'])
+
+	})
+
+	it('returns elements in set 1 not in set 0', function ( ) {
+
+		expect( commons.data.array.difference(['a'], ['a', 'b']) ).to.deep.equal(['b'])
+
+	})
+
+})

@@ -168,17 +168,6 @@ commons.data.enum = labels => {
 
 }
 
-commons.data.string.locate = (char, string, from = 0) => {
-
-	for (let ith = from; ith < string.length; ++ith) {
-		if (char === string.charAt(ith)) {
-			return ith
-		}
-	}
-
-	return -1
-}
-
 
 
 
@@ -186,10 +175,6 @@ commons.data.string.locate = (char, string, from = 0) => {
 commons.data.array.maxBy = (fn, array) => {
 
 	commons.data.array.maxBy.precond(fn, array)
-
-
-
-
 
 	return array.reduce((max, elem) => {
 

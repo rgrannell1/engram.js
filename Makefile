@@ -135,7 +135,7 @@ ENGRAM_CLIENT_DEPENDENCY_PATH     = public/javascript/lib
 
 all: es6ify-client es6ify-server add-client-dependencies browserify-client cssify-client
 
-ALL_TGT = $(ENGRAM_ALL_CLIENT_TGT) $(ENGRAM_CLIENT_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT)
+ALL_TGT = $(ENGRAM_ALL_CLIENT_TGT) $(ENGRAM_CLIENT_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT) $(ENGRAM_CLIENT_LIB_TGT)
 
 
 
@@ -229,11 +229,9 @@ $(ENGRAM_CLIENT_BUNDLE_TGT): $(ENGRAM_CLIENT_BUNDLE_SRC)
 
 
 
-
-
 add-client-dependencies: $(ENGRAM_CLIENT_LIB_TGT)
 
-$(ENGRAM_CLIENT_LIB_TGT): $(ENGRAM_CLIENT_LIB_SRC)
+$(ENGRAM_CLIENT_TGT_PATH)/%.js: $(CLIENT_LIB_PATH)/%.js
 
 	# Make: install library dependencies.
 
