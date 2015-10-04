@@ -10,18 +10,15 @@ var rest = require('./rest')
 
 
 
-// -- remove eventually.
-var constants = {maxId: 1000000, amount: 1000000}
-
-
-
-
 
 // todo; adapt this to work with streaming api!
 
 var syncBookmarks = (bookmarkList, callbacks) => {
 
 	syncBookmarks.precond(bookmarkList, callbacks)
+
+	// -- remove eventually.
+	var constants = {maxId: 1000000, amount: 1000000}
 
 	rest.getBookmarks(constants.maxId, constants.amount, {
 		success: body => {

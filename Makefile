@@ -48,6 +48,9 @@ ESLINT_FLAGS = --config config/eslint-config.json
 SASS       = sass
 SASS_FLAGS =
 
+# -- Karma
+
+KARMA = ./node_modules/karma/bin/karma
 
 
 
@@ -315,6 +318,15 @@ test-server: all
 
 	$(MOCHA) $(MOCHA_FLAGS) $(SERVER_TEST_ES5_PATH)
 
+test-phantom:
+
+	@printf "[Test :: Karma (PhantomJS)]"
+	$(KARMA) start --browsers PhantomJS
+
+test-firefox:
+
+	@printf "[Test :: Karma (Firefox)]"
+	$(KARMA) start --browsers Firefox
 
 
 
@@ -325,7 +337,7 @@ test-server: all
 
 clean:
 
-	# Make: removing compiled code.
+	@printf "[Clean]"
 	-rm $(ALL_TGT)
 
 
