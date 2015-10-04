@@ -167,7 +167,7 @@ Bookmark.precond = data => {
 	commons.assert.hasProperties([
 		'bookmarkId',
 		'ctime',
-		'hostname'
+		'hostname',
 		'hosturl',
 		'title',
 		'url',

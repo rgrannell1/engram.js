@@ -228,6 +228,23 @@ commons.data.string.pluck.precond = (string, object) => {
 
 
 
+
+commons.data.array.difference = (set0, set1) => {
+
+	var exclusion = [ ]
+
+	set0.forEach(item0 => {
+		if (set1.indexOf(item0) === -1) {
+			exclusion.push(item0)
+		}
+	})
+
+	return exclusion
+
+}
+
+
+
 commons.data.object.containsProperties = (props, object) => {
 
 	var hasAllProps = true
@@ -294,14 +311,13 @@ commons.mithril.invokeView = comp => {
 
 commons.assert.hasProperties = (props, object) => {
 
-	var hasAllProps = commons.data.object.containsProperties(props, object)
 
-	if (!hasAllProps) {
+	var excluded = commons.data.array.difference(props, Object.keys(object))
+
+	if (excluded.length > 0) {
 
 		var message = 'object did not contain expected properties'
-
-		message += '\n' + JSON.stringify(props.sort( ))
-		message += '\n' + JSON.stringify(Object.keys(object).sort( ))
+		message += '\n' + JSON.stringify(excluded)
 
 		throw new Error(message)
 
