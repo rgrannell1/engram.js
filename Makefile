@@ -10,11 +10,6 @@ ENGRAM_DOCOPT = ./bin/docopt-engram.js
 NODE       = node
 NODE_FLAGS = --harmony_destructuring
 
-
-# -- Chrome
-
-CHROME = chromium-browser
-
 # -- Browserify.
 
 BROWSERIFY       = $(BIN)/browserify
@@ -302,33 +297,19 @@ $(ENGRAM_SASS_TGT): $(ENGRAM_SASS_SRC)
 
 # -- Run the mocha tests.
 
-test: test-client test-server
+test: test-client test-server test-karma
 
 	# Make: Run client and server tests.
 
-test-client: all
-
-	# Make: Run client tests.
-
-	$(CHROME) $(CLIENT_RUNNER_PATH) &
-
-test-server: all
+test-server: build
 
 	# Make: Run server tests.
 
 	$(MOCHA) $(MOCHA_FLAGS) $(SERVER_TEST_ES5_PATH)
 
-test-phantom:
+test-karma: build
 
-	@printf "[Test :: Karma (PhantomJS)]"
-	$(KARMA) start --browsers PhantomJS
-
-test-firefox:
-
-	@printf "[Test :: Karma (Firefox)]"
-	$(KARMA) start --browsers Firefox
-
-
+	$(KARMA) start
 
 
 # ==== ==== ==== ==== Cleanup ==== ==== ==== ==== #

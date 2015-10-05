@@ -24,9 +24,10 @@ module.exports = function(config) {
         'public-test/bundle.js'
     ],
 
-
-
-
+    coverageReporter: {
+        type: 'text',
+        dir:  'coverage/'
+    },
 
     // list of files to exclude
     exclude: [
@@ -69,6 +70,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   })
 }
