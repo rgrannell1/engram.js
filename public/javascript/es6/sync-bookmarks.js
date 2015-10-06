@@ -13,9 +13,9 @@ var rest = require('./rest')
 
 // todo; adapt this to work with streaming api!
 
-var syncBookmarks = (bookmarkList, callbacks) => {
+var syncBookmarks = (bookmarks, callbacks) => {
 
-	syncBookmarks.precond(bookmarkList, callbacks)
+	syncBookmarks.precond(bookmarks, callbacks)
 
 	// -- remove eventually.
 	var constants = {maxId: 1000000, amount: 1000000}
@@ -23,7 +23,7 @@ var syncBookmarks = (bookmarkList, callbacks) => {
 	rest.getBookmarks(constants.maxId, constants.amount, {
 		success: body => {
 
-			body.data.forEach(bookmarkList.ctrl.add)
+			bookmarks(bookmarks( ).concat(body.data))
 			callbacks.success(body)
 
 		},
@@ -36,9 +36,9 @@ var syncBookmarks = (bookmarkList, callbacks) => {
 
 
 
-syncBookmarks.precond = (bookmarkList, callbacks) => {
+syncBookmarks.precond = (bookmarks, callbacks) => {
 
-	is.always.object(bookmarkList)
+	is.always.function(bookmarks)
 	is.always.object(callbacks)
 
 	is.always.function(callbacks.success)

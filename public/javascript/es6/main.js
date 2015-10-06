@@ -37,7 +37,7 @@ commons.log.summary('loaded client-side code.', {
 
 
 
-syncBookmarks(app.ctrl.subcomponents.bookmarkList, {
+syncBookmarks(app.ctrl.model.bookmarks, {
 	success: body => {
 
 		console.log( body )

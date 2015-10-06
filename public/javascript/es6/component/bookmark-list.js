@@ -44,10 +44,6 @@ var BookmarkList = bookmarks => {
 				lower: maxId - constants.view.VISIBLE_BOOKMARKS,
 				upper: maxId
 			}
-		},
-		add: bookmark => {
-			ctrl.model.bookmarks( ).push(bookmark)
-			m.redraw.strategy('diff')
 		}
 	}
 
