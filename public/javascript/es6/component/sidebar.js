@@ -20,7 +20,15 @@ var view = ctrl => {
 }
 
 view.import = ctrl => {
-	return m('a', {href: '', id: 'upload'}, 'Import')
+	return m('a', {
+
+		href:    '',
+		id:      'upload',
+		onclick: ( ) => {
+			uploadFile()
+		}
+
+	}, 'Import')
 }
 
 view.export = ctrl => {

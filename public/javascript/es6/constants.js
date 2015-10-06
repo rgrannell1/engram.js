@@ -37,7 +37,7 @@ constants.selectors.BOOKMARKS          = '#bookmarks'
 constants.selectors.BOOKMARK_CONTAINER = '#bookmark-container'
 constants.selectors.ARTICLES           = '#bookmarks article'
 constants.selectors.UPLOAD_FORM        = '#uploader-hidden'
-constants.selectors.UPLOAD_BUTTON      = '#uploader'
+constants.selectors.UPLOAD_BUTTON      = 'uploader'
 constants.selectors.DELETE_BUTTONS     = '.delete-bookmark'
 constants.selectors.TIMES              = '.bookmark time'
 
