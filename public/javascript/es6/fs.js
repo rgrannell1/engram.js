@@ -33,7 +33,7 @@ fs.readDataURL = (url, callback) => {
 
 
 var hasFiles = elem => {
-	return !is.undefined(elem.getAttribute('files')).
+	return !is.undefined(elem.getAttribute('files'))
 }
 
 
