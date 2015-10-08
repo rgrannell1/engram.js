@@ -52,6 +52,12 @@ constants.unicode.HEAVY_MULTIPLICATION = String.fromCharCode(10006)
 
 
 
+constants.contentType = {
+
+}
+
+
+
 
 constants.view.VISIBLE_BOOKMARKS = 50
 

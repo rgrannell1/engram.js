@@ -52,6 +52,8 @@ KARMA = ./node_modules/karma/bin/karma
 
 URL_IS      = https://raw.githubusercontent.com/rgrannell1/is/master/lib/is-min.js
 URL_MITHRIL = https://cdnjs.cloudflare.com/ajax/libs/mithril/0.2.0/mithril.min.js
+URL_JQUERY  = http://code.jquery.com/jquery-2.1.4.min.js
+
 
 
 
@@ -209,8 +211,10 @@ install-is:
 	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-is.js $(URL_IS)
 
 install-mithril:
-	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-is.js $(URL_MITHRIL)
+	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-mithril.js $(URL_MITHRIL)
 
+install-jquery:
+	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-jquery.js $(URL_JQUERY)
 
 
 
@@ -274,7 +278,7 @@ eslint:
 	# Make: ESHint
 
 	$(ESLINT) $(ESLINT_FLAGS) $(SERVER_ES6_PATH)
-
+	$(ESLINT) $(ESLINT_FLAGS) $(CLIENT_ES6_PATH)
 
 
 

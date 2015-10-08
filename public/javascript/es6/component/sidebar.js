@@ -5,6 +5,13 @@
 
 
 
+var fs      = require('../fs')
+var imports = require('../imports')
+
+
+
+
+
 var view = ctrl => {
 
 	return m('section', {id: 'navbar'}, [
@@ -25,7 +32,9 @@ view.import = ctrl => {
 		href:    '',
 		id:      'upload',
 		onclick: ( ) => {
-			uploadFile()
+			fs.read(data => {
+				imports.pocket.parse(data)
+			})
 		}
 
 	}, 'Import')

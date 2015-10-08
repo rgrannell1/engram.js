@@ -11,6 +11,7 @@ var constants = require('./constants')
 
 var commons         = { }
 
+commons.dom         = { }
 commons.data        = {
 	string: { },
 	array:  { },
@@ -24,7 +25,6 @@ commons.messages    = { }
 commons.log         = { }
 commons.external    = { }
 commons.mithril     = { }
-
 
 
 
@@ -309,6 +309,7 @@ commons.assert.hasProperties = (props, object) => {
 	}
 
 }
+
 
 
 

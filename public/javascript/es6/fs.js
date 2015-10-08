@@ -16,18 +16,50 @@ var fs = { }
 
 
 
+fs.readDataURL = (url, callback) => {
 
-/*
-	this method is intended to act as a no-form uploader;
-	click on the import link, and the import form should pop up.
-*/
+	var dataURLContentType = 'data:text/html;base64,'
 
-fs.read = ( ) => {
-
-	var uploader = document.getElementById(constants.selectors.UPLOAD_BUTTON)
+	if (!url.startsWith(dataURLContentType)) {
+		commons.log.error('could not load URL')
+	} else {
+		callback( atob(url.slice(dataURLContentType.length)) )
+	}
 
 }
 
+
+
+
+
+var hasFiles = elem => {
+	return !is.undefined(elem.getAttribute('files')).
+}
+
+
+
+
+
+fs.read = callback => {
+
+	commons.dom.onElem(constants.selectors.UPLOAD_FORM, hasFiles, elem => {
+
+		var file   = elem.getAttribute('files')[0]
+		var reader = new FileReader( )
+
+		reader.readAsDataURL(file)
+
+		reader.onload = ( ) => {
+
+			fs.readDataUrl(reader.result, url => {
+				fs.readDataURL(url, callback)
+			})
+
+		}
+
+	})
+
+}
 
 
 module.exports = fs
