@@ -80,11 +80,6 @@ CLIENT_RUNNER_PATH = public-test/runner.html
 
 
 
-
-
-ENGRAM_CLIENT_LIB_SRC = $(shell find $(CLIENT_LIB_PATH) -name '*.js')
-ENGRAM_CLIENT_LIB_TGT = $(subst lib,es5, $(ENGRAM_CLIENT_LIB_SRC))
-
 # -- Engram test code
 
 ENGRAM_TEST_SRC   = $(shell find $(SERVER_TEST_ES6_PATH) -name '*.js')
@@ -127,6 +122,7 @@ ENGRAM_CLIENT_DEPENDENCY_PATH     = public/javascript/lib
 
 
 
+
 .PHONY: clean all install nodemon eslint jshint test wipe start bunstart bundbstart
 
 
@@ -135,7 +131,7 @@ ENGRAM_CLIENT_DEPENDENCY_PATH     = public/javascript/lib
 
 all: es6ify-client es6ify-server add-client-dependencies browserify-client cssify-client
 
-ALL_TGT = $(ENGRAM_ALL_CLIENT_TGT) $(ENGRAM_CLIENT_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT) $(ENGRAM_CLIENT_LIB_TGT)
+ALL_TGT = $(ENGRAM_ALL_CLIENT_TGT) $(ENGRAM_CLIENT_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT) $(ENGRAM_CLIENT_LIB_TGT) $(ENGRAM_CLIENT_LIB_SRC)
 
 
 
@@ -150,7 +146,7 @@ install: build
 
 # -- compile source code.
 
-build: es6ify-client browserify-client add-client-dependencies es6ify-server browserify-client-test cssify-client
+build: es6ify-client browserify-client add-client-dependencies es6ify-server browserify-client-test cssify-client install-dependencies
 
 
 
@@ -205,7 +201,7 @@ $(ENGRAM_CLIENT_TGT_PATH)/%.js: $(ENGRAM_CLIENT_SRC_PATH)/%.js
 
 
 
-install-dependencies:
+install-dependencies: install-is install-mithril install-jquery
 
 install-is:
 	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-is.js $(URL_IS)
