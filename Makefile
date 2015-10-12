@@ -60,8 +60,7 @@ URL_JQUERY  = http://code.jquery.com/jquery-2.1.4.min.js
 
 # -- PATHS -- #
 
-SERVER_ES5_PATH = node_modules/engram/es5
-SERVER_ES6_PATH = node_modules/engram/es6
+SERVER_PATH     = node_modules/engram/es6
 
 CLIENT_ES5_PATH = public/javascript/es5
 CLIENT_ES6_PATH = public/javascript/es6
@@ -72,9 +71,6 @@ SERVER_TEST_ES6_PATH = node_modules/engram/test/es6
 SERVER_TEST_ES5_PATH = node_modules/engram/test/es5
 
 SASS_PATH = public/sass
-CSS_PATH  = public/css
-
-CLIENT_RUNNER_PATH = public-test/runner.html
 
 
 
@@ -91,6 +87,7 @@ SASS_SRC   = $(shell find $(SASS_PATH) -name '*.sass')
 SASS_TGT   = $(subst sass,css, $(SASS_SRC))
 
 # -- Browserify bundles
+
 TEST_BUNDLE_SRC   = public-test/tests/main.js
 TEST_BUNDLE_TGT   = public-test/bundle.js
 
@@ -116,9 +113,9 @@ CLIENT_CONTROLLER_TGT_PATH     = $(CLIENT_ES5_PATH)/controller
 CLIENT_MODEL_TGT_PATH          = $(CLIENT_ES5_PATH)/model
 CLIENT_VIEW_TGT_PATH           = $(CLIENT_ES5_PATH)/view
 
-CLIENT_DEPENDENCY_IS_PATH      = public/javascript/lib/dependency-is.js
-CLIENT_DEPENDENCY_MITHRIL_PATH = public/javascript/lib/dependency-mithril.js
-CLIENT_DEPENDENCY_JQUERY_PATH  = public/javascript/lib/dependency-jquery.js
+CLIENT_DEP_IS_PATH             = public/javascript/lib/dependency-is.js
+CLIENT_DEP_MITHRIL_PATH        = public/javascript/lib/dependency-mithril.js
+CLIENT_DEP_JQUERY_PATH         = public/javascript/lib/dependency-jquery.js
 
 
 
@@ -135,7 +132,7 @@ CLIENT_DEPENDENCY_JQUERY_PATH  = public/javascript/lib/dependency-jquery.js
 
 
 
-all: es6ify-client es6ify-server add-client-dependencies browserify-client cssify-client
+all: es6ify-client add-client-dependencies browserify-client cssify-client
 
 ALL_TGT = $(ALL_CLIENT_TGT) $(CLIENT_BUNDLE_TGT) $(TEST_BUNDLE_TGT) $(ENGRAM_CLIENT_LIB_TGT) $(ENGRAM_CLIENT_LIB_SRC)
 
@@ -152,7 +149,7 @@ install: build
 
 # -- compile source code.
 
-build: es6ify-client browserify-client install-dependencies add-client-dependencies es6ify-server browserify-client-test cssify-client
+build: es6ify-client browserify-client install-dependencies add-client-dependencies browserify-client-test cssify-client
 
 
 
@@ -175,12 +172,7 @@ bundbstart: all
 
 
 
-
-
-
-
-
-
+# ==== ==== ==== ==== Compile ES6 -> ES6 ==== ==== ==== ==== #
 
 es6ify-client: $(ALL_CLIENT_TGT)
 
@@ -207,16 +199,19 @@ $(CLIENT_ES5_PATH)/%.js: $(CLIENT_SRC_PATH)/%.js
 
 
 
+# ==== ==== ==== ==== Install Client Dependencies ==== ==== ==== ==== #
+
 install-dependencies:
 
-$(CLIENT_DEPENDENCY_IS_PATH):
+$(CLIENT_DEP_IS_PATH):
 	wget -O $@ $(URL_IS)
 
-$(CLIENT_DEPENDENCY_MITHRIL_PATH):
+$(CLIENT_DEP_MITHRIL_PATH):
 	wget -O $@ $(URL_MITHRIL)
 
-$(CLIENT_DEPENDENCY_JQUERY_PATH):
+$(CLIENT_DEP_JQUERY_PATH):
 	wget -O $@ $(URL_JQUERY)
+
 
 
 
@@ -233,7 +228,7 @@ $(CLIENT_BUNDLE_TGT): $(CLIENT_BUNDLE_SRC)
 
 
 # == todo
-add-client-dependencies: $(CLIENT_DEPENDENCY_IS_PATH) $(CLIENT_DEPENDENCY_MITHRIL_PATH) $(CLIENT_DEPENDENCY_JQUERY_PATH)
+add-client-dependencies: $(CLIENT_DEP_IS_PATH) $(CLIENT_DEP_MITHRIL_PATH) $(CLIENT_DEP_JQUERY_PATH)
 
 
 $(CLIENT_TGT_PATH)/%.js: $(CLIENT_LIB_PATH)/%.js
@@ -242,17 +237,6 @@ $(CLIENT_TGT_PATH)/%.js: $(CLIENT_LIB_PATH)/%.js
 
 	cp -f $< $@
 
-
-
-
-es6ify-server: $(TEST_TGT)
-
-$(TEST_TGT): $(TEST_SRC)
-
-	# Make: building server test code.
-
-	mkdir -p $(@D)
-	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
 
 
@@ -268,20 +252,23 @@ $(TEST_BUNDLE_TGT): $(TEST_BUNDLE_SRC)
 
 
 
+
+
 # ==== ==== ==== ==== Code Validation ==== ==== ==== ==== #
 
 jshint:
 
 	# Make: JShint
 
-	$(JSHINT) $(JSHINT_FLAGS) $(SERVER_ES6_PATH)
+	$(JSHINT) $(JSHINT_FLAGS) $(SERVER_PATH)
 
 eslint:
 
 	# Make: ESHint
 
-	$(ESLINT) $(ESLINT_FLAGS) $(SERVER_ES6_PATH)
+	$(ESLINT) $(ESLINT_FLAGS) $(SERVER_PATH)
 	$(ESLINT) $(ESLINT_FLAGS) $(CLIENT_ES6_PATH)
+
 
 
 
@@ -317,6 +304,9 @@ test-server: build
 test-karma: build
 
 	$(KARMA) start
+
+
+
 
 
 # ==== ==== ==== ==== Cleanup ==== ==== ==== ==== #
