@@ -5,7 +5,9 @@
 
 
 
+
 var constants = require('./constants')
+var commons   = require('./commons')
 
 
 
@@ -40,24 +42,42 @@ var hasFiles = elem => {
 
 
 
-fs.read = callback => {
+fs.read = (callback, event) => {
 
-	commons.dom.onElem(constants.selectors.UPLOAD_FORM, hasFiles, elem => {
+	var id = 'hidden-file-input'
 
-		var file   = elem.getAttribute('files')[0]
-		var reader = new FileReader( )
+	if ($('#' + id).length === 0) {
+		// -- append a hidden file to the document body,
+		// -- to circumvent ineffective and annoying browser security.
 
-		reader.readAsDataURL(file)
+		$('<input id=' + id + ' type="file">').appendTo('body')
 
-		reader.onload = ( ) => {
+	}
 
-			fs.readDataUrl(reader.result, url => {
-				fs.readDataURL(url, callback)
-			})
-
-		}
-
+	$('#' + id).one(( ) => {
+		callback( )
 	})
+
+	$('#' + id).trigger('click')
+
+
+	// ~~ trigger click.
+	// set callback of other element
+	// set click.
+
+	var file   = elem.getAttribute('files')[0]
+	var reader = new FileReader( )
+
+	reader.readAsDataURL(file)
+
+	reader.onload = ( ) => {
+
+		fs.readDataUrl(reader.result, url => {
+			fs.readDataURL(url, callback)
+		})
+
+	}
+
 
 }
 

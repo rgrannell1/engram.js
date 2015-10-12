@@ -314,4 +314,12 @@ commons.assert.hasProperties = (props, object) => {
 
 
 
+commons.dom.onElemChange = (elem, predicate, callback) => {
+
+}
+
+
+
+
+
 module.exports = commons

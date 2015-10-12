@@ -19,7 +19,7 @@ var view = ctrl => {
 	// todo pass in Sidebar, Bookmark objects.
 	return m('main', [
 		BookmarkList(ctrl.model.bookmarks( )).view( ),
-		Sidebar(ctrl.model.sidebars( )).view( )
+		Sidebar(ctrl.model.sidebar( )).view( )
 	])
 
 }

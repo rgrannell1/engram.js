@@ -26,7 +26,7 @@ BABEL        = $(BIN)/babel
 BABEL_FLAGS  =
 
 # -- Bunyan.
-BUNYAN       = bunyan
+BUNYAN       = $(BIN)/bunyan
 
 # -- JS Hint.
 
@@ -113,9 +113,9 @@ CLIENT_CONTROLLER_TGT_PATH     = $(CLIENT_ES5_PATH)/controller
 CLIENT_MODEL_TGT_PATH          = $(CLIENT_ES5_PATH)/model
 CLIENT_VIEW_TGT_PATH           = $(CLIENT_ES5_PATH)/view
 
-CLIENT_DEP_IS_PATH             = public/javascript/lib/dependency-is.js
-CLIENT_DEP_MITHRIL_PATH        = public/javascript/lib/dependency-mithril.js
-CLIENT_DEP_JQUERY_PATH         = public/javascript/lib/dependency-jquery.js
+CLIENT_DEP_IS_PATH             = public/javascript/es5/dependency-is.js
+CLIENT_DEP_MITHRIL_PATH        = public/javascript/es5/dependency-mithril.js
+CLIENT_DEP_JQUERY_PATH         = public/javascript/es5/dependency-jquery.js
 
 
 
@@ -126,15 +126,15 @@ CLIENT_DEP_JQUERY_PATH         = public/javascript/lib/dependency-jquery.js
 
 
 
-.PHONY: clean all install nodemon eslint jshint test wipe start bunstart bundbstart
+.PHONY: clean all install nodemon eslint jshint test wipe start bstart
 
 
 
 
 
-all: es6ify-client add-client-dependencies browserify-client cssify-client
+all: build
 
-ALL_TGT = $(ALL_CLIENT_TGT) $(CLIENT_BUNDLE_TGT) $(TEST_BUNDLE_TGT) $(ENGRAM_CLIENT_LIB_TGT) $(ENGRAM_CLIENT_LIB_SRC)
+ALL_TGT = $(ALL_CLIENT_TGT) $(CLIENT_BUNDLE_TGT) $(TEST_BUNDLE_TGT) $(CLIENT_DEP_IS_PATH) $(CLIENT_DEP_MITHRIL_PATH) $(CLIENT_DEP_JQUERY_PATH)
 
 
 
@@ -149,7 +149,7 @@ install: build
 
 # -- compile source code.
 
-build: es6ify-client browserify-client install-dependencies add-client-dependencies browserify-client-test cssify-client
+build: es6ify-client browserify-client install-dependencies browserify-client-test cssify-client
 
 
 
@@ -162,11 +162,8 @@ build: es6ify-client browserify-client install-dependencies add-client-dependenc
 start: all
 	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT)
 
-bunstart: all
+bstart: all
 	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN)
-
-bundbstart: all
-	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN) --level DEBUG
 
 
 
@@ -201,7 +198,9 @@ $(CLIENT_ES5_PATH)/%.js: $(CLIENT_SRC_PATH)/%.js
 
 # ==== ==== ==== ==== Install Client Dependencies ==== ==== ==== ==== #
 
-install-dependencies:
+# -- download dependencies
+
+install-dependencies: $(CLIENT_DEP_IS_PATH) $(CLIENT_DEP_MITHRIL_PATH) $(CLIENT_DEP_JQUERY_PATH)
 
 $(CLIENT_DEP_IS_PATH):
 	wget -O $@ $(URL_IS)
@@ -216,6 +215,10 @@ $(CLIENT_DEP_JQUERY_PATH):
 
 
 
+# ==== ==== ==== ==== Bundle client code ==== ==== ==== ==== #
+
+browserify: browserify-client browserify-client-test
+
 browserify-client: es6ify-client $(CLIENT_BUNDLE_TGT)
 
 $(CLIENT_BUNDLE_TGT): $(CLIENT_BUNDLE_SRC)
@@ -224,18 +227,6 @@ $(CLIENT_BUNDLE_TGT): $(CLIENT_BUNDLE_SRC)
 
 	mkdir -p $(@D)
 	$(BROWSERIFY) $< --outfile $@
-
-
-
-# == todo
-add-client-dependencies: $(CLIENT_DEP_IS_PATH) $(CLIENT_DEP_MITHRIL_PATH) $(CLIENT_DEP_JQUERY_PATH)
-
-
-$(CLIENT_TGT_PATH)/%.js: $(CLIENT_LIB_PATH)/%.js
-
-	# Make: install library dependencies.
-
-	cp -f $< $@
 
 
 

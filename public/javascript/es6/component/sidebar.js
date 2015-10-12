@@ -29,7 +29,6 @@ var view = ctrl => {
 view.import = ctrl => {
 	return m('a', {
 
-		href:    '',
 		id:      'upload',
 		onclick: fs.read.bind({ }, data => {
 			imports.pocket.parse(data)
@@ -39,7 +38,7 @@ view.import = ctrl => {
 }
 
 view.export = ctrl => {
-	return m('a', {href: '', id: 'export'}, 'Export')
+	return m('a', {id: 'export'}, 'Export')
 }
 
 
