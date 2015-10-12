@@ -4,6 +4,7 @@
 
 
 
+var commons = require('./commons')
 
 
 
@@ -18,18 +19,26 @@ imports.pocket = { }
 
 
 
-var extractPocketLink = link => {
+var extractPocketLink = $link => {
 
-	if (is.undefined(link.url)) {
-		commons.log.warning('link missing url')
+	if (is.undefined($link.attr('href'))) {
+
+		commons.log.warningLow('link missing url', {
+			link: $link[0].toString( )
+		})
+
 	}
-	if (is.undefined(link.ctime)) {
-		commons.log.warning('link missing ctime')
+	if (is.undefined($link.attr('time_added'))) {
+
+		commons.log.warningLow('link missing time_added', {
+			link: $link[0].toString( )
+		})
+
 	}
 
 	return {
-		url:   encodeURIComponent(link.url),
-		ctime: link.ctime
+		url:   encodeURIComponent($link.attr('href')),
+		ctime: $link.attr('time_added')
 	}
 
 }
@@ -41,7 +50,7 @@ var extractPocketLink = link => {
 imports.pocket.parse = data => {
 
 	$(data).find('a').map((ith, link) => {
-		extractPocketLink(link)
+		return extractPocketLink($(link))
 	})
 	.sort((bookmark0, bookmark1) => {
 		bookmark0.ctime - bookmark1.ctime
