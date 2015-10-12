@@ -46,38 +46,32 @@ fs.read = (callback, event) => {
 
 	var id = 'hidden-file-input'
 
+	// -- append a hidden file to the document body,
+	// -- to circumvent ineffective and annoying browser security.
 	if ($('#' + id).length === 0) {
-		// -- append a hidden file to the document body,
-		// -- to circumvent ineffective and annoying browser security.
 
 		$('<input id=' + id + ' type="file">').appendTo('body')
+		$('#' + id).change(( ) => {
 
-	}
+			var file   = $('#' + id).prop('files')[0]
+			var reader = new FileReader( )
 
-	$('#' + id).one(( ) => {
-		callback( )
-	})
+			reader.readAsDataURL(file)
 
-	$('#' + id).trigger('click')
+			reader.onload = ( ) => {
 
+				fs.readDataURL(reader.result, url => {
+					fs.readDataURL(url, callback)
+				})
 
-	// ~~ trigger click.
-	// set callback of other element
-	// set click.
+			}
 
-	var file   = elem.getAttribute('files')[0]
-	var reader = new FileReader( )
-
-	reader.readAsDataURL(file)
-
-	reader.onload = ( ) => {
-
-		fs.readDataUrl(reader.result, url => {
-			fs.readDataURL(url, callback)
 		})
 
 	}
 
+
+	$('#' + id).trigger('click')
 
 }
 
