@@ -31,11 +31,9 @@ view.import = ctrl => {
 
 		href:    '',
 		id:      'upload',
-		onclick: ( ) => {
-			fs.read(data => {
-				imports.pocket.parse(data)
-			})
-		}
+		onclick: fs.read.bind({ }, data => {
+			imports.pocket.parse(data)
+		})
 
 	}, 'Import')
 }

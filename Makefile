@@ -82,20 +82,20 @@ CLIENT_RUNNER_PATH = public-test/runner.html
 
 # -- Engram test code
 
-ENGRAM_TEST_SRC   = $(shell find $(SERVER_TEST_ES6_PATH) -name '*.js')
-ENGRAM_TEST_TGT   = $(subst es6,es5, $(ENGRAM_TEST_SRC))
+TEST_SRC   = $(shell find $(SERVER_TEST_ES6_PATH) -name '*.js')
+TEST_TGT   = $(subst es6,es5, $(TEST_SRC))
 
 # -- Sass source code
 
-ENGRAM_SASS_SRC   = $(shell find $(SASS_PATH) -name '*.sass')
-ENGRAM_SASS_TGT   = $(subst sass,css, $(ENGRAM_SASS_SRC))
+SASS_SRC   = $(shell find $(SASS_PATH) -name '*.sass')
+SASS_TGT   = $(subst sass,css, $(SASS_SRC))
 
 # -- Browserify bundles
-ENGRAM_TEST_BUNDLE_SRC   = public-test/tests/main.js
-ENGRAM_TEST_BUNDLE_TGT   = public-test/bundle.js
+TEST_BUNDLE_SRC   = public-test/tests/main.js
+TEST_BUNDLE_TGT   = public-test/bundle.js
 
-ENGRAM_CLIENT_BUNDLE_SRC = $(CLIENT_ES5_PATH)/main.js
-ENGRAM_CLIENT_BUNDLE_TGT = $(CLIENT_ES5_PATH)/bundle.js
+CLIENT_BUNDLE_SRC = $(CLIENT_ES5_PATH)/main.js
+CLIENT_BUNDLE_TGT = $(CLIENT_ES5_PATH)/bundle.js
 
 
 
@@ -103,21 +103,27 @@ ENGRAM_CLIENT_BUNDLE_TGT = $(CLIENT_ES5_PATH)/bundle.js
 
 # -- Engram public code
 
-ENGRAM_ALL_CLIENT_SRC = $(shell find $(CLIENT_ES6_PATH) -name '*.js')
-ENGRAM_ALL_CLIENT_TGT = $(subst es6,es5, $(ENGRAM_ALL_CLIENT_SRC))
+ALL_CLIENT_SRC = $(shell find $(CLIENT_ES6_PATH) -name '*.js')
+ALL_CLIENT_TGT = $(subst es6,es5, $(ALL_CLIENT_SRC))
 
 
-ENGRAM_CLIENT_CONTROLLER_SRC_PATH = $(CLIENT_ES6_PATH)/controller
-ENGRAM_CLIENT_MODEL_SRC_PATH      = $(CLIENT_ES6_PATH)/model
-ENGRAM_CLIENT_VIEW_SRC_PATH       = $(CLIENT_ES6_PATH)/view
-ENGRAM_CLIENT_SRC_PATH            = $(CLIENT_ES6_PATH)
+CLIENT_CONTROLLER_SRC_PATH     = $(CLIENT_ES6_PATH)/controller
+CLIENT_MODEL_SRC_PATH          = $(CLIENT_ES6_PATH)/model
+CLIENT_VIEW_SRC_PATH           = $(CLIENT_ES6_PATH)/view
+CLIENT_SRC_PATH                = $(CLIENT_ES6_PATH)
 
-ENGRAM_CLIENT_CONTROLLER_TGT_PATH = $(CLIENT_ES5_PATH)/controller
-ENGRAM_CLIENT_MODEL_TGT_PATH      = $(CLIENT_ES5_PATH)/model
-ENGRAM_CLIENT_VIEW_TGT_PATH       = $(CLIENT_ES5_PATH)/view
-ENGRAM_CLIENT_TGT_PATH            = $(CLIENT_ES5_PATH)
+CLIENT_CONTROLLER_TGT_PATH     = $(CLIENT_ES5_PATH)/controller
+CLIENT_MODEL_TGT_PATH          = $(CLIENT_ES5_PATH)/model
+CLIENT_VIEW_TGT_PATH           = $(CLIENT_ES5_PATH)/view
 
-ENGRAM_CLIENT_DEPENDENCY_PATH     = public/javascript/lib
+CLIENT_DEPENDENCY_IS_PATH      = public/javascript/lib/dependency-is.js
+CLIENT_DEPENDENCY_MITHRIL_PATH = public/javascript/lib/dependency-mithril.js
+CLIENT_DEPENDENCY_JQUERY_PATH  = public/javascript/lib/dependency-jquery.js
+
+
+
+
+
 
 
 
@@ -131,7 +137,7 @@ ENGRAM_CLIENT_DEPENDENCY_PATH     = public/javascript/lib
 
 all: es6ify-client es6ify-server add-client-dependencies browserify-client cssify-client
 
-ALL_TGT = $(ENGRAM_ALL_CLIENT_TGT) $(ENGRAM_CLIENT_BUNDLE_TGT) $(ENGRAM_TEST_BUNDLE_TGT) $(ENGRAM_CLIENT_LIB_TGT) $(ENGRAM_CLIENT_LIB_SRC)
+ALL_TGT = $(ALL_CLIENT_TGT) $(CLIENT_BUNDLE_TGT) $(TEST_BUNDLE_TGT) $(ENGRAM_CLIENT_LIB_TGT) $(ENGRAM_CLIENT_LIB_SRC)
 
 
 
@@ -146,7 +152,7 @@ install: build
 
 # -- compile source code.
 
-build: es6ify-client browserify-client add-client-dependencies es6ify-server browserify-client-test cssify-client install-dependencies
+build: es6ify-client browserify-client install-dependencies add-client-dependencies es6ify-server browserify-client-test cssify-client
 
 
 
@@ -176,24 +182,24 @@ bundbstart: all
 
 
 
-es6ify-client: $(ENGRAM_ALL_CLIENT_TGT)
+es6ify-client: $(ALL_CLIENT_TGT)
 
-$(ENGRAM_CLIENT_CONTROLLER_TGT_PATH)/%.js: $(ENGRAM_CLIENT_CONTROLLER_SRC_PATH)/%.js
+$(CLIENT_CONTROLLER_TGT_PATH)/%.js: $(CLIENT_CONTROLLER_SRC_PATH)/%.js
 
 	mkdir -p $(@D
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
-$(ENGRAM_CLIENT_MODEL_TGT_PATH)/%.js: $(ENGRAM_CLIENT_MODEL_SRC_PATH)/%.js
+$(CLIENT_MODEL_TGT_PATH)/%.js: $(CLIENT_MODEL_SRC_PATH)/%.js
 
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
-$(ENGRAM_CLIENT_VIEW_TGT_PATH)/%.js: $(ENGRAM_CLIENT_VIEW_SRC_PATH)/%.js
+$(CLIENT_VIEW_TGT_PATH)/%.js: $(CLIENT_VIEW_SRC_PATH)/%.js
 
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
 
-$(ENGRAM_CLIENT_TGT_PATH)/%.js: $(ENGRAM_CLIENT_SRC_PATH)/%.js
+$(CLIENT_ES5_PATH)/%.js: $(CLIENT_SRC_PATH)/%.js
 
 	mkdir -p $(@D)
 	$(BABEL) $(BABEL_FLAGS) $< --out-file $@
@@ -201,23 +207,23 @@ $(ENGRAM_CLIENT_TGT_PATH)/%.js: $(ENGRAM_CLIENT_SRC_PATH)/%.js
 
 
 
-install-dependencies: install-is install-mithril install-jquery
+install-dependencies:
 
-install-is:
-	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-is.js $(URL_IS)
+$(CLIENT_DEPENDENCY_IS_PATH):
+	wget -O $@ $(URL_IS)
 
-install-mithril:
-	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-mithril.js $(URL_MITHRIL)
+$(CLIENT_DEPENDENCY_MITHRIL_PATH):
+	wget -O $@ $(URL_MITHRIL)
 
-install-jquery:
-	wget -O $(ENGRAM_CLIENT_DEPENDENCY_PATH)/dependency-jquery.js $(URL_JQUERY)
-
-
+$(CLIENT_DEPENDENCY_JQUERY_PATH):
+	wget -O $@ $(URL_JQUERY)
 
 
-browserify-client: es6ify-client $(ENGRAM_CLIENT_BUNDLE_TGT)
 
-$(ENGRAM_CLIENT_BUNDLE_TGT): $(ENGRAM_CLIENT_BUNDLE_SRC)
+
+browserify-client: es6ify-client $(CLIENT_BUNDLE_TGT)
+
+$(CLIENT_BUNDLE_TGT): $(CLIENT_BUNDLE_SRC)
 
 	# Make: build client test bundle
 
@@ -226,10 +232,11 @@ $(ENGRAM_CLIENT_BUNDLE_TGT): $(ENGRAM_CLIENT_BUNDLE_SRC)
 
 
 
+# == todo
+add-client-dependencies: $(CLIENT_DEPENDENCY_IS_PATH) $(CLIENT_DEPENDENCY_MITHRIL_PATH) $(CLIENT_DEPENDENCY_JQUERY_PATH)
 
-add-client-dependencies: $(ENGRAM_CLIENT_LIB_TGT)
 
-$(ENGRAM_CLIENT_TGT_PATH)/%.js: $(CLIENT_LIB_PATH)/%.js
+$(CLIENT_TGT_PATH)/%.js: $(CLIENT_LIB_PATH)/%.js
 
 	# Make: install library dependencies.
 
@@ -238,9 +245,9 @@ $(ENGRAM_CLIENT_TGT_PATH)/%.js: $(CLIENT_LIB_PATH)/%.js
 
 
 
-es6ify-server: $(ENGRAM_TEST_TGT)
+es6ify-server: $(TEST_TGT)
 
-$(ENGRAM_TEST_TGT): $(ENGRAM_TEST_SRC)
+$(TEST_TGT): $(TEST_SRC)
 
 	# Make: building server test code.
 
@@ -250,9 +257,9 @@ $(ENGRAM_TEST_TGT): $(ENGRAM_TEST_SRC)
 
 
 
-browserify-client-test: es6ify-client $(ENGRAM_TEST_BUNDLE_TGT)
+browserify-client-test: es6ify-client $(TEST_BUNDLE_TGT)
 
-$(ENGRAM_TEST_BUNDLE_TGT): $(ENGRAM_TEST_BUNDLE_SRC)
+$(TEST_BUNDLE_TGT): $(TEST_BUNDLE_SRC)
 
 	# Make: Build public test bundle.
 
@@ -281,9 +288,9 @@ eslint:
 
 # ==== ==== ==== ==== CSS ==== ==== ==== ==== #
 
-cssify-client: $(ENGRAM_SASS_TGT)
+cssify-client: $(SASS_TGT)
 
-$(ENGRAM_SASS_TGT): $(ENGRAM_SASS_SRC)
+$(SASS_TGT): $(SASS_SRC)
 
 	# Make: build public css.
 
