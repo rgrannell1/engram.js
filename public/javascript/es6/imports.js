@@ -53,7 +53,7 @@ imports.pocket.parse = data => {
 		return extractPocketLink($(link))
 	})
 	.sort((bookmark0, bookmark1) => {
-		bookmark0.ctime - bookmark1.ctime
+		return bookmark0.ctime - bookmark1.ctime
 	})
 
 }

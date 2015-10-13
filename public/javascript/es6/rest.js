@@ -11,10 +11,14 @@ var constants = require('./constants')
 
 
 
-var rest = { }
+var rest = {
+	url:     { },
+	import: { }
+}
 
-rest.url    = { }
-rest.import = { }
+rest.url    = {
+	import: { }
+}
 
 rest.url.shareLink = url => {
 	return `http://www.twitter.com/share?url=${url}`
@@ -28,7 +32,7 @@ rest.url.getBookmarks = (maxID, amount) => {
 	return `api/bookmarks?maxID=${maxID}&amount=${amount}`
 }
 
-rest.url.importBookmarks = ( ) => {
+rest.url.import.pocket = ( ) => {
 	return '/import'
 }
 
@@ -70,9 +74,9 @@ rest.import.pocket = (data, onOk, onErr) => {
 
 	$.ajax({
 		type:     'POST',
-		url:      rest.url.importBookmarks( ),
+		url:      rest.url.import.pocket( ),
 		dataType: 'json',
-        data,
+        data:     JSON.stringify({data}),
         headers:  {
         	'Content-Type': 'application/json'
         },
