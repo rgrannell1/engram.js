@@ -33,6 +33,7 @@ view.import = ctrl => {
 
 		id:      'upload',
 		style:   'cursor: pointer',
+		title:   'Import pocket bookmarks...',
 		onclick: fs.read.bind({ }, data => {
 
 			var formatted = imports.pocket.parse(data)
@@ -63,6 +64,7 @@ view.import = ctrl => {
 view.export = ctrl => {
 	return m('a', {
 		id:    'export',
+		title: 'Export pocket bookmarks...',
 		style: 'cursor: pointer'
 	}, 'Export')
 }

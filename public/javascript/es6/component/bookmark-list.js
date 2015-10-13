@@ -40,7 +40,7 @@ var BookmarkList = bookmarks => {
 	var ctrl  = {
 		model: {
 			bookmarks: m.prop(bookmarks),
-			slice:     {
+			slice: {
 				lower: maxId - constants.view.VISIBLE_BOOKMARKS,
 				upper: maxId
 			}

@@ -126,7 +126,7 @@ CLIENT_DEP_JQUERY_PATH         = public/javascript/es5/dependency-jquery.js
 
 
 
-.PHONY: clean all install nodemon eslint jshint test wipe start bstart
+.PHONY: clean all install nodemon eslint jshint test wipe start infostart debugstart
 
 
 
@@ -162,9 +162,11 @@ build: es6ify-client browserify-client install-dependencies browserify-client-te
 start: all
 	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT)
 
-bstart: all
+infostart: all
 	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN)
 
+debugstart: all
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN) --level trace
 
 
 

@@ -40,6 +40,6 @@ $(( ) => {
 		}
 	})
 
-	m.mount(document.getElementById('bookmark-container'), app)
+	m.mount(document.body, app)
 
 })
