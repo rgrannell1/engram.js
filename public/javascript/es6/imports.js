@@ -49,7 +49,7 @@ var extractPocketLink = $link => {
 
 imports.pocket.parse = data => {
 
-	$(data).find('a').map((ith, link) => {
+	return $(data).find('a').map((ith, link) => {
 		return extractPocketLink($(link))
 	})
 	.sort((bookmark0, bookmark1) => {

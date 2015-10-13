@@ -13,7 +13,8 @@ var constants = require('./constants')
 
 var rest = { }
 
-rest.url  = { }
+rest.url    = { }
+rest.import = { }
 
 rest.url.shareLink = url => {
 	return `http://www.twitter.com/share?url=${url}`
@@ -49,7 +50,7 @@ rest.deleteBookmark = (id, onOk, onErr) => {
 		url:     `/api/bookmarks/${id}`,
 		type:    'DELETE',
 		success: onOk,
-		failure: onErr
+		error:   onErr
 	})
 
 }
@@ -60,12 +61,12 @@ rest.getBookmarks = (maxID, amount, callbacks) => {
 		url:      rest.url.getBookmarks(maxID, amount),
 		dataType: 'json',
 		success:  callbacks.success,
-		failure:  callbacks.failure
+		error:    callbacks.failure
 	})
 
 }
 
-rest.importBookmarks = (data, onOk, onErr) => {
+rest.import.pocket = (data, onOk, onErr) => {
 
 	$.ajax({
 		type:     'POST',
@@ -76,7 +77,7 @@ rest.importBookmarks = (data, onOk, onErr) => {
         	'Content-Type': 'application/json'
         },
         success: onOk,
-        failure: onErr
+        error:   onErr
 	})
 
 }

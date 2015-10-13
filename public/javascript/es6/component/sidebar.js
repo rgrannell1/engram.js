@@ -6,6 +6,8 @@
 
 
 var fs      = require('../fs')
+var rest    = require('../rest')
+var commons = require('../commons')
 var imports = require('../imports')
 
 
@@ -31,7 +33,27 @@ view.import = ctrl => {
 
 		id:      'upload',
 		onclick: fs.read.bind({ }, data => {
-			imports.pocket.parse(data)
+
+			var formatted = imports.pocket.parse(data)
+
+			rest.import.pocket(
+				formatted,
+				( ) => {
+
+					commons.log.summary('successfully imported pocket bookmarks.', {
+						number: formatted.length
+					})
+
+				},
+				( ) => {
+
+					commons.log.error('failed to import pocket bookmarks.', {
+						number: formatted.length
+					})
+
+				}
+			)
+
 		})
 
 	}, 'Import')
