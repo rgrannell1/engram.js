@@ -32,6 +32,7 @@ view.import = ctrl => {
 	return m('a', {
 
 		id:      'upload',
+		style:   'cursor: pointer',
 		onclick: fs.read.bind({ }, data => {
 
 			var formatted = imports.pocket.parse(data)
@@ -60,7 +61,10 @@ view.import = ctrl => {
 }
 
 view.export = ctrl => {
-	return m('a', {id: 'export'}, 'Export')
+	return m('a', {
+		id:    'export',
+		style: 'cursor: pointer'
+	}, 'Export')
 }
 
 

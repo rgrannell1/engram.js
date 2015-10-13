@@ -19,7 +19,7 @@ imports.pocket = { }
 
 
 
-var extractPocketLink = $link => {
+var extractLink = $link => {
 
 	if (is.undefined($link.attr('href'))) {
 
@@ -50,7 +50,7 @@ var extractPocketLink = $link => {
 imports.pocket.parse = data => {
 
 	return $(data).find('a').map((ith, link) => {
-		return extractPocketLink($(link))
+		return extractLink($(link))
 	})
 	.sort((bookmark0, bookmark1) => {
 		return bookmark0.ctime - bookmark1.ctime

@@ -9,22 +9,22 @@ var constants = require('./constants')
 
 
 
-var commons         = { }
+var commons = {
+	dom:  { },
+	data: {
+		string: { },
+		array:  { },
+		object: { }
+	},
+	assert:   { },
 
-commons.dom         = { }
-commons.data        = {
-	string: { },
-	array:  { },
-	object: { }
+	date:     { },
+	messages: { },
+	log:      { },
+	external: { },
+	mithril:  { }
 }
 
-commons.assert      = { }
-
-commons.date        = { }
-commons.messages    = { }
-commons.log         = { }
-commons.external    = { }
-commons.mithril     = { }
 
 
 
@@ -307,14 +307,6 @@ commons.assert.hasProperties = (props, object) => {
 		throw new Error(message)
 
 	}
-
-}
-
-
-
-
-
-commons.dom.onElemChange = (elem, predicate, callback) => {
 
 }
 

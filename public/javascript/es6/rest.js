@@ -12,13 +12,15 @@ var constants = require('./constants')
 
 
 var rest = {
-	url:     { },
+	url:     {
+		import: { }
+	},
 	import: { }
 }
 
-rest.url    = {
-	import: { }
-}
+
+
+
 
 rest.url.shareLink = url => {
 	return `http://www.twitter.com/share?url=${url}`
@@ -42,9 +44,7 @@ rest.url.import.pocket = ( ) => {
 
 rest.getTemplate = (onOk, onErr) => {
 
-	$.get(constants.urls.BOOKMARK_TEMPLATE)
-	.done(onOk)
-	.always(onErr)
+	$.get(constants.urls.BOOKMARK_TEMPLATE).done(onOk).always(onErr)
 
 }
 
@@ -70,22 +70,35 @@ rest.getBookmarks = (maxID, amount, callbacks) => {
 
 }
 
+
+
+
+
 rest.import.pocket = (data, onOk, onErr) => {
+
+	rest.import.pocket.precond(data, onOk, onErr)
 
 	$.ajax({
 		type:     'POST',
 		url:      rest.url.import.pocket( ),
 		dataType: 'json',
-        data:     JSON.stringify({data}),
-        headers:  {
-        	'Content-Type': 'application/json'
-        },
-        success: onOk,
-        error:   onErr
+		data:     JSON.stringify({data}),
+		headers:  {
+			'Content-Type': 'application/json'
+		},
+		success: onOk,
+		error:   onErr
 	})
 
 }
 
+rest.import.pocket.precond = (data, onOk, onErr) => {
+
+	is.always.array(data)
+	is.always.function(onOk)
+	is.always.function(onErr)
+
+}
 
 
 

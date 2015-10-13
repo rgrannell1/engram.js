@@ -17,40 +17,29 @@ var syncBookmarks = require('./sync-bookmarks')
 
 // for testing.
 
-window.ENGRAM = { }
-
-window.ENGRAM.constants = constants
-window.ENGRAM.messages  = messages
-window.ENGRAM.commons   = commons
-window.ENGRAM.rest      = rest
+window.ENGRAM = {constants, messages, commons, rest}
 
 
 
 
 
-commons.log.summary('loaded client-side code.', {
-	is:      typeof window.is !== 'undefined',
-	mithril: typeof window.m  !== 'undefined'
+commons.log.summary('loaded client-side code.')
+
+
+
+
+
+$(( ) => {
+
+	syncBookmarks(app.ctrl.model.bookmarks, {
+		success: body => {
+			m.redraw( )
+		},
+		failure: res  => {
+
+		}
+	})
+
+	m.mount(document.getElementById('bookmark-container'), app)
+
 })
-
-
-
-
-
-syncBookmarks(app.ctrl.model.bookmarks, {
-	success: body => {
-
-		console.log( body )
-		m.redraw( )
-
-	},
-	failure: res  => {
-
-	}
-})
-
-
-
-
-
-m.mount(document.getElementById('bookmark-container'), app)

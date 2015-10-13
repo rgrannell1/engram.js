@@ -22,12 +22,12 @@ fs.readDataURL = (url, callback) => {
 
 	fs.readDataURL.precond(url, callback)
 
-	var dataURLContentType = 'data:text/html;base64,'
+	var ctype = 'data:text/html;base64,'
 
-	if (!url.startsWith(dataURLContentType)) {
+	if (!url.startsWith(ctype)) {
 		commons.log.error('could not load URL', {url})
 	} else {
-		callback( atob(url.slice(dataURLContentType.length)) )
+		callback( atob(url.slice(ctype.length)) )
 	}
 
 }
@@ -37,13 +37,6 @@ fs.readDataURL.precond = (url, callback) => {
 	is.always.string(url)
 	is.always.function(callback)
 
-}
-
-
-
-
-var hasFiles = elem => {
-	return !is.undefined(elem.getAttribute('files'))
 }
 
 
@@ -60,7 +53,7 @@ fs.read = callback => {
 	// -- to circumvent ineffective and annoying browser security.
 	if ($('#' + id).length === 0) {
 
-		$(`<input id=${id} type="file">`).appendTo('body')
+		$(`<input id=${id} type="file" style="opacity: 0">`).appendTo('body')
 		$('#' + id).change(( ) => {
 
 			var file   = $('#' + id).prop('files')[0]

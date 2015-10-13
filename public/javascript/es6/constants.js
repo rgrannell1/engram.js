@@ -5,12 +5,14 @@
 
 
 
-var constants       = { }
-constants.urls      = { }
-constants.selectors = { }
-constants.date      = { }
-constants.view      = { }
-constants.unicode   = { }
+var constants       = {
+	urls:      { },
+	selectors: { },
+	date:      { },
+	view:      { },
+	unicode:   { }
+}
+
 
 
 
