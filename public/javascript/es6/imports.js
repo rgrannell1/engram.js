@@ -49,10 +49,13 @@ var extractLink = $link => {
 
 imports.pocket.parse = data => {
 
-	return $(data).find('a').map((ith, link) => {
-		return extractLink($(link))
+	var links = [ ]
+
+	$(data).find('a').map((ith, link) => {
+		links.push( extractLink($(link)) )
 	})
-	.sort((bookmark0, bookmark1) => {
+
+	return links.sort((bookmark0, bookmark1) => {
 		return bookmark0.ctime - bookmark1.ctime
 	})
 
