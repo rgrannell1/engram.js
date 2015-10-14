@@ -12,6 +12,7 @@ var messages      = require('./messages')
 var commons       = require('./commons')
 var rest          = require('./rest')
 var syncBookmarks = require('./sync-bookmarks')
+var listeners     = require('./listeners')
 
 
 
@@ -38,6 +39,18 @@ $(( ) => {
 		failure: res  => {
 
 		}
+	})
+
+	listeners.onScroll(scrollData => {
+
+		listeners.atPageTop(scrollData, ( ) => {
+			commons.log.stub('top: hook into model.')
+		})
+
+		listeners.atPageBottom(scrollData, ( ) => {
+			commons.log.stub('bottom: hook into model.')
+		})
+
 	})
 
 	m.mount(document.body, app)

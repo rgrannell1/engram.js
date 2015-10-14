@@ -246,7 +246,7 @@ commons.data.object.containsProperties = (props, object) => {
 
 
 
-commons.log.levelNames    = ['trace', 'info', 'summary', 'warningLow', 'warningHigh', 'error', 'fatal']
+commons.log.levelNames    = ['stub', 'trace', 'info', 'summary', 'warningLow', 'warningHigh', 'error', 'fatal']
 commons.log.formatMessage = (level, message, data) => {
 	return level + ': ' + message + (data ? ' ' + JSON.stringify(data) : '')
 }
