@@ -23,7 +23,7 @@ var syncBookmarks = (bookmarks, callbacks) => {
 	rest.getBookmarks(constants.maxId, constants.amount, {
 		success: body => {
 
-			bookmarks(bookmarks( ).concat(body.data))
+			bookmarks = bookmarks.concat(body.data)
 			callbacks.success(body)
 
 		},
@@ -38,7 +38,7 @@ var syncBookmarks = (bookmarks, callbacks) => {
 
 syncBookmarks.precond = (bookmarks, callbacks) => {
 
-	is.always.function(bookmarks)
+	is.always.array(bookmarks)
 	is.always.object(callbacks)
 
 	is.always.function(callbacks.success)

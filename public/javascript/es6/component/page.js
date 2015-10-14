@@ -18,8 +18,11 @@ var view = ctrl => {
 
 	// todo pass in Sidebar, Bookmark objects.
 	return m('main', [
-		BookmarkList(ctrl.model.bookmarks( )).view( ),
-		Sidebar(ctrl.model.sidebar( )).view( )
+		BookmarkList({
+			bookmarks: ctrl.model.bookmarks,
+			page:      ctrl.model.page
+		}).view( ),
+		Sidebar(ctrl.model.sidebar).view( )
 	])
 
 }
@@ -33,7 +36,7 @@ var Page = data => {
 	Page.precond(data)
 
 	var ctrl = {
-		model: commons.mithril.propObj(data)
+		model: data
 	}
 
 	return {

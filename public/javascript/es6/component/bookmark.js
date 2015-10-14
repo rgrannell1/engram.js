@@ -38,7 +38,7 @@ var view = ctrl => {
 	var articleProperties = {
 
 		class: `bookmarkId`,
-		id:    ctrl.model.bookmarkId( )
+		id:    ctrl.model.bookmarkId
 
 	}
 
@@ -54,7 +54,7 @@ var view = ctrl => {
 
 view.date = ctrl => {
 
-	var cdate    = new Date(ctrl.model.ctime( ))
+	var cdate    = new Date(ctrl.model.ctime)
 	var tidyDate = commons.date.formatInterval.ms(new Date( ), cdate)
 
 	return m('time', {
@@ -70,10 +70,10 @@ view.bookmarkLink = ctrl => {
 
 	return m('a', {
 
-		href: ctrl.model.url( ),
+		href: ctrl.model.url,
 		rel:  'external noreferrer'
 
-	}, ctrl.model.title( ))
+	}, ctrl.model.title)
 
 }
 
@@ -81,11 +81,11 @@ view.hostLink = ctrl => {
 
 	return m('a', {
 
-		href:  ctrl.model.hosturl( ),
+		href:  ctrl.model.hosturl,
 		class: 'hosturl',
 		rel:   'external noreferrer'
 
-	}, ctrl.model.hostname( ))
+	}, ctrl.model.hostname)
 
 }
 
@@ -119,7 +119,7 @@ view.archiveButton = ctrl => {
 	return m('a', {
 
 		title: 'Show Archive...',
-		href:  rest.url.archiveLink(ctrl.model.bookmarkId( )),
+		href:  rest.url.archiveLink(ctrl.model.bookmarkId),
 		class: 'archive',
 		target: '_blank'
 
@@ -132,7 +132,7 @@ view.shareButton = ctrl => {
 	return m('a', {
 
 		title: 'Share Link...',
-		href:  rest.url.shareLink(ctrl.model.url( )),
+		href:  rest.url.shareLink(ctrl.model.url),
 		target: '_blank'
 
 	}, constants.unicode.WRAPPED_PRESENT)
@@ -148,7 +148,7 @@ var Bookmark = data => {
 	Bookmark.precond(data)
 
 	var ctrl = {
-		model: commons.mithril.propObj(data)
+		model: data
 	}
 
 	return {

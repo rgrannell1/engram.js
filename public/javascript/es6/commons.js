@@ -310,6 +310,14 @@ commons.assert.hasProperties = (props, object) => {
 
 }
 
+commons.assert.isTrue = (bool, message) => {
+
+	if (bool !== true) {
+		throw new Error(message)
+	}
+
+}
+
 
 
 

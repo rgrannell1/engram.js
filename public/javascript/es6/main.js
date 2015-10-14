@@ -44,11 +44,11 @@ $(( ) => {
 	listeners.onScroll(scrollData => {
 
 		listeners.atPageTop(scrollData, ( ) => {
-			commons.log.stub('top: hook into model.')
+			app.ctrl.model.page = Math.max(app.ctrl.model.page, 0)
 		})
 
 		listeners.atPageBottom(scrollData, ( ) => {
-			commons.log.stub('bottom: hook into model.')
+			--app.ctrl.model.page
 		})
 
 	})

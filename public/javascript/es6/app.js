@@ -15,7 +15,8 @@ var BookmarkList = require('./component/bookmark-list')
 
 var app = Page({
 	sidebar:   null,
-	bookmarks: [ ]
+	bookmarks: [ ],
+	page:      0
 })
 
 
