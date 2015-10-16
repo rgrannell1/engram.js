@@ -23,7 +23,7 @@ var syncBookmarks = (bookmarks, callbacks) => {
 	rest.getBookmarks(constants.maxId, constants.amount, {
 		success: body => {
 
-			bookmarks = bookmarks.concat(body.data)
+			body.data.forEach(datum => bookmarks.push(datum))
 			callbacks.success(body)
 
 		},

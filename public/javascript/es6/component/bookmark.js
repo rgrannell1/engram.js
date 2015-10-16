@@ -54,7 +54,7 @@ var view = ctrl => {
 
 view.date = ctrl => {
 
-	var cdate    = new Date(ctrl.model.ctime)
+	var cdate    = new Date(ctrl.model.ctime * constants.date.S_IN_MS)
 	var tidyDate = commons.date.formatInterval.ms(new Date( ), cdate)
 
 	return m('time', {
@@ -103,12 +103,32 @@ view.seperator = ( ) => {
 
 view.deleteButton = ctrl => {
 
+	// -- hide bookmark on click, remove from bookmarks list.
+
 	return m('a', {
 
 		title: 'Delete',
 		href:  'javascript:void(0)',
 		class: 'delete-bookmark',
-		role:  'button'
+		role:  'button',
+
+		onclick: ( ) => {
+
+			rest.deleteBookmark(
+				ctrl.model.bookmarkId,
+				( ) => {
+					commons.log.summary('deleted bookmark', {
+						id: ctrl.model.bookmarkId
+					})
+				},
+				( ) => {
+					commons.log.error('failed to remove bookmark', {
+						id: ctrl.model.bookmarkId
+					})
+				}
+			)
+
+		}
 
 	}, constants.unicode.HEAVY_MULTIPLICATION)
 

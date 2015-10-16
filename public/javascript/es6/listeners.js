@@ -16,7 +16,6 @@ var $document = $(document)
 
 listener.onScroll = callback => {
 
-
 	$window.on('scroll', ( ) => {
 
 		var windowTop = $window.scrollTop( )

@@ -44,11 +44,15 @@ $(( ) => {
 	listeners.onScroll(scrollData => {
 
 		listeners.atPageTop(scrollData, ( ) => {
+
 			app.ctrl.model.page = Math.max(app.ctrl.model.page, 0)
+
 		})
 
 		listeners.atPageBottom(scrollData, ( ) => {
+
 			--app.ctrl.model.page
+
 		})
 
 	})

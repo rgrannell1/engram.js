@@ -18,7 +18,7 @@ var view = ctrl => {
 	var bounds   = { }
 
 	bounds.lower = ctrl.model.page * constants.view.VISIBLE_BOOKMARKS
-	bounds.upper = bounds.lower   += constants.view.VISIBLE_BOOKMARKS
+	bounds.upper = bounds.lower    + constants.view.VISIBLE_BOOKMARKS
 
 	var toView = ctrl.model.bookmarks.slice(bounds.lower, bounds.upper)
 
