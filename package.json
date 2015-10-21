@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "tests": "make test-server"
-  }
+  },
   "devDependencies": {
     "babel": "^5.8.5",
     "babel-eslint": "^4.0.6",
