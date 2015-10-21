@@ -284,7 +284,7 @@ $(SASS_TGT): $(SASS_SRC)
 
 # -- Run the mocha tests.
 
-test: test-client test-server test-karma
+test: test-server test-karma
 
 	# Make: Run client and server tests.
 
