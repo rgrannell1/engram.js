@@ -67,19 +67,13 @@ CLIENT_ES6_PATH = public/javascript/es6
 
 CLIENT_LIB_PATH = public/javascript/lib
 
-SERVER_TEST_ES6_PATH = node_modules/engram/test/es6
-SERVER_TEST_ES5_PATH = node_modules/engram/test/es5
+SERVER_TEST_PATH = node_modules/engram/test
 
 SASS_PATH = public/sass
 
 
 
 
-
-# -- Engram test code
-
-TEST_SRC   = $(shell find $(SERVER_TEST_ES6_PATH) -name '*.js')
-TEST_TGT   = $(subst es6,es5, $(TEST_SRC))
 
 # -- Sass source code
 
@@ -292,7 +286,7 @@ test-server: build
 
 	# Make: Run server tests.
 
-	$(MOCHA) $(MOCHA_FLAGS) $(SERVER_TEST_ES5_PATH)
+	$(MOCHA) $(MOCHA_FLAGS) $(SERVER_TEST_PATH)
 
 test-karma: build
 
