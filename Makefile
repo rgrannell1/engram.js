@@ -143,7 +143,7 @@ ALL_TGT = $(ALL_CLIENT_TGT) $(CLIENT_BUNDLE_TGT) $(TEST_BUNDLE_TGT) $(CLIENT_DEP
 
 # -- build and install npm dependencies.
 
-install: build
+install:
 	sudo npm install
 
 # -- compile source code.
