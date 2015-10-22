@@ -17,8 +17,13 @@ BROWSERIFY_FLAGS = -t es6ify
 
 # -- Mocha.
 
+_MOCHA      = $(BIN)/_mocha
 MOCHA       = $(BIN)/mocha
 MOCHA_FLAGS =
+
+# -- Istanbul.
+
+ISTANBUL = $(BIN)/istanbul
 
 # -- Babel.
 
@@ -291,6 +296,14 @@ test-server: build
 test-karma: build
 
 	$(KARMA) start
+
+
+
+
+coverage: coverage-server
+
+coverage-server: build
+	$(ISTANBUL) cover $(_MOCHA) -- $(SERVER_TEST_PATH) -R spec	--	recursive test
 
 
 
