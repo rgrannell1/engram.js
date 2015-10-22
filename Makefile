@@ -65,7 +65,7 @@ URL_JQUERY  = http://code.jquery.com/jquery-2.1.4.min.js
 
 # -- PATHS -- #
 
-SERVER_PATH     = node_modules/engram/es6-new
+SERVER_PATH     = node_modules/engram
 
 CLIENT_ES5_PATH = public/javascript/es5
 CLIENT_ES6_PATH = public/javascript/es6
