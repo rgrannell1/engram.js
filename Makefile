@@ -273,7 +273,7 @@ $(SASS_TGT): $(SASS_SRC)
 
 	# Make: build public css.
 
-	mkdir -p $@
+	mkdir -p public/css
 	$(SASS) $(SASS_FLAGS) $< > $@
 
 
