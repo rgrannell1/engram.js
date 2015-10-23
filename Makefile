@@ -73,6 +73,8 @@ CLIENT_ES6_PATH = public/javascript/es6
 CLIENT_LIB_PATH = public/javascript/lib
 
 SERVER_TEST_PATH = node_modules/engram/test
+LOGS_PATH        = log
+
 
 SASS_PATH = public/sass
 
@@ -148,7 +150,7 @@ install:
 
 # -- compile source code.
 
-build: es6ify-client browserify-client install-dependencies browserify-client-test cssify-client
+build: es6ify-client browserify-client install-dependencies browserify-client-test cssify-client setup-fs
 
 
 
@@ -305,6 +307,13 @@ coverage: coverage-server
 
 coverage-server: build
 	$(ISTANBUL) cover $(_MOCHA) -- $(SERVER_TEST_PATH) -R spec	--	recursive test
+
+
+
+
+
+setup-fs:
+	-mkdir -p $(LOGS_PATH)
 
 
 
