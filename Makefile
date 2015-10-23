@@ -73,8 +73,10 @@ CLIENT_ES6_PATH = public/javascript/es6
 CLIENT_LIB_PATH = public/javascript/lib
 
 SERVER_TEST_PATH = node_modules/engram/test
+
 LOGS_PATH        = log
 CERTS_PATH       = certs
+DATA_PATH        = data
 
 SASS_PATH = public/sass
 
@@ -315,6 +317,7 @@ coverage-server: build
 setup-fs:
 	-mkdir -p $(LOGS_PATH)
 	-mkdir -p $(CERTS_PATH)
+	-mkdir -p $(DATA_PATH)
 
 
 
