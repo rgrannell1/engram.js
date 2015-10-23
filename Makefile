@@ -1,7 +1,7 @@
 
 # -- Node binaries
 BIN           = ./node_modules/.bin
-ENGRAM_DOCOPT = ./bin/docopt-engram.js
+ENGRAM_DOCOPT = engram/cli/engram.js
 
 
 
@@ -166,10 +166,10 @@ start: all
 	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT)
 
 infostart: all
-	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN)
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) run | $(BUNYAN)
 
 debugstart: all
-	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) | $(BUNYAN) --level trace
+	$(NODE) $(NODE_FLAGS) $(ENGRAM_DOCOPT) run | $(BUNYAN) --level trace
 
 
 
