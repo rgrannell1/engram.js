@@ -74,7 +74,7 @@ CLIENT_LIB_PATH = public/javascript/lib
 
 SERVER_TEST_PATH = node_modules/engram/test
 LOGS_PATH        = log
-
+CERTS_PATH       = certs
 
 SASS_PATH = public/sass
 
@@ -314,6 +314,7 @@ coverage-server: build
 
 setup-fs:
 	-mkdir -p $(LOGS_PATH)
+	-mkdir -p $(CERTS_PATH)
 
 
 
