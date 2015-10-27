@@ -8,7 +8,7 @@ ENGRAM_DOCOPT = engram/cli/engram.js
 
 
 NODE       = node
-NODE_FLAGS = --harmony_destructuring
+NODE_FLAGS = --harmony_destructuring --harmony_rest_parameters
 
 # -- Browserify.
 
