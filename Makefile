@@ -19,7 +19,7 @@ BROWSERIFY_FLAGS = -t es6ify
 
 _MOCHA      = $(BIN)/_mocha
 MOCHA       = $(BIN)/mocha
-MOCHA_FLAGS =
+MOCHA_FLAGS = $(NODE_FLAGS)
 
 # -- Istanbul.
 
@@ -258,14 +258,13 @@ jshint:
 
 	$(JSHINT) $(JSHINT_FLAGS) $(SERVER_PATH)
 
-eslint:
+eslint: eslint-client eslint-server
 
-	# Make: ESHint
-
+eslint-client:
 	$(ESLINT) $(ESLINT_FLAGS) $(CLIENT_ES6_PATH)
+
+eslint-server:
 	$(ESLINT) $(ESLINT_FLAGS) $(SERVER_PATH)
-
-
 
 
 
