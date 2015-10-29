@@ -304,6 +304,17 @@ test-karma: build
 
 
 
+
+list-deps:
+	@find engram/ -name \*.js | \
+	xargs cat | \
+	egrep -o 'require\(([^\(.]+)\)' | \
+	sort -u | \
+	sed -E 's/require//g' | \
+	sed -E 's/^..//g'
+
+
+
 coverage: coverage-server
 
 coverage-server: build
