@@ -6,6 +6,9 @@
 
 # Engram
 
+## NOTE
+
+This project has been discontinued; it takes far too much effort for one person to build a secure, fast tested bookmark server, and Pocket's mobile app is much nicer than their web interface which remove a lot of my incentive for trying.
 
 ## Installation
 
